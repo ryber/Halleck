@@ -1,0 +1,9 @@
+<html>
+    <head>
+        <title>Welcome To Halleck. THe ISG Agile / XP training System</title>
+    </head>
+
+    <body>
+         {{body}}
+    </body>
+</html>
