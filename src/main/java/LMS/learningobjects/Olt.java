@@ -3,16 +3,19 @@ package lms.learningobjects;
 import halleck.Course;
 
 public class Olt implements Course {
+    private final String id;
     private String name;
+    private final String descrription;
 
     public Olt(String id, String name, String descrription) {
-
+        this.id = id;
         this.name = name;
+        this.descrription = descrription;
     }
 
     @Override
     public String getId() {
-        return null;
+        return id;
     }
 
     @Override
@@ -22,6 +25,11 @@ public class Olt implements Course {
 
     @Override
     public String getDescription() {
-        return null;
+        return descrription;
+    }
+
+    @Override
+    public String getDescriptionShort() {
+        return descrription.substring(0, 100);
     }
 }

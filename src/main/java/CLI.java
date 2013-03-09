@@ -7,6 +7,7 @@ public class CLI {
 
     public static void main(String[] args) {
 
+
         Injector injector = Guice.createInjector(new BindingModule());
 
         HttpRouts routs = injector.getInstance(HttpRouts.class);

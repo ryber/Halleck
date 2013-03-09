@@ -1,7 +1,6 @@
 package webserver;
 
 import com.google.inject.Inject;
-import halleck.Course;
 import halleck.Halleck;
 import spark.Request;
 import spark.Response;
@@ -24,8 +23,19 @@ public class HttpRouts {
         get(new Route("/") {
             @Override
             public Object handle(Request request, Response response) {
-                Iterable<Course> courses = halleck.getAllCourses();
-                return view.render("welcome.mustache", map("courses", courses));
+                return view.render("welcome.mustache", map("courses", halleck.getAllCourses()));
+            }
+        });
+
+        get(new Route("/course/:id") {
+            @Override
+            public Object handle(Request request, Response response) {
+                try{
+                return view.render("course.mustache", map("course", halleck.getCourse(request.params(":id"))));
+                }catch (Exception e){
+                    System.out.println("e = " + e);
+                }
+                return null;
             }
         });
 

@@ -1,15 +1,9 @@
-
-<table>
-    <tr>
-        <th>Courses</th>
-    </tr>
+<h2 xmlns="http://www.w3.org/1999/html">Available Courses</h2>
 
     {{#courses}}
-      <tr>
-          <td>
-              {{name}}
-          </td>
-      </tr>
+        <p>
+        <h4><a href="/course/{{id}}">{{name}}</a></h4>
+         <span class="tiny">{{descriptionShort}} </span>
+        </p>
     {{/courses}}
 
-</table>
