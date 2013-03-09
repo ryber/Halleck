@@ -1,6 +1,5 @@
-package LMS;
+package halleck;
 
-import LMS.learningobjects.Course;
 
 public interface Halleck {
     Iterable<Course> getAllCourses();

@@ -1,4 +1,4 @@
-package HttpEngine;
+package webserver;
 
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
@@ -11,7 +11,7 @@ public class ViewRenderer {
 
 
     public String render(String template, Object data){
-        return renderTemplate("shell.stash", new Body(renderTemplate(template, data)));
+        return renderTemplate("shell.mustache", new Body(renderTemplate(template, data)));
     }
 
     private String renderTemplate(String template, Object data) {

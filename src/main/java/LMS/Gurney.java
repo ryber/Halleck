@@ -1,12 +1,21 @@
-package LMS;
+package lms;
 
-import LMS.learningobjects.Course;
-
-import static com.google.common.collect.Lists.newArrayList;
+import com.google.inject.Inject;
+import halleck.Course;
+import halleck.Halleck;
 
 public class Gurney implements Halleck {
+
+    private CourseRepository courseRepo;
+
+    @Inject
+    public Gurney(CourseRepository courseRepo){
+        this.courseRepo = courseRepo;
+    }
+
     @Override
     public Iterable<Course> getAllCourses() {
-        return newArrayList(new Course("Foo"), new Course("Bar"));
+        return courseRepo.getAllCourses();
     }
+
 }
