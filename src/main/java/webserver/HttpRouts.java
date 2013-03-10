@@ -30,12 +30,7 @@ public class HttpRouts {
         get(new Route("/course/:id") {
             @Override
             public Object handle(Request request, Response response) {
-                try{
                 return view.render("course.mustache", map("course", halleck.getCourse(request.params(":id"))));
-                }catch (Exception e){
-                    System.out.println("e = " + e);
-                }
-                return null;
             }
         });
 
