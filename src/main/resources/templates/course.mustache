@@ -1,1 +1,20 @@
-Hi
+
+<h1>{{registration.course.name}}</h1>
+
+
+{{#registration.isRegistered}}
+<div class="right">
+      You are already registered for this course.
+</div>
+{{/registration.isRegistered}}
+{{^registration.isRegistered}}
+    <div class="right">
+        <form action="#" method="post">
+            <input type="submit" value="Register For this course now!">
+        </form>
+    </div>
+{{/registration.isRegistered}}
+
+<p>
+{{registration.course.description}}
+</p>

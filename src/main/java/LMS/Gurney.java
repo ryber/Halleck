@@ -4,6 +4,8 @@ import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 import halleck.Course;
 import halleck.Halleck;
+import halleck.Registration;
+import lms.learningobjects.UserRegistration;
 
 import static com.google.common.collect.Iterables.find;
 
@@ -29,6 +31,17 @@ public class Gurney implements Halleck {
                 return id.equalsIgnoreCase(course.getId());
             }
         });
+    }
+
+    @Override
+    public Registration getRegistration(String courseID, String userID) {
+        Course c = getCourse(courseID);
+        return new UserRegistration(c, userID, courseRepo.hasRegistration(courseID, userID));
+    }
+
+    @Override
+    public void register(String courseId, String user) {
+        courseRepo.putRegistration(courseId, user);
     }
 
 }
