@@ -13,7 +13,17 @@ Halleck is of course named after Gurney Halleck; Paul Atreides weapons trainer f
 * Goto http://localhost:4567
 
 ## Road Map
+
+### Soon
 * The ability to have a max enrollment for a course
 * The ability to create / edit courses
 * Persistence
 * A 'My Courses' page
+
+### Long Term Goals
+* anyone can create and publish content
+* anyonce can enroll in any published content
+* the ability to group content into 'boot camps'
+
+### Things Halleck will never do
+* SCORM / AICC
