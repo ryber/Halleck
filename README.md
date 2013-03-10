@@ -6,6 +6,11 @@ Halleck is a "micro-learning management system" (or LMS) aimed at small teams an
 Halleck is of course named after Gurney Halleck; Paul Atreides weapons trainer from Frank Herbert's 'Dune'
 
 <br />
+## Quick Start
+* Clone it
+* Compile it with Maven (mvn compile)
+* Run the jar (java --jar halleck.jar
+* Goto http://localhost:4567
 
 ## Road Map
 * The ability to have a max enrollment for a course
