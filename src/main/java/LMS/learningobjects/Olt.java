@@ -32,4 +32,9 @@ public class Olt implements Course {
     public String getDescriptionShort() {
         return descrription.substring(0, 100);
     }
+
+    @Override
+    public String getVideoName() {
+        return "E1-960x540.mp4";
+    }
 }

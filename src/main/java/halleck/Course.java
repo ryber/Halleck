@@ -5,4 +5,5 @@ public interface Course {
     String getName();
     String getDescription();
     String getDescriptionShort();
+    String getVideoName();
 }
