@@ -1,13 +1,18 @@
 package lms;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.collect.FluentIterable;
 import com.google.inject.Inject;
 import halleck.Course;
 import halleck.Halleck;
 import halleck.Registration;
 import lms.learningobjects.UserRegistration;
 
+import java.util.Set;
+
 import static com.google.common.collect.Iterables.find;
+import static com.google.common.collect.Iterables.transform;
 
 public class Gurney implements Halleck {
 
@@ -36,12 +41,27 @@ public class Gurney implements Halleck {
     @Override
     public Registration getRegistration(String courseID, String userID) {
         Course c = getCourse(courseID);
-        return new UserRegistration(c, userID, courseRepo.hasRegistration(courseID, userID));
+        return new UserRegistration(c, userID, c.registeredUsers().contains(userID));
     }
 
     @Override
     public void register(String courseId, String user) {
         courseRepo.putRegistration(courseId, user);
+    }
+
+    @Override
+    public Set<Registration> getRegistrations(final String courseID) {
+        final Course course = getCourse(courseID);
+
+        return FluentIterable.from(transform(getCourse(courseID).registeredUsers(),
+            new Function<String, Registration>() {
+            @Override
+            public Registration apply(String s) {
+
+                return new UserRegistration(course, s, true);
+            }
+        }
+        )).toSet();
     }
 
 }

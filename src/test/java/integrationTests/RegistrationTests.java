@@ -1,0 +1,72 @@
+package integrationTests;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import halleck.Halleck;
+import ioc.BindingModule;
+import org.junit.Before;
+import org.junit.Test;
+
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
+
+public class RegistrationTests {
+
+    private Injector injector = Guice.createInjector(new BindingModule());
+    private Halleck system = injector.getInstance(Halleck.class);
+
+    @Before
+    public void setUp() throws Exception {
+        SetupFixtures.reset();
+    }
+
+    @Test
+    public void canRegisterForCourse() throws Exception {
+        SetupFixtures.givenCourse("abc", "Underwater Basketweaving");
+
+        assertFalse(system.getRegistration("abc", "barry").isRegistered());
+
+        system.register("abc", "barry");
+
+        assertTrue(system.getRegistration("abc", "barry").isRegistered());
+
+        system.register("abc", "barry");
+
+        assertTrue(system.getRegistration("abc", "barry").isRegistered());
+    }
+
+    @Test
+    public void canCountRegistrations() throws Exception {
+        SetupFixtures.givenCourse("abc", "Underwater Basketweaving");
+
+        system.register("abc", "barry");
+        system.register("abc", "gary");
+
+        assertEquals(2, system.getRegistrations("abc").size());
+
+        system.register("abc", "larry");
+        system.register("abc", "larry");
+
+        assertEquals(3, system.getRegistrations("abc").size());
+    }
+
+    @Test
+    public void cannotRegisterIfPastMaxCapacity() throws Exception {
+        SetupFixtures.givenCourse("abc", "Underwater Basketweaving").setMaxCapacity(2);
+
+        assertEquals(2, system.getCourse("abc").getFreeSeats());
+
+        system.register("abc", "larry");
+
+        assertEquals(1, system.getCourse("abc").getFreeSeats());
+
+        system.register("abc", "larry");
+
+        assertEquals(1, system.getCourse("abc").getFreeSeats());
+
+        system.register("abc", "barry");
+
+        assertEquals(0, system.getCourse("abc").getFreeSeats());
+    }
+}

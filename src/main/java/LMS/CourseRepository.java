@@ -1,33 +1,38 @@
 package lms;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
+import com.google.common.collect.Maps;
 import halleck.Course;
 
-import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import static com.google.common.collect.Lists.newArrayList;
 
 public class CourseRepository {
 
-    private static List<Course> repo = newArrayList();
-    private static Multimap<String, String> registrations = HashMultimap.create();
+    private static Map<String, Course> repo = Maps.newHashMap();
+
 
     List<Course> getAllCourses() {
-        return repo;
+        return newArrayList(repo.values());
     }
 
-    public boolean hasRegistration(String courseID, String userID) {
-        Collection<String> courses = registrations.get(userID);
-        return courses != null && courses.contains(courseID);
+
+    public static void addCourse(List<Course> allCourses) {
+        for (Course c : allCourses){
+            addCourse(c);
+        }
     }
 
-    public static void createCourses(List<Course> allCourses) {
-        repo.addAll(allCourses);
+    public static void addCourse(Course course) {
+        repo.put(course.getId().toLowerCase(), course);
     }
 
     public void putRegistration(String courseId, String user) {
-        registrations.put(user, courseId);
+        repo.get(courseId.toLowerCase()).addRegisteredUser(user);
+    }
+
+    public static void reset() {
+        repo.clear();
     }
 }
