@@ -14,12 +14,16 @@
 
 {{/registration.isRegistered}}
 {{^registration.isRegistered}}
+    {{#registration.canRegister}}
     <div class="right">
         <form action="#" method="post">
             <input type="submit" value="Register For this course now!">
         </form>
     </div>
-
+    {{/registration.canRegister}}
+    {{^registration.canRegister}}
+       The class is full. Please contact your team lead to have registrations added.
+    {{/registration.canRegister}}
     <p>
     {{registration.course.description}}
 {{/registration.isRegistered}}

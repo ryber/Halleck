@@ -28,7 +28,9 @@ public class UserRegistration implements Registration {
         return course.getRegisteredUsers().contains(userID);
     }
 
+    @Override
     public boolean canRegister() {
-        return course.getFreeSeats() > 0 && !isRegistered();
+        return course.hasFreeSeats() && !isRegistered();
     }
+
 }

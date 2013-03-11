@@ -52,7 +52,7 @@ public class RegistrationTests {
     }
 
     @Test
-    public void cannotRegisterIfPastMaxCapacity() throws Exception {
+     public void canTrackCapacity() throws Exception {
         SetupFixtures.givenCourse("abc", "Underwater Basketweaving").setMaxCapacity(2);
 
         assertEquals(2, system.getCourse("abc").getFreeSeats());
@@ -68,5 +68,32 @@ public class RegistrationTests {
         system.register("abc", "barry");
 
         assertEquals(0, system.getCourse("abc").getFreeSeats());
+    }
+
+    @Test
+    public void canDetectIfRegistrationIsPossible() throws Exception {
+        SetupFixtures.givenCourse("abc", "Underwater Basketweaving").setMaxCapacity(2);
+
+        assertTrue(system.getRegistration("abc", "Moe").canRegister());
+
+        system.register("abc", "Moe");
+
+        assertFalse(system.getRegistration("abc", "Moe").canRegister());
+
+        system.register("abc", "larry");
+
+        assertFalse(system.getRegistration("abc", "shemp").canRegister());
+    }
+
+    @Test
+    public void canRegisterAsManyPeopleAsWeWantIfMaxCapacityIsOff() throws Exception {
+        SetupFixtures.givenCourse("abc", "Underwater Basketweaving").setMaxCapacity(null);
+
+        system.register("abc", "moe");
+        system.register("abc", "larry");
+        system.register("abc", "curly");
+        system.register("abc", "shemp");
+
+        assertEquals(4, system.getRegistrations("abc").size());
     }
 }

@@ -10,10 +10,12 @@ public class CLI {
 
         TestData.hydrate();
 
+
+
         Injector injector = Guice.createInjector(new BindingModule());
 
         HttpRouts routs = injector.getInstance(HttpRouts.class);
         routs.registerRouts();
-    }
 
+    }
 }

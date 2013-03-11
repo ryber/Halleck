@@ -12,7 +12,7 @@ import static org.mockito.Mockito.when;
 public class UserRegistrationTest {
 
     @Test
-    public void isRegisteredIfUserInCOurse() throws Exception {
+    public void isRegisteredIfUserInCourse() throws Exception {
         Course course = mock(Course.class);
         when(course.getRegisteredUsers()).thenReturn(newHashSet("bob"));
 
@@ -36,7 +36,7 @@ public class UserRegistrationTest {
         Course course = mock(Course.class);
 
         when(course.getRegisteredUsers()).thenReturn(newHashSet("bob"));
-        when(course.getFreeSeats()).thenReturn(1);
+        when(course.hasFreeSeats()).thenReturn(true);
 
         UserRegistration u = new UserRegistration(course, "Chauncey");
 

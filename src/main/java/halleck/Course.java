@@ -8,8 +8,10 @@ public interface Course {
     String getDescription();
     String getDescriptionShort();
     String getVideoName();
-    void setMaxCapacity(int maxCapacity);
+    void setMaxCapacity(Integer maxCapacity);
     int getFreeSeats();
     Set<String> getRegisteredUsers();
     void addRegisteredUser(String user);
+
+    boolean hasFreeSeats();
 }

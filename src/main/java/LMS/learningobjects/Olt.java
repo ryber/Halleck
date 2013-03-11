@@ -1,6 +1,7 @@
 package lms.learningobjects;
 
 import com.google.common.collect.Sets;
+import com.sun.istack.internal.Nullable;
 import halleck.Course;
 
 import java.util.Set;
@@ -9,8 +10,9 @@ public class Olt implements Course {
     private final String id;
     private String name;
     private final String descrription;
-    private int maxCapacity = 0;
+    private Integer maxCapacity;
     private Set<String> registeredUsers = Sets.newHashSet();
+    public static final int UNLIMITED_ENROLLMENT = 999;
 
     public Olt(String id, String name, String descrription) {
         this.id = id;
@@ -44,12 +46,15 @@ public class Olt implements Course {
     }
 
     @Override
-    public void setMaxCapacity(int maxCapacity) {
+    public void setMaxCapacity(@Nullable Integer maxCapacity) {
         this.maxCapacity = maxCapacity;
     }
 
     @Override
     public int getFreeSeats() {
+        if(maxCapacity == null){
+            return UNLIMITED_ENROLLMENT;
+        }
         return maxCapacity - registeredUsers.size();
     }
 
@@ -61,5 +66,9 @@ public class Olt implements Course {
     @Override
     public void addRegisteredUser(String user) {
         registeredUsers.add(user);
+    }
+
+    public boolean hasFreeSeats() {
+        return getFreeSeats() > 0;
     }
 }
