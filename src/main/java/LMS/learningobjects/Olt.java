@@ -54,7 +54,7 @@ public class Olt implements Course {
     }
 
     @Override
-    public Set<String> registeredUsers() {
+    public Set<String> getRegisteredUsers() {
         return registeredUsers;
     }
 

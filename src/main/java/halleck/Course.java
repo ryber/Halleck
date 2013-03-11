@@ -10,6 +10,6 @@ public interface Course {
     String getVideoName();
     void setMaxCapacity(int maxCapacity);
     int getFreeSeats();
-    Set<String> registeredUsers();
+    Set<String> getRegisteredUsers();
     void addRegisteredUser(String user);
 }

@@ -41,7 +41,7 @@ public class Gurney implements Halleck {
     @Override
     public Registration getRegistration(String courseID, String userID) {
         Course c = getCourse(courseID);
-        return new UserRegistration(c, userID, c.registeredUsers().contains(userID));
+        return new UserRegistration(c, userID);
     }
 
     @Override
@@ -53,12 +53,12 @@ public class Gurney implements Halleck {
     public Set<Registration> getRegistrations(final String courseID) {
         final Course course = getCourse(courseID);
 
-        return FluentIterable.from(transform(getCourse(courseID).registeredUsers(),
+        return FluentIterable.from(transform(getCourse(courseID).getRegisteredUsers(),
             new Function<String, Registration>() {
             @Override
             public Registration apply(String s) {
 
-                return new UserRegistration(course, s, true);
+                return new UserRegistration(course, s);
             }
         }
         )).toSet();

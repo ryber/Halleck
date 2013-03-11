@@ -6,13 +6,11 @@ import halleck.Registration;
 public class UserRegistration implements Registration {
     private final Course course;
     private final String userID;
-    private final boolean isRegistered;
 
-    public UserRegistration(Course course, String userID, boolean isRegistered) {
+
+    public UserRegistration(Course course, String userID) {
         this.course = course;
         this.userID = userID;
-        this.isRegistered = isRegistered;
-
     }
 
     @Override
@@ -27,6 +25,10 @@ public class UserRegistration implements Registration {
 
     @Override
     public boolean isRegistered() {
-        return isRegistered;
+        return course.getRegisteredUsers().contains(userID);
+    }
+
+    public boolean canRegister() {
+        return course.getFreeSeats() > 0 && !isRegistered();
     }
 }
