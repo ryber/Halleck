@@ -1,11 +1,13 @@
 package lms.learningobjects;
 
-import com.google.common.base.Strings;
 import com.google.common.collect.Sets;
 import com.sun.istack.internal.Nullable;
 import halleck.Course;
+import halleck.CourseInput;
 
 import java.util.Set;
+
+import static com.google.common.base.Strings.nullToEmpty;
 
 public class Olt implements Course {
     private final String id;
@@ -14,11 +16,17 @@ public class Olt implements Course {
     private Integer maxCapacity;
     private Set<String> registeredUsers = Sets.newHashSet();
     public static final int UNLIMITED_ENROLLMENT = 999;
+    private String url = "";
 
     public Olt(String id, String name, String descrription) {
         this.id = id;
         this.name = name;
-        this.descrription = Strings.nullToEmpty(descrription);
+        this.descrription = nullToEmpty(descrription);
+    }
+
+    public Olt(CourseInput courseInput) {
+        this(courseInput.getId(), courseInput.getName(), courseInput.getDescription());
+        this.url = nullToEmpty(courseInput.getUrl());
     }
 
     @Override
@@ -45,8 +53,8 @@ public class Olt implements Course {
     }
 
     @Override
-    public String getVideoName() {
-        return "E1-960x540.mp4";
+    public String getContentUrl() {
+        return url;
     }
 
     @Override

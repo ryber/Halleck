@@ -12,6 +12,7 @@ public class MockResponse implements HttpServletResponse {
     private int status;
 
     private FakeServletOutputStream  fakeStream = new FakeServletOutputStream();
+    private String redirectLocation;
 
 
     public String getOutputString()  {
@@ -60,7 +61,7 @@ public class MockResponse implements HttpServletResponse {
 
     @Override
     public void sendRedirect(String location) throws IOException {
-
+        redirectLocation = location;
     }
 
     @Override
@@ -180,5 +181,9 @@ public class MockResponse implements HttpServletResponse {
 
     public int getStatus(){
         return status;
+    }
+
+    public String getRedirectLocation(){
+        return redirectLocation;
     }
 }

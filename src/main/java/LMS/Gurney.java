@@ -5,8 +5,10 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.inject.Inject;
 import halleck.Course;
+import halleck.CourseInput;
 import halleck.Halleck;
 import halleck.Registration;
+import lms.learningobjects.Olt;
 import lms.learningobjects.UserRegistration;
 
 import java.util.Set;
@@ -62,6 +64,11 @@ public class Gurney implements Halleck {
             }
         }
         )).toSet();
+    }
+
+    @Override
+    public void createCourse(CourseInput courseInput) {
+        courseRepo.putCourse(new Olt(courseInput));
     }
 
 }

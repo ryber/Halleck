@@ -1,6 +1,7 @@
 package integrationTests.mocks;
 
 import com.google.common.base.Strings;
+import webserver.mappers.FormVars;
 import spark.route.HttpMethod;
 import webserver.HttpRouts;
 
@@ -23,14 +24,22 @@ import static com.google.common.collect.Lists.newArrayList;
 public class MockRequest implements HttpServletRequest {
     private final HttpMethod method;
     private final String path;
+    private FormVars form = new FormVars();
     private List<Cookie> cookies = newArrayList();
 
 
 
-    public MockRequest(HttpMethod method, String path, String currentUser) {
+    public MockRequest(HttpMethod method, String path, String currentUser, FormVars form) {
         this.method = method;
         this.path = path;
+        setForm(form);
         setupUserCookies(currentUser);
+    }
+
+    private void setForm(FormVars input) {
+        if(input != null){
+            this.form = input;
+        }
     }
 
     private void setupUserCookies(String currentUser) {
@@ -78,7 +87,7 @@ public class MockRequest implements HttpServletRequest {
 
     @Override
     public String getParameter(String name) {
-        return null;
+        return form.get(name);
     }
 
     @Override
@@ -93,7 +102,7 @@ public class MockRequest implements HttpServletRequest {
 
     @Override
     public Map getParameterMap() {
-        return null;
+        return form;
     }
 
     @Override

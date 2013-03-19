@@ -1,11 +1,17 @@
 package webserver;
 
 import com.google.inject.Inject;
+import halleck.CourseInput;
 import halleck.Halleck;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 import spark.servlet.SparkApplication;
+import webserver.mappers.CourseMapper;
+import webserver.mappers.FormVars;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.NoSuchElementException;
 
 import static spark.Spark.*;
 import static webserver.MapMaker.map;
@@ -14,10 +20,12 @@ import static webserver.RequestCookies.requestCookies;
 public class HttpRouts implements SparkApplication {
     public static final String HALLECK_NAME = "halleckName";
     private ViewRenderer view = new ViewRenderer();
+    private CourseMapper mapper = new CourseMapper();
     private Halleck halleck;
 
+
     @Inject
-    public HttpRouts(Halleck halleck){
+    public HttpRouts(Halleck halleck) {
         this.halleck = halleck;
     }
 
@@ -33,6 +41,7 @@ public class HttpRouts implements SparkApplication {
             }
         });
 
+
         post(new Route("/registrations/course/:id") {
             @Override
             public Object handle(Request request, Response response) {
@@ -46,10 +55,15 @@ public class HttpRouts implements SparkApplication {
         get(new Route("/registrations/course/:id") {
             @Override
             public Object handle(Request request, Response response) {
-                return view.render("course.mustache", map(
-                        "registration", halleck.getRegistration(request.params(":id"), getUser(request))
-                )
-                );
+
+                try {
+                    return view.render("course.mustache", map(
+                            "registration", halleck.getRegistration(request.params(":id"), getUser(request))
+                    ));
+                } catch (NoSuchElementException e) {
+                    response.status(404);
+                    return null;
+                }
             }
         });
 
@@ -65,9 +79,44 @@ public class HttpRouts implements SparkApplication {
             public Object handle(Request request, Response response) {
                 String username = request.queryParams("username");
                 new ResponseCookies(response).cookie(HALLECK_NAME, username);
-                return view.render("redirect.mustache", map("url","/"));
+                return view.render("redirect.mustache", map("url", "/"));
             }
         });
+
+        get(new Route("/course/") {
+            @Override
+            public Object handle(Request request, Response response) {
+                return view.render("editcourse.mustache");
+            }
+        });
+
+        get(new Route("/course/:id") {
+            @Override
+            public Object handle(Request request, Response response) {
+                return view.render("editcourse.mustache", map("course", halleck.getCourse(request.params(":id"))));
+            }
+        });
+
+        post(new Route("/course/") {
+            @Override
+            public Object handle(Request request, Response response) {
+
+                CourseInput apply = mapper.apply(getForm(request));
+                halleck.createCourse(apply);
+                response.redirect("/course/" + apply.getId());
+                return null;
+            }
+        });
+    }
+
+    private FormVars getForm(Request request) {
+        FormVars vars = new FormVars();
+        HttpServletRequest raw = request.raw();
+
+        for (Object key : raw.getParameterMap().keySet()) {
+            vars.put(key.toString(), raw.getParameter(key.toString()));
+        }
+        return vars;
     }
 
     private String getUser(Request request) {

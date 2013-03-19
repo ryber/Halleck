@@ -10,6 +10,10 @@ import java.io.StringWriter;
 public class ViewRenderer {
 
 
+    public String render(String templateName) {
+        return render(templateName, null);
+    }
+
     public String render(String template, Object data){
         return renderTemplate("shell.mustache", new Body(renderTemplate(template, data)));
     }

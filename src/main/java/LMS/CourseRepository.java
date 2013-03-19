@@ -35,4 +35,8 @@ public class CourseRepository {
     public static void reset() {
         repo.clear();
     }
+
+    public void putCourse(Course course) {
+        addCourse(course);
+    }
 }

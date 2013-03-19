@@ -9,4 +9,5 @@ public interface Halleck {
     Registration getRegistration(String courseID, String userID);
     void register(String courseId, String userID);
     Set<Registration> getRegistrations(String courseID);
+    void createCourse(CourseInput apply);
 }

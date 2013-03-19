@@ -7,11 +7,10 @@ public interface Course {
     String getName();
     String getDescription();
     String getDescriptionShort();
-    String getVideoName();
+    String getContentUrl();
     void setMaxCapacity(Integer maxCapacity);
     int getFreeSeats();
     Set<String> getRegisteredUsers();
     void addRegisteredUser(String user);
-
     boolean hasFreeSeats();
 }

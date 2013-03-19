@@ -1,6 +1,7 @@
 package integrationTests.mocks;
 
 import integrationTests.SetupFixtures;
+import webserver.mappers.FormVars;
 import spark.route.HttpMethod;
 import spark.route.RouteMatcherFactory;
 import spark.webserver.MatcherFilter;
@@ -8,10 +9,16 @@ import spark.webserver.MatcherFilter;
 public class FakeAppServer {
 
     public static Result exec(HttpMethod method, String path){
+        return exec(method, path, null);
+    }
+
+    public static Result exec(HttpMethod method, String path, FormVars form){
         MatcherFilter matcherFilter = new MatcherFilter(RouteMatcherFactory.get(), false);
         matcherFilter.init(null);
 
-        MockRequest request = new MockRequest(method, path, SetupFixtures.getCurrentUser());
+        MockRequest request = new MockRequest(method, path, SetupFixtures.getCurrentUser(), form);
+
+
         MockResponse response = new MockResponse();
         try {
             matcherFilter.doFilter(request, response, null);
@@ -19,26 +26,9 @@ public class FakeAppServer {
             e.printStackTrace();
         }
 
-        return new Result(response.getStatus(), response.getOutputString());
+        return new Result(response);
     }
 
-    public static class Result {
-        private final int status;
-        private final String content;
 
-        public Result(int status, String content){
-
-            this.status = status;
-            this.content = content;
-        }
-
-        public String getContent() {
-            return content;
-        }
-
-        public int getStatus() {
-            return status;
-        }
-    }
 
 }
