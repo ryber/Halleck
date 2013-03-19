@@ -1,5 +1,6 @@
 package lms.learningobjects;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.Sets;
 import com.sun.istack.internal.Nullable;
 import halleck.Course;
@@ -9,7 +10,7 @@ import java.util.Set;
 public class Olt implements Course {
     private final String id;
     private String name;
-    private final String descrription;
+    private String descrription = "";
     private Integer maxCapacity;
     private Set<String> registeredUsers = Sets.newHashSet();
     public static final int UNLIMITED_ENROLLMENT = 999;
@@ -17,7 +18,7 @@ public class Olt implements Course {
     public Olt(String id, String name, String descrription) {
         this.id = id;
         this.name = name;
-        this.descrription = descrription;
+        this.descrription = Strings.nullToEmpty(descrription);
     }
 
     @Override
@@ -37,7 +38,10 @@ public class Olt implements Course {
 
     @Override
     public String getDescriptionShort() {
-        return descrription.substring(0, 100);
+        if(descrription.length() > 100){
+            return descrription.substring(0, 100);
+        }
+        return descrription;
     }
 
     @Override

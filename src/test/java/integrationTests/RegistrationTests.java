@@ -7,6 +7,7 @@ import ioc.BindingModule;
 import org.junit.Before;
 import org.junit.Test;
 
+import static integrationTests.SetupFixtures.givenCourse;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
@@ -23,7 +24,7 @@ public class RegistrationTests {
 
     @Test
     public void canRegisterForCourse() throws Exception {
-        SetupFixtures.givenCourse("abc", "Underwater Basketweaving");
+        givenCourse("abc", "Underwater Basketweaving");
 
         assertFalse(system.getRegistration("abc", "barry").isRegistered());
 
@@ -38,7 +39,7 @@ public class RegistrationTests {
 
     @Test
     public void canCountRegistrations() throws Exception {
-        SetupFixtures.givenCourse("abc", "Underwater Basketweaving");
+        givenCourse("abc", "Underwater Basketweaving");
 
         system.register("abc", "barry");
         system.register("abc", "gary");
@@ -53,7 +54,7 @@ public class RegistrationTests {
 
     @Test
      public void canTrackCapacity() throws Exception {
-        SetupFixtures.givenCourse("abc", "Underwater Basketweaving").setMaxCapacity(2);
+        givenCourse("abc", "Underwater Basketweaving").setMaxCapacity(2);
 
         assertEquals(2, system.getCourse("abc").getFreeSeats());
 
@@ -72,7 +73,7 @@ public class RegistrationTests {
 
     @Test
     public void canDetectIfRegistrationIsPossible() throws Exception {
-        SetupFixtures.givenCourse("abc", "Underwater Basketweaving").setMaxCapacity(2);
+        givenCourse("abc", "Underwater Basketweaving").setMaxCapacity(2);
 
         assertTrue(system.getRegistration("abc", "Moe").canRegister());
 
@@ -87,7 +88,7 @@ public class RegistrationTests {
 
     @Test
     public void canRegisterAsManyPeopleAsWeWantIfMaxCapacityIsOff() throws Exception {
-        SetupFixtures.givenCourse("abc", "Underwater Basketweaving").setMaxCapacity(null);
+        givenCourse("abc", "Underwater Basketweaving").setMaxCapacity(null);
 
         system.register("abc", "moe");
         system.register("abc", "larry");

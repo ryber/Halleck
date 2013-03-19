@@ -5,12 +5,13 @@ import halleck.Halleck;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import spark.servlet.SparkApplication;
 
 import static spark.Spark.*;
 import static webserver.MapMaker.map;
 import static webserver.RequestCookies.requestCookies;
 
-public class HttpRouts {
+public class HttpRouts implements SparkApplication {
     public static final String HALLECK_NAME = "halleckName";
     private ViewRenderer view = new ViewRenderer();
     private Halleck halleck;
@@ -20,7 +21,8 @@ public class HttpRouts {
         this.halleck = halleck;
     }
 
-    public void registerRouts() {
+    @Override
+    public void init() {
 
         before(new SecurityFilter());
 
@@ -51,7 +53,6 @@ public class HttpRouts {
             }
         });
 
-
         get(new Route("/login") {
             @Override
             public Object handle(Request request, Response response) {
@@ -67,7 +68,6 @@ public class HttpRouts {
                 return view.render("redirect.mustache", map("url","/"));
             }
         });
-
     }
 
     private String getUser(Request request) {

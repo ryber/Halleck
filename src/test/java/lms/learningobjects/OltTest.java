@@ -12,4 +12,11 @@ public class OltTest {
         o.setMaxCapacity(null);
         assertEquals(Olt.UNLIMITED_ENROLLMENT, o.getFreeSeats());
     }
+
+    @Test
+    public void canSetDescripToNullAndNotDie() throws Exception {
+        Olt o = new Olt(null,null,null);
+        assertEquals("", o.getDescription());
+        assertEquals("", o.getDescriptionShort());
+    }
 }
