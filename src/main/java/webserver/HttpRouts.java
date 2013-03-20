@@ -107,6 +107,8 @@ public class HttpRouts implements SparkApplication {
                 return null;
             }
         });
+
+        get(new AssetRouts("/assets/*"));
     }
 
     private FormVars getForm(Request request) {
