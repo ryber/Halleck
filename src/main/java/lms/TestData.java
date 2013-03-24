@@ -29,7 +29,7 @@ public class TestData {
     }
 
     private static Olt createCourse(String id, String name, String desc, String url) {
-        return new Olt(new CourseInputImpl(id, name, desc, url));
+        return new Olt(new CourseInputImpl(id, name, desc, url, null));
 
     }
 }

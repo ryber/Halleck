@@ -5,4 +5,5 @@ public interface CourseInput {
     String getName();
     String getDescription();
     String getUrl();
+    Integer getMaxEnrollment();
 }

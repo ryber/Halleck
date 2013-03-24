@@ -50,7 +50,7 @@ public class GurneyTest {
         ArgumentCaptor<Course> captor = ArgumentCaptor.forClass(Course.class);
         doNothing().when(courseRepo).putCourse(captor.capture());
 
-        gurney.createCourse(new CourseInputImpl("42","Underwater Basketweaving", "a desc", "http://foo"));
+        gurney.createCourse(new CourseInputImpl("42","Underwater Basketweaving", "a desc", "http://foo", null));
 
         Course result = captor.getValue();
 
