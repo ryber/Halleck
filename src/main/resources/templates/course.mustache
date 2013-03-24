@@ -1,11 +1,11 @@
 
-<h1>{{registration.course.name}}</h1>
+<h4>{{registration.course.name}}</h4>
 
-
+<div class="tiny">
 {{#registration.isRegistered}}
 
 
-<div class="content">
+
     <video width="720"  controls>
         <source src="http://localhost/{{registration.course.contentUrl}}" type="video/mp4">
         Your browser does not support the video tag.
@@ -15,18 +15,19 @@
 {{/registration.isRegistered}}
 {{^registration.isRegistered}}
     {{#registration.canRegister}}
-    <div class="right">
-        <form action="#" method="post">
-            <input type="submit" value="Register For this course now!">
-        </form>
-    </div>
+
+    <form action="#" method="post">
+        <input type="submit" value="Register For this course now!">
+    </form>
+
     {{/registration.canRegister}}
     {{^registration.canRegister}}
        The class is full. Please contact your team lead to have registrations added.
     {{/registration.canRegister}}
-    <p>
-    {{registration.course.description}}
+
+
+    <p>{{registration.course.description}}</p>
 {{/registration.isRegistered}}
 
 
-</p>
+</div>
