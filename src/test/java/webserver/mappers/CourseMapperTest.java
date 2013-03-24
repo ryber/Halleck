@@ -4,6 +4,7 @@ import halleck.CourseInput;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNull;
 
 public class CourseMapperTest {
 
@@ -39,7 +40,18 @@ public class CourseMapperTest {
 
         assertEquals(null, inputCourse.getId());
         assertEquals("Underwater Basketweaving", inputCourse.getName());
+    }
 
+    @Test
+    public void emptyMaxResultsInNUll(){
+        FormVars form = new FormVars();
+        form.put("max", "");
+
+        CourseMapper mapper = new CourseMapper();
+
+        CourseInput inputCourse = mapper.apply(form);
+
+        assertNull(inputCourse.getMaxEnrollment());
     }
 
 

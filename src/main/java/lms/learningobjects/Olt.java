@@ -27,6 +27,7 @@ public class Olt implements Course {
     public Olt(CourseInput courseInput) {
         this(courseInput.getId(), courseInput.getName(), courseInput.getDescription());
         this.url = nullToEmpty(courseInput.getUrl());
+        this.maxCapacity = courseInput.getMaxEnrollment();
     }
 
     @Override
