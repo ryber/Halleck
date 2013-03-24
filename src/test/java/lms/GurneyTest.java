@@ -57,6 +57,6 @@ public class GurneyTest {
         assertEquals("42", result.getId());
         assertEquals("Underwater Basketweaving", result.getName());
         assertEquals("a desc", result.getDescription());
-        assertEquals("http://foo", result.getContentUrl());
+        assertEquals("http://foo", result.getUrl());
     }
 }

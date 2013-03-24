@@ -45,16 +45,21 @@ public class Olt implements Course {
     }
 
     @Override
+    public String getUrl() {
+        return url;
+    }
+
+    @Override
+    public Integer getMaxEnrollment() {
+        return maxCapacity;
+    }
+
+    @Override
     public String getDescriptionShort() {
         if(descrription.length() > 100){
             return descrription.substring(0, 100);
         }
         return descrription;
-    }
-
-    @Override
-    public String getContentUrl() {
-        return url;
     }
 
     @Override

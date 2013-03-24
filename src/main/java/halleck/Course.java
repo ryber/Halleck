@@ -2,12 +2,8 @@ package halleck;
 
 import java.util.Set;
 
-public interface Course {
-    String getId();
-    String getName();
-    String getDescription();
+public interface Course extends CourseInput {
     String getDescriptionShort();
-    String getContentUrl();
     void setMaxCapacity(Integer maxCapacity);
     int getFreeSeats();
     Set<String> getRegisteredUsers();
