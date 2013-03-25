@@ -17,10 +17,10 @@ import static com.google.common.collect.Iterables.transform;
 
 public class Gurney implements Halleck {
 
-    private InMemoryCourseRepository courseRepo;
+    private CourseRepository courseRepo;
 
     @Inject
-    public Gurney(InMemoryCourseRepository courseRepo){
+    public Gurney(CourseRepository courseRepo){
         this.courseRepo = courseRepo;
     }
 

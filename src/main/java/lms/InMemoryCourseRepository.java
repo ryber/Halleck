@@ -12,7 +12,7 @@ public class InMemoryCourseRepository implements CourseRepository {
 
     private static Map<String, Course> repo = Maps.newHashMap();
 
-    List<Course> getAllCourses() {
+    public List<Course> getAllCourses() {
         return newArrayList(repo.values());
     }
 
