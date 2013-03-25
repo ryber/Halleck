@@ -84,12 +84,15 @@ public class UiDrivenTests {
 
     @Test
     public void canVewCourseFormForExistingCourse() throws Exception {
-        givenCourse("42", "Find The Fish");
+        givenCourse("42", "Find The Fish", "a nice course", "http://foo", 42);
 
         Result result = exec(get, "/course/42");
 
         assertHasFormInput(result.getContent(), "id", "42");
         assertHasFormInput(result.getContent(), "name", "Find The Fish");
+        assertHasTextArea(result.getContent(), "description", "a nice course");
+        assertHasFormInput(result.getContent(), "url", "http://foo");
+        assertHasFormInput(result.getContent(), "max", "42");
     }
 
     @Test
@@ -97,6 +100,7 @@ public class UiDrivenTests {
         Result regResult = exec(get, "/registrations/course/42");
         assertEquals(404, regResult.getStatus());
     }
+
 
     @Test
     public void canCreateNewCourse() throws Exception {
@@ -111,14 +115,23 @@ public class UiDrivenTests {
         assertEquals("/course/42", result.getRedirect());
     }
 
-
-
     private void assertHasFormInput(String content, String inputName, String inputValue) {
         try{
             assertThat(content, containsString(String.format("name=\"%s\"", inputName)));
             assertThat(content, containsString(String.format("value=\"%s\"", inputValue)));
         }catch (RuntimeException e){
             fail(String.format("Was expecting form input named '%s' with value '%s'", inputName, inputValue));
+        }
+    }
+
+
+
+    private void assertHasTextArea(String content,  String inputName, String inputValue) {
+        try{
+            assertThat(content, containsString(String.format("name=\"%s\"", inputName)));
+            assertThat(content, containsString(inputValue));
+        }catch (RuntimeException e){
+            fail(String.format("Was expecting form textarea named '%s' with value '%s'", inputName, inputValue));
         }
     }
 }

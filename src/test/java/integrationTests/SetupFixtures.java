@@ -8,11 +8,14 @@ public class SetupFixtures {
     private static String currentUser;
 
     public static Course givenCourse(String id, String name) {
-        Course c = new OnlineCourse(id, name, null);
+        return givenCourse(id, name, null, null, null);
+    }
+
+    public static Course givenCourse(String id, String name, String desc, String url, Integer max) {
+        Course c = new OnlineCourse(id, name, desc, url, max);
         CourseRepository.addCourse(c);
         return c;
     }
-
 
     public static void givenUser(String barry) {
 

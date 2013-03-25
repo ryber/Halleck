@@ -8,7 +8,6 @@ import static junit.framework.Assert.assertNull;
 
 public class CourseMapperTest {
 
-
     @Test
     public void canMapRequestIntoCourse() throws Exception {
         FormVars form = new FormVars();
