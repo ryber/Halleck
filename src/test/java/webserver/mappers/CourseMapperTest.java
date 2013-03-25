@@ -1,6 +1,6 @@
 package webserver.mappers;
 
-import halleck.CourseInput;
+import halleck.Course;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
@@ -20,7 +20,7 @@ public class CourseMapperTest {
 
         CourseMapper mapper = new CourseMapper();
 
-        CourseInput inputCourse = mapper.apply(form);
+        Course inputCourse = mapper.apply(form);
 
         assertEquals("42", inputCourse.getId());
         assertEquals("Underwater Basketweaving", inputCourse.getName());
@@ -36,7 +36,7 @@ public class CourseMapperTest {
 
         CourseMapper mapper = new CourseMapper();
 
-        CourseInput inputCourse = mapper.apply(form);
+        Course inputCourse = mapper.apply(form);
 
         assertEquals(null, inputCourse.getId());
         assertEquals("Underwater Basketweaving", inputCourse.getName());
@@ -49,7 +49,7 @@ public class CourseMapperTest {
 
         CourseMapper mapper = new CourseMapper();
 
-        CourseInput inputCourse = mapper.apply(form);
+        Course inputCourse = mapper.apply(form);
 
         assertNull(inputCourse.getMaxEnrollment());
     }

@@ -2,13 +2,13 @@ package integrationTests;
 
 import halleck.Course;
 import lms.CourseRepository;
-import lms.learningobjects.Olt;
+import halleck.OnlineCourse;
 
 public class SetupFixtures {
     private static String currentUser;
 
     public static Course givenCourse(String id, String name) {
-        Course c = new Olt(id, name, null);
+        Course c = new OnlineCourse(id, name, null);
         CourseRepository.addCourse(c);
         return c;
     }

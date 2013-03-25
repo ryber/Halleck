@@ -1,14 +1,13 @@
 package lms;
 
 import halleck.Course;
-import lms.learningobjects.Olt;
+import halleck.OnlineCourse;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import webserver.mappers.CourseInputImpl;
 
 import java.util.List;
 
@@ -35,8 +34,8 @@ public class GurneyTest {
 
     @Test
     public void willReturnDesiredCourse() throws Exception {
-        Course c1 = new Olt("foo",null,null);
-        Course c2 = new Olt("bar",null,null);
+        Course c1 = new OnlineCourse("foo",null,null);
+        Course c2 = new OnlineCourse("bar",null,null);
         List<Course> courses = newArrayList(c1, c2);
 
         when(courseRepo.getAllCourses()).thenReturn(courses);
@@ -50,7 +49,7 @@ public class GurneyTest {
         ArgumentCaptor<Course> captor = ArgumentCaptor.forClass(Course.class);
         doNothing().when(courseRepo).putCourse(captor.capture());
 
-        gurney.createCourse(new CourseInputImpl("42","Underwater Basketweaving", "a desc", "http://foo", null));
+        gurney.createCourse(new OnlineCourse("42","Underwater Basketweaving", "a desc", "http://foo", null));
 
         Course result = captor.getValue();
 

@@ -1,31 +1,32 @@
 package lms.learningobjects;
 
-import halleck.CourseInput;
+import halleck.Course;
+import halleck.OnlineCourse;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class OltTest {
+public class OnlineCourseTest {
 
     @Test
     public void ifMaxCapacityIsNullThenFreeSeatsIsAlways99() throws Exception {
-        Olt o = new Olt(null,null,null);
+        OnlineCourse o = new OnlineCourse(null,null,null);
         o.setMaxCapacity(null);
-        assertEquals(Olt.UNLIMITED_ENROLLMENT, o.getFreeSeats());
+        assertEquals(OnlineCourse.UNLIMITED_ENROLLMENT, o.getFreeSeats());
     }
 
     @Test
     public void canSetDescripToNullAndNotDie() throws Exception {
-        Olt o = new Olt(null,null,null);
+        OnlineCourse o = new OnlineCourse(null,null,null);
         assertEquals("", o.getDescription());
         assertEquals("", o.getDescriptionShort());
     }
 
     @Test
     public void willCopyFromInputToMakeACourse(){
-        CourseInput i = mock(CourseInput.class);
+        Course i = mock(Course.class);
 
         when(i.getId()).thenReturn("fooid");
         when(i.getName()).thenReturn("Underwater Basketweaving");
@@ -33,7 +34,7 @@ public class OltTest {
         when(i.getUrl()).thenReturn("http://bar");
         when(i.getMaxEnrollment()).thenReturn(54);
 
-        Olt t = new Olt(i);
+        OnlineCourse t = new OnlineCourse(i);
 
         assertEquals("fooid", t.getId());
         assertEquals("Underwater Basketweaving", t.getName());

@@ -1,15 +1,13 @@
-package lms.learningobjects;
+package halleck;
 
 import com.google.common.collect.Sets;
 import com.sun.istack.internal.Nullable;
-import halleck.Course;
-import halleck.CourseInput;
 
 import java.util.Set;
 
 import static com.google.common.base.Strings.nullToEmpty;
 
-public class Olt implements Course {
+public class OnlineCourse implements Course {
     private final String id;
     private String name;
     private String descrription = "";
@@ -18,16 +16,22 @@ public class Olt implements Course {
     public static final int UNLIMITED_ENROLLMENT = 999;
     private String url = "";
 
-    public Olt(String id, String name, String descrription) {
+    public OnlineCourse(String id, String name, String descrription) {
         this.id = id;
         this.name = name;
         this.descrription = nullToEmpty(descrription);
     }
 
-    public Olt(CourseInput courseInput) {
+    public OnlineCourse(Course courseInput) {
         this(courseInput.getId(), courseInput.getName(), courseInput.getDescription());
         this.url = nullToEmpty(courseInput.getUrl());
         this.maxCapacity = courseInput.getMaxEnrollment();
+    }
+
+    public OnlineCourse(String id, String name, String description, String url, Integer max) {
+        this(id, name, description);
+        this.url = nullToEmpty(url);
+        this.maxCapacity = max;
     }
 
     @Override

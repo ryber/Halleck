@@ -1,8 +1,7 @@
 package lms;
 
 import halleck.Course;
-import lms.learningobjects.Olt;
-import webserver.mappers.CourseInputImpl;
+import halleck.OnlineCourse;
 
 import java.util.List;
 
@@ -28,8 +27,8 @@ public class TestData {
         );
     }
 
-    private static Olt createCourse(String id, String name, String desc, String url) {
-        return new Olt(new CourseInputImpl(id, name, desc, url, null));
+    private static OnlineCourse createCourse(String id, String name, String desc, String url) {
+        return new OnlineCourse(id, name, desc, url, null);
 
     }
 }

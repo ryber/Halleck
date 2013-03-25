@@ -5,10 +5,9 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.inject.Inject;
 import halleck.Course;
-import halleck.CourseInput;
 import halleck.Halleck;
 import halleck.Registration;
-import lms.learningobjects.Olt;
+import halleck.OnlineCourse;
 import lms.learningobjects.UserRegistration;
 
 import java.util.Set;
@@ -67,8 +66,8 @@ public class Gurney implements Halleck {
     }
 
     @Override
-    public void createCourse(CourseInput courseInput) {
-        courseRepo.putCourse(new Olt(courseInput));
+    public void createCourse(Course course) {
+        courseRepo.putCourse(new OnlineCourse(course));
     }
 
 }

@@ -1,7 +1,7 @@
 package webserver;
 
 import com.google.inject.Inject;
-import halleck.CourseInput;
+import halleck.Course;
 import halleck.Halleck;
 import spark.Request;
 import spark.Response;
@@ -101,7 +101,7 @@ public class HttpRouts implements SparkApplication {
             @Override
             public Object handle(Request request, Response response) {
 
-                CourseInput apply = mapper.apply(getForm(request));
+                Course apply = mapper.apply(getForm(request));
                 halleck.createCourse(apply);
                 response.redirect("/course/" + apply.getId());
                 return null;
