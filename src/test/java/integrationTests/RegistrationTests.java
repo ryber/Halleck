@@ -14,7 +14,7 @@ import static junit.framework.Assert.assertTrue;
 
 public class RegistrationTests {
 
-    private Injector injector = Guice.createInjector(new BindingModule());
+    private Injector injector = Guice.createInjector(new TestBindings());
     private Halleck system = injector.getInstance(Halleck.class);
 
     @Before

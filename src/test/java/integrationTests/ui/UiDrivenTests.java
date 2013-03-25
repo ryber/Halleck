@@ -2,6 +2,7 @@ package integrationTests.ui;
 
 import halleck.Course;
 import integrationTests.SetupFixtures;
+import integrationTests.TestBindings;
 import integrationTests.mocks.Result;
 import ioc.CLI;
 import org.junit.Before;
@@ -23,7 +24,7 @@ public class UiDrivenTests {
     public void setUp() throws Exception {
         SetupFixtures.reset();
         if(!serverStarted){
-            CLI.startServer();
+            CLI.startServer(new TestBindings());
             serverStarted = true;
         }
     }

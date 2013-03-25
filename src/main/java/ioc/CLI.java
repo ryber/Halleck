@@ -11,12 +11,12 @@ public class CLI {
 
         TestData.hydrate();
 
-        startServer();
+        startServer(new BindingModule());
 
     }
 
-    public static void startServer() {
-        Injector injector = Guice.createInjector(new BindingModule());
+    public static void startServer(BindingModule bindingModule) {
+        Injector injector = Guice.createInjector(bindingModule);
 
         HttpRouts routs = injector.getInstance(HttpRouts.class);
         routs.init();
