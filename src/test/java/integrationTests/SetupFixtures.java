@@ -1,8 +1,8 @@
 package integrationTests;
 
 import halleck.Course;
-import lms.CourseRepository;
 import halleck.OnlineCourse;
+import lms.InMemoryCourseRepository;
 
 public class SetupFixtures {
     private static String currentUser;
@@ -13,7 +13,7 @@ public class SetupFixtures {
 
     public static Course givenCourse(String id, String name, String desc, String url, Integer max) {
         Course c = new OnlineCourse(id, name, desc, url, max);
-        CourseRepository.addCourse(c);
+        InMemoryCourseRepository.addCourse(c);
         return c;
     }
 
@@ -22,7 +22,7 @@ public class SetupFixtures {
     }
 
     public static void reset() {
-        CourseRepository.reset();
+        InMemoryCourseRepository.reset();
     }
 
     public static void setCurrentUser(String name) {

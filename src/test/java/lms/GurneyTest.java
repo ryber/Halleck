@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
 public class GurneyTest {
 
     @Mock
-    private CourseRepository courseRepo;
+    private InMemoryCourseRepository courseRepo;
 
     @InjectMocks
     private Gurney gurney;
@@ -58,4 +58,6 @@ public class GurneyTest {
         assertEquals("a desc", result.getDescription());
         assertEquals("http://foo", result.getUrl());
     }
+
+
 }

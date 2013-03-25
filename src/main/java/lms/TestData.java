@@ -9,7 +9,7 @@ import static lms.learningobjects.LoUtils.newCourseList;
 
 public class TestData {
     public static void hydrate(){
-        CourseRepository.addCourse(getAllCourses());
+        InMemoryCourseRepository.addCourse(getAllCourses());
     }
 
     static List<Course> getAllCourses() {

@@ -17,10 +17,10 @@ import static com.google.common.collect.Iterables.transform;
 
 public class Gurney implements Halleck {
 
-    private CourseRepository courseRepo;
+    private InMemoryCourseRepository courseRepo;
 
     @Inject
-    public Gurney(CourseRepository courseRepo){
+    public Gurney(InMemoryCourseRepository courseRepo){
         this.courseRepo = courseRepo;
     }
 
@@ -47,7 +47,9 @@ public class Gurney implements Halleck {
 
     @Override
     public void register(String courseId, String user) {
-        courseRepo.putRegistration(courseId, user);
+        Course c = courseRepo.getCourse(courseId);
+        c.addRegisteredUser(user);
+        courseRepo.putCourse(c);
     }
 
     @Override
