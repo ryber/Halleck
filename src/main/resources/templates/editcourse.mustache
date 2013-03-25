@@ -1,8 +1,32 @@
 <form action="/course/" method="post">
-    Course Id:  <input name="id" value="{{course.id}}" />   <br />
-    Name:  <input name="name" value="{{course.name}}" />   <br />
-    Description:  <input name="description" value="{{course.description}}" />   <br />
-    URL:  <input name="url" type="url" value="{{course.contentUrl}}" />   <br />
-    Max Enrollment:  <input name="max" type="number" value="{{course.contentUrl}}" />   <br />
-    <input type="submit" />
+    <div class="container intro">
+        <div class="row">
+            <div class="threecol">
+                Course Id: <input name="id" value="{{course.id}}" size="75" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="threecol">
+                Name: <input name="name" value="{{course.name}}"  size="75"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="threecol">
+                Description: <textarea name="description" cols="58" rows="10">{{course.description}}</textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="threecol">
+                URL: <input name="url" type="url" value="{{course.contentUrl}}"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="threecol">
+                Max Enrollment: <input name="max" type="number" value="{{course.contentUrl}}"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="threecol">
+                <input type="submit"/>
+            </div>
 </form>
