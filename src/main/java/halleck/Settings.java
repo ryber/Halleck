@@ -6,22 +6,25 @@ import java.util.Properties;
 
 public class Settings {
 
-    private Properties properties;
+    private String mongoHost;
+    private Integer mongoPort;
+    private String siteName;
 
     public Settings(Properties properties) {
-        this.properties = properties;
+        this.mongoHost = (String) properties.get("mongo.host");
+        this.mongoPort = Ints.tryParse((String) properties.get("mongo.port"));
+        this.siteName = (String) properties.get("site.name");
     }
 
-
-    public String getMongoHost(){
-        return (String)properties.get("mongo.host");
+    public String getMongoHost() {
+        return mongoHost;
     }
 
     public int getMongoPort() {
-        return Ints.tryParse((String)properties.get("mongo.port"));
+        return mongoPort;
     }
 
-    public String getSiteName(){
-        return (String)properties.get("site.name");
+    public String getSiteName() {
+        return siteName;
     }
 }

@@ -19,14 +19,15 @@ import static webserver.RequestCookies.requestCookies;
 
 public class HttpRouts implements SparkApplication {
     public static final String HALLECK_NAME = "halleckName";
-    private ViewRenderer view = new ViewRenderer();
     private CourseMapper mapper = new CourseMapper();
+    private ViewRenderer view;
     private Halleck halleck;
 
 
     @Inject
-    public HttpRouts(Halleck halleck) {
+    public HttpRouts(Halleck halleck, ViewRenderer view) {
         this.halleck = halleck;
+        this.view = view;
     }
 
     @Override

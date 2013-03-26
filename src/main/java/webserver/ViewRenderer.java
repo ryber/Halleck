@@ -3,19 +3,27 @@ package webserver;
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
+import com.google.inject.Inject;
+import halleck.Settings;
 
 import java.io.IOException;
 import java.io.StringWriter;
 
 public class ViewRenderer {
 
+    private String siteName;
+
+    @Inject
+    public ViewRenderer(Settings settings){
+        this.siteName = settings.getSiteName();
+    }
 
     public String render(String templateName) {
         return render(templateName, null);
     }
 
     public String render(String template, Object data){
-        return renderTemplate("shell.mustache", new Body(renderTemplate(template, data)));
+        return renderTemplate("shell.mustache", new Body(renderTemplate(template, data), siteName));
     }
 
     private String renderTemplate(String template, Object data) {
@@ -31,11 +39,13 @@ public class ViewRenderer {
         }
     }
 
-    private class Body {
+    private static class Body {
         public String body;
+        public String title;
 
-        public Body(String body) {
+        public Body(String body, String title) {
             this.body = body;
+            this.title = title;
         }
     }
 }
