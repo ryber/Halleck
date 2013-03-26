@@ -13,6 +13,11 @@
             <id>Spark repository</id>
             <url>http://www.sparkjava.com/nexus/content/repositories/spark/</url>
         </repository>
+
+        <repository>
+            <id>morphia</id>
+            <url>http://morphia.googlecode.com/svn/mavenrepo/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -51,7 +56,6 @@
             <artifactId>mongo-java-driver</artifactId>
             <version>2.9.3</version>
         </dependency>
-
 
         <!--
           == TEST DEPENDENCIES

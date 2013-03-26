@@ -93,4 +93,10 @@ public class OnlineCourse implements Course {
     public boolean hasFreeSeats() {
         return getFreeSeats() > 0;
     }
+
+    public void addRegisteredUsers(Iterable<String> users) {
+        for(String u : users){
+            addRegisteredUser(u);
+        }
+    }
 }

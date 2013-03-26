@@ -45,9 +45,15 @@ public class HttpRouts implements SparkApplication {
         post(new Route("/registrations/course/:id") {
             @Override
             public Object handle(Request request, Response response) {
+                try{
                 String courseID = request.params(":id");
                 halleck.register(courseID, getUser(request));
                 response.redirect("/registrations/course/" + courseID);
+
+                }catch (Exception e){
+                    System.out.println("e = " + e);
+                }
+
                 return null;
             }
         });
