@@ -11,9 +11,9 @@ public class Settings {
     private String siteName;
 
     public Settings(Properties properties) {
-        this.mongoHost = (String) properties.get("mongo.host");
-        this.mongoPort = Ints.tryParse((String) properties.get("mongo.port"));
-        this.siteName = (String) properties.get("site.name");
+        this.mongoHost = (String) properties.getProperty("mongo.host");
+        this.mongoPort = Ints.tryParse((String) properties.getProperty("mongo.port"));
+        this.siteName = (String) properties.getProperty("site.name");
     }
 
     public String getMongoHost() {

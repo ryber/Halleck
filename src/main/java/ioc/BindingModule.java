@@ -9,6 +9,8 @@ import lms.Gurney;
 import lms.MongoCourseRepository;
 
 public class BindingModule extends AbstractModule {
+
+
     @Override
     protected void configure() {
         bind(Halleck.class).to(Gurney.class);
