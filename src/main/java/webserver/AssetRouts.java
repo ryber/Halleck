@@ -1,16 +1,17 @@
 package webserver;
 
+import com.google.common.base.Charsets;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.io.Files;
+import com.google.common.io.Resources;
 import spark.Request;
 import spark.Response;
 import spark.Route;
-import spark.utils.IOUtils;
 
-import java.io.InputStream;
-import java.io.StringWriter;
+import static com.google.common.io.Resources.getResource;
 
 public class AssetRouts extends Route {
 
@@ -36,26 +37,14 @@ public class AssetRouts extends Route {
     }
 
     private String getExtension(String og){
-        return og.substring(og.lastIndexOf('.'));
+        return Files.getFileExtension(og);
     }
 
     private static class ResourceLoader extends CacheLoader<String,String> {
         @Override
         public String load(String resourceName) throws Exception {
-            ClassLoader classLoader = getClass().getClassLoader();
-            InputStream file = classLoader.getResourceAsStream(resourceName.substring(1));
+            return Resources.toString(getResource(resourceName.substring(1)), Charsets.UTF_8);
 
-            if(file == null){
-                return null;
-            }
-
-            StringWriter writer = new StringWriter();
-            try {
-                IOUtils.copy(file, writer);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return writer.toString();
         }
     }
 }

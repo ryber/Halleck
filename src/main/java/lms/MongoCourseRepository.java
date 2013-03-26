@@ -1,13 +1,10 @@
 package lms;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 import com.mongodb.*;
 import halleck.Course;
 import halleck.OnlineCourse;
 
-import javax.annotation.Nullable;
-import java.net.UnknownHostException;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -17,13 +14,9 @@ public class MongoCourseRepository implements CourseRepository {
 
     private Mongo mongoClient;
 
-
-    public MongoCourseRepository() {
-        try {
-            mongoClient = new Mongo("oracle.axiom.local", 27017);
-        } catch (UnknownHostException e) {
-            throw new RuntimeException(e);
-        }
+    @Inject
+    public MongoCourseRepository(Mongo mongoClient) {
+        this.mongoClient = mongoClient;
     }
 
     @Override
@@ -65,16 +58,15 @@ public class MongoCourseRepository implements CourseRepository {
     }
 
     private DBObject getId(Course course) {
-        return new BasicDBObject("_id", course.getId());
+        return getId(course.getId());
+    }
+
+    private DBObject getId(String courseId) {
+        return new BasicDBObject("_id", courseId);
     }
 
     private boolean exists(final String courseId) {
-        return Iterables.any(getAllCourses(), new Predicate<Course>() {
-            @Override
-            public boolean apply(@Nullable Course input) {
-                return input.getId().equalsIgnoreCase(courseId);
-            }
-        });
+        return getCourses().count(getId(courseId)) > 0;
     }
 
     private DBObject map(Course course) {
@@ -88,12 +80,7 @@ public class MongoCourseRepository implements CourseRepository {
 
     @Override
     public Course getCourse(final String courseId) {
-        return Iterables.find(getAllCourses(), new Predicate<Course>() {
-            @Override
-            public boolean apply(@Nullable Course input) {
-                return input.getId().equalsIgnoreCase(courseId);
-            }
-        });
+        return createCourse(getCourses().findOne(getId(courseId)));
     }
 
 
