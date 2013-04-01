@@ -23,7 +23,7 @@ public class ViewRenderer {
     }
 
     public String render(String template, Object data){
-        return renderTemplate("shell.mustache", new Body(renderTemplate(template, data), siteName));
+        return renderTemplate("shell.mustache", new Body(renderTemplate(template, data)));
     }
 
     private String renderTemplate(String template, Object data) {
@@ -39,13 +39,15 @@ public class ViewRenderer {
         }
     }
 
-    private static class Body {
+    private class Body {
         public String body;
         public String title;
+        public String user;
 
-        public Body(String body, String title) {
+        public Body(String body) {
             this.body = body;
-            this.title = title;
+            this.title = siteName;
+            this.user = "ryber";
         }
     }
 }

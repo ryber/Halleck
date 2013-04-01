@@ -24,7 +24,7 @@ public class SettingsProvider implements Provider<Settings> {
 
     private static File getPath(String[] args) {
 
-        if(args != null){
+        if(args != null && args.length > 0){
             File prop = new File(args[0]);
             if(prop.exists()){
                 return prop;

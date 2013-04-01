@@ -8,10 +8,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RequestCookies {
+    public static final String HALLECK_NAME = "halleckName";
     private HttpServletRequest servletRequest;
 
     public RequestCookies(HttpServletRequest servletRequest){
         this.servletRequest = servletRequest;
+    }
+
+    public static String getUser(Request request) {
+        return requestCookies(request).cookie(HALLECK_NAME);
     }
 
     /**

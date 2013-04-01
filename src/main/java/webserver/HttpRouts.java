@@ -16,21 +16,22 @@ import java.util.NoSuchElementException;
 
 import static spark.Spark.*;
 import static webserver.MapMaker.map;
-import static webserver.RequestCookies.requestCookies;
+import static webserver.RequestCookies.HALLECK_NAME;
 
 public class HttpRouts implements SparkApplication {
-    public static final String HALLECK_NAME = "halleckName";
     private CourseMapper mapper = new CourseMapper();
     private ViewRenderer view;
     private Settings settings;
+    private SecurityFilter filter;
     private Halleck halleck;
 
 
     @Inject
-    public HttpRouts(Halleck halleck, ViewRenderer view, Settings settings) {
+    public HttpRouts(Halleck halleck, ViewRenderer view, Settings settings, SecurityFilter filter) {
         this.halleck = halleck;
         this.view = view;
         this.settings = settings;
+        this.filter = filter;
     }
 
     @Override
@@ -38,7 +39,7 @@ public class HttpRouts implements SparkApplication {
 
         setPort(settings.getAppPort());
 
-        before(new SecurityFilter());
+        before(filter);
 
         get(new Route("/") {
             @Override
@@ -53,7 +54,7 @@ public class HttpRouts implements SparkApplication {
             public Object handle(Request request, Response response) {
                 try{
                 String courseID = request.params(":id");
-                halleck.register(courseID, getUser(request));
+                halleck.register(courseID, RequestCookies.getUser(request));
                 response.redirect("/registrations/course/" + courseID);
 
                 }catch (Exception e){
@@ -70,7 +71,7 @@ public class HttpRouts implements SparkApplication {
 
                 try {
                     return view.render("course.mustache", map(
-                            "registration", halleck.getRegistration(request.params(":id"), getUser(request))
+                            "registration", halleck.getRegistration(request.params(":id"), RequestCookies.getUser(request))
                     ));
                 } catch (NoSuchElementException e) {
                     response.status(404);
@@ -92,6 +93,15 @@ public class HttpRouts implements SparkApplication {
                 String username = request.queryParams("username");
                 new ResponseCookies(response).cookie(HALLECK_NAME, username);
                 return view.render("redirect.mustache", map("url", "/"));
+            }
+        });
+
+        get(new Route("/logout") {
+            @Override
+            public Object handle(Request request, Response response) {
+                new ResponseCookies(response).removeCookie(HALLECK_NAME);
+                response.redirect("/login");
+                return null;
             }
         });
 
@@ -131,10 +141,6 @@ public class HttpRouts implements SparkApplication {
             vars.put(key.toString(), raw.getParameter(key.toString()));
         }
         return vars;
-    }
-
-    private String getUser(Request request) {
-        return requestCookies(request).cookie(HALLECK_NAME);
     }
 
 }

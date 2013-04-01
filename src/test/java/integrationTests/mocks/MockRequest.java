@@ -1,9 +1,9 @@
 package integrationTests.mocks;
 
 import com.google.common.base.Strings;
+import webserver.RequestCookies;
 import webserver.mappers.FormVars;
 import spark.route.HttpMethod;
-import webserver.HttpRouts;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletInputStream;
@@ -44,7 +44,7 @@ public class MockRequest implements HttpServletRequest {
 
     private void setupUserCookies(String currentUser) {
         if(!Strings.isNullOrEmpty(currentUser)){
-            cookies.add(new Cookie(HttpRouts.HALLECK_NAME, currentUser));
+            cookies.add(new Cookie(RequestCookies.HALLECK_NAME, currentUser));
         }
     }
 
