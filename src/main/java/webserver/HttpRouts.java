@@ -3,6 +3,7 @@ package webserver;
 import com.google.inject.Inject;
 import halleck.Course;
 import halleck.Halleck;
+import halleck.Settings;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -21,18 +22,21 @@ public class HttpRouts implements SparkApplication {
     public static final String HALLECK_NAME = "halleckName";
     private CourseMapper mapper = new CourseMapper();
     private ViewRenderer view;
+    private Settings settings;
     private Halleck halleck;
 
 
     @Inject
-    public HttpRouts(Halleck halleck, ViewRenderer view) {
+    public HttpRouts(Halleck halleck, ViewRenderer view, Settings settings) {
         this.halleck = halleck;
         this.view = view;
+        this.settings = settings;
     }
 
     @Override
     public void init() {
 
+        setPort(settings.getAppPort());
         before(new SecurityFilter());
 
         get(new Route("/") {

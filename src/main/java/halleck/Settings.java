@@ -9,11 +9,13 @@ public class Settings {
     private String mongoHost;
     private Integer mongoPort;
     private String siteName;
+    private Integer sitePort;
 
     public Settings(Properties properties) {
-        this.mongoHost = (String) properties.getProperty("mongo.host");
-        this.mongoPort = Ints.tryParse((String) properties.getProperty("mongo.port"));
-        this.siteName = (String) properties.getProperty("site.name");
+        this.mongoHost = properties.getProperty("mongo.host");
+        this.mongoPort = Ints.tryParse(properties.getProperty("mongo.port"));
+        this.siteName = properties.getProperty("site.name");
+        this.sitePort = Ints.tryParse(properties.getProperty("site.port"));
     }
 
     public String getMongoHost() {
@@ -26,5 +28,9 @@ public class Settings {
 
     public String getSiteName() {
         return siteName;
+    }
+
+    public int getAppPort() {
+        return sitePort;
     }
 }

@@ -1,16 +1,18 @@
 package ioc;
 
 import com.google.common.base.Charsets;
-import com.google.common.io.Files;
-import com.google.common.io.Resources;
 import com.google.inject.Provider;
 import halleck.Settings;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
+import java.io.InputStreamReader;
 import java.util.Properties;
+
+import static com.google.common.io.Files.newReaderSupplier;
+import static com.google.common.io.Resources.getResource;
+import static com.google.common.io.Resources.newInputStreamSupplier;
 
 public class SettingsProvider implements Provider<Settings> {
 
@@ -21,13 +23,14 @@ public class SettingsProvider implements Provider<Settings> {
     }
 
     private static File getPath(String[] args) {
-        if(args == null){
-            return null;
+
+        if(args != null){
+            File prop = new File(args[0]);
+            if(prop.exists()){
+                return prop;
+            }
         }
-        File prop = new File(args[0]);
-        if(prop.exists()){
-            return prop;
-        }
+
         return null;
     }
 
@@ -39,20 +42,21 @@ public class SettingsProvider implements Provider<Settings> {
 
         Properties props = new Properties(baseFile);
         try {
-            props.load(Files.newReaderSupplier(overrides, Charsets.UTF_8).getInput());
+            props.load(getOverridePropertyFile());
         } catch (IOException e) {
             e.printStackTrace();
         }
         return props;
     }
 
+    private static InputStreamReader getOverridePropertyFile() throws IOException {
+        return newReaderSupplier(overrides, Charsets.UTF_8).getInput();
+    }
+
 
     @Override
     public Settings get() {
-
-        Properties baseFile = getBaseFile();
-
-        return new Settings(getProperties(baseFile));
+        return new Settings(getProperties(getBaseFile()));
     }
 
     private Properties getBaseFile() {
@@ -67,7 +71,6 @@ public class SettingsProvider implements Provider<Settings> {
 
 
     private InputStream getDefault() throws IOException {
-        URL url = Resources.getResource("settings/halleck.properties");
-        return Resources.newInputStreamSupplier(url).getInput();
+        return newInputStreamSupplier(getResource("settings/halleck.properties")).getInput();
     }
 }
