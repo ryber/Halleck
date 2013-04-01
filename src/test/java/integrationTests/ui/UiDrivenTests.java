@@ -18,7 +18,7 @@ import static spark.route.HttpMethod.post;
 
 public class UiDrivenTests {
 
-    private boolean serverStarted = false;
+    private static boolean serverStarted = false;
 
     @Before
     public void setUp() throws Exception {
@@ -75,7 +75,7 @@ public class UiDrivenTests {
 
     @Test
     public void canVewCourseForm() throws Exception {
-         Result result = exec(get, "/course/");
+         Result result = exec(get, "/admin/course/");
 
         assertHasFormInput(result.getContent(), "id", "");
         assertHasFormInput(result.getContent(), "name", "");
@@ -87,7 +87,7 @@ public class UiDrivenTests {
     public void canVewCourseFormForExistingCourse() throws Exception {
         givenCourse("42", "Find The Fish", "a nice course", "http://foo", 42);
 
-        Result result = exec(get, "/course/42");
+        Result result = exec(get, "/admin/course/42");
 
         assertHasFormInput(result.getContent(), "id", "42");
         assertHasFormInput(result.getContent(), "name", "Find The Fish");
@@ -111,7 +111,7 @@ public class UiDrivenTests {
         form.put("description", "fishy went wherever I did go");
         form.put("url", "http://foo/foo.mp4");
 
-        Result result = exec(post, "/course/", form);
+        Result result = exec(post, "/admin/course/", form);
 
         assertEquals("/course/42", result.getRedirect());
     }

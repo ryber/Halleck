@@ -37,6 +37,7 @@ public class HttpRouts implements SparkApplication {
     public void init() {
 
         setPort(settings.getAppPort());
+
         before(new SecurityFilter());
 
         get(new Route("/") {
@@ -94,21 +95,21 @@ public class HttpRouts implements SparkApplication {
             }
         });
 
-        get(new Route("/course/") {
+        get(new Route("/admin/course/") {
             @Override
             public Object handle(Request request, Response response) {
                 return view.render("editcourse.mustache");
             }
         });
 
-        get(new Route("/course/:id") {
+        get(new Route("/admin/course/:id") {
             @Override
             public Object handle(Request request, Response response) {
                 return view.render("editcourse.mustache", map("course", halleck.getCourse(request.params(":id"))));
             }
         });
 
-        post(new Route("/course/") {
+        post(new Route("/admin/course/") {
             @Override
             public Object handle(Request request, Response response) {
 
