@@ -5,6 +5,7 @@ import integrationTests.SetupFixtures;
 import integrationTests.TestBindings;
 import integrationTests.mocks.Result;
 import ioc.CLI;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import webserver.mappers.FormVars;
@@ -22,11 +23,15 @@ public class UiDrivenTests {
 
     @Before
     public void setUp() throws Exception {
-        SetupFixtures.reset();
         if(!serverStarted){
             CLI.startServer(new TestBindings());
             serverStarted = true;
         }
+    }
+
+    @After
+    public void tearDown(){
+        SetupFixtures.reset();
     }
 
     @Test
@@ -75,7 +80,9 @@ public class UiDrivenTests {
 
     @Test
     public void canVewCourseForm() throws Exception {
-         Result result = exec(get, "/admin/course/");
+        SetupFixtures.setAdmin("Phil");
+
+        Result result = exec(get, "/admin/course/");
 
         assertHasFormInput(result.getContent(), "id", "");
         assertHasFormInput(result.getContent(), "name", "");
@@ -85,6 +92,8 @@ public class UiDrivenTests {
 
     @Test
     public void canVewCourseFormForExistingCourse() throws Exception {
+        SetupFixtures.setAdmin("Phil");
+
         givenCourse("42", "Find The Fish", "a nice course", "http://foo", 42);
 
         Result result = exec(get, "/admin/course/42");
@@ -105,6 +114,8 @@ public class UiDrivenTests {
 
     @Test
     public void canCreateNewCourse() throws Exception {
+        SetupFixtures.setAdmin("Phil");
+
         FormVars form = new FormVars();
         form.put("id", 42);
         form.put("name", "Underwater Basketweaving");

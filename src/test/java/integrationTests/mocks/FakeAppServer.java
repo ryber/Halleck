@@ -13,7 +13,7 @@ public class FakeAppServer {
     }
 
     public static Result exec(HttpMethod method, String path, FormVars form){
-        MatcherFilter matcherFilter = new MatcherFilter(RouteMatcherFactory.get(), false);
+        MatcherFilter matcherFilter = new MatcherFilter(RouteMatcherFactory.get(), false, false);
         matcherFilter.init(null);
 
         MockRequest request = new MockRequest(method, path, SetupFixtures.getCurrentUser(), form);

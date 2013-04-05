@@ -1,0 +1,40 @@
+package integrationTests.mocks;
+
+import halleck.Settings;
+import webserver.AppSettings;
+
+import java.util.List;
+import java.util.Properties;
+
+import static com.google.common.collect.Lists.newArrayList;
+
+public class MockSettings implements Settings {
+
+    public static String admin;
+
+    @Override
+    public String getMongoHost() {
+        return null;
+    }
+
+    @Override
+    public int getMongoPort() {
+        return 0;
+    }
+
+    @Override
+    public String getSiteName() {
+        return null;
+    }
+
+    @Override
+    public int getAppPort() {
+        return 0;
+    }
+
+    @Override
+    public List<String> getAdmins() {
+        return newArrayList(admin);
+    }
+}
+

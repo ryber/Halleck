@@ -2,6 +2,7 @@ package integrationTests;
 
 import halleck.Course;
 import halleck.OnlineCourse;
+import integrationTests.mocks.MockSettings;
 import lms.InMemoryCourseRepository;
 
 public class SetupFixtures {
@@ -23,6 +24,7 @@ public class SetupFixtures {
 
     public static void reset() {
         InMemoryCourseRepository.reset();
+        MockSettings.admin = null;
     }
 
     public static void setCurrentUser(String name) {
@@ -31,5 +33,10 @@ public class SetupFixtures {
 
     public static String getCurrentUser() {
         return currentUser;
+    }
+
+    public static void setAdmin(String name) {
+        setCurrentUser(name);
+        MockSettings.admin = name;
     }
 }

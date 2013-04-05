@@ -2,6 +2,7 @@ package ioc;
 
 import com.google.common.base.Charsets;
 import com.google.inject.Provider;
+import webserver.AppSettings;
 import halleck.Settings;
 
 import java.io.File;
@@ -56,7 +57,7 @@ public class SettingsProvider implements Provider<Settings> {
 
     @Override
     public Settings get() {
-        return new Settings(getProperties(getBaseFile()));
+        return new AppSettings(getProperties(getBaseFile()));
     }
 
     private Properties getBaseFile() {
