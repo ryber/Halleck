@@ -38,6 +38,7 @@ public class HttpRouts implements SparkApplication {
     public void init() {
 
         setPort(settings.getAppPort());
+        staticFileRoute("/");
 
         before(filter);
 
@@ -130,7 +131,6 @@ public class HttpRouts implements SparkApplication {
             }
         });
 
-        get(new AssetRouts("/assets/*"));
     }
 
     private FormVars getForm(Request request) {
