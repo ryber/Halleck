@@ -3,6 +3,7 @@ package webserver;
 import com.google.inject.Inject;
 import halleck.Course;
 import halleck.Halleck;
+import halleck.Registration;
 import halleck.Settings;
 import spark.Request;
 import spark.Response;
@@ -38,7 +39,7 @@ public class HttpRouts implements SparkApplication {
     public void init() {
 
         setPort(settings.getAppPort());
-        staticFileRoute("/");
+        staticFileRoute("/assets");
 
         before(filter);
 
@@ -72,7 +73,7 @@ public class HttpRouts implements SparkApplication {
 
                 try {
                     return view.render("course.mustache", map(
-                            "registration", halleck.getRegistration(request.params(":id"), RequestCookies.getUser(request))
+                            "registration", getRegistrationId(request)
                     ));
                 } catch (NoSuchElementException e) {
                     response.status(404);
@@ -131,6 +132,10 @@ public class HttpRouts implements SparkApplication {
             }
         });
 
+    }
+
+    private Registration getRegistrationId(Request request) {
+        return halleck.getRegistration(request.params(":id"), RequestCookies.getUser(request));
     }
 
     private FormVars getForm(Request request) {

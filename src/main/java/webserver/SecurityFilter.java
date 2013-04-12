@@ -20,7 +20,7 @@ public class SecurityFilter extends Filter {
 
     @Override
     public void handle(Request request, Response response) {
-        if(!hasUserCookieSet(request) && !isTheLoginPage(request)){
+        if(!hasUserCookieSet(request) && !isExempt(request.pathInfo())){
             response.redirect("/login");
         }
 
@@ -37,8 +37,8 @@ public class SecurityFilter extends Filter {
         return request.pathInfo().startsWith("/admin");
     }
 
-    private boolean isTheLoginPage(Request request) {
-        return request.pathInfo().contains("login");
+    private boolean isExempt(String path) {
+        return path.contains("login") || path.contains("css") || path.contains("img");
     }
 
     private boolean hasUserCookieSet(Request request) {
