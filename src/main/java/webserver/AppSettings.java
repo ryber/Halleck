@@ -16,6 +16,7 @@ public class AppSettings implements Settings {
     private String siteName;
     private Integer sitePort;
     private List<String> admins;
+    private String persistenceType;
 
     public AppSettings(Properties properties) {
         this.mongoHost = properties.getProperty("mongo.host");
@@ -23,12 +24,18 @@ public class AppSettings implements Settings {
         this.siteName = properties.getProperty("site.name");
         this.sitePort = Ints.tryParse(properties.getProperty("site.port"));
         this.admins = getAdmins(properties.getProperty("site.admins"));
+        this.persistenceType = properties.getProperty("persistence.type");
     }
 
     private List<String> getAdmins(String propLIst) {
         return newArrayList(
                 Splitter.on(",").omitEmptyStrings().trimResults().split(propLIst)
         );
+    }
+
+    @Override
+    public String getPersistenceType() {
+        return this.persistenceType;
     }
 
     @Override

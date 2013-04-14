@@ -16,14 +16,11 @@ public class BindingModule extends AbstractModule {
     @Override
     protected void configure() {
         bind(Halleck.class).to(Gurney.class);
-
-        //bind(Mongo.class).toProvider(MongoClientProvider.class);
+        bind(CourseRepository.class).toProvider(RepositoryProvider.class);
         bindRepo();
     }
 
     protected void bindRepo() {
         bind(Settings.class).toProvider(SettingsProvider.class);
-        //bind(CourseRepository.class).to(MongoCourseRepository.class);
-        bind(CourseRepository.class).to(InMemoryCourseRepository.class);
     }
 }

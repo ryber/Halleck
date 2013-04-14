@@ -13,6 +13,11 @@ public class MockSettings implements Settings {
     public static String admin;
 
     @Override
+    public String getPersistenceType() {
+        return null;
+    }
+
+    @Override
     public String getMongoHost() {
         return null;
     }

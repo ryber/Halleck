@@ -10,7 +10,6 @@ import lms.InMemoryCourseRepository;
 public class TestBindings extends BindingModule {
     @Override
     protected void bindRepo() {
-        bind(CourseRepository.class).to(InMemoryCourseRepository.class);
         bind(Settings.class).to(MockSettings.class);
     }
 }
