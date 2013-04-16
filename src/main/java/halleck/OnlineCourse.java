@@ -1,8 +1,9 @@
 package halleck;
 
 import com.google.common.collect.Sets;
-import com.sun.istack.internal.Nullable;
 
+
+import javax.annotation.Nullable;
 import java.util.Set;
 
 import static com.google.common.base.Strings.nullToEmpty;
@@ -92,6 +93,11 @@ public class OnlineCourse implements Course {
 
     public boolean hasFreeSeats() {
         return getFreeSeats() > 0;
+    }
+
+    @Override
+    public boolean isEmbedVideo() {
+        return url.endsWith("mp4");
     }
 
     public void addRegisteredUsers(Iterable<String> users) {

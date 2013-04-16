@@ -14,4 +14,5 @@ public interface Course {
     Set<String> getRegisteredUsers();
     void addRegisteredUser(String user);
     boolean hasFreeSeats();
+    boolean isEmbedVideo();
 }

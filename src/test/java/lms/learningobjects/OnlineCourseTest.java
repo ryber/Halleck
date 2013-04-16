@@ -5,6 +5,8 @@ import halleck.OnlineCourse;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -41,6 +43,16 @@ public class OnlineCourseTest {
         assertEquals("http://bar", t.getUrl());
         assertEquals("boo!", t.getDescription());
         assertEquals(54, t.getMaxEnrollment().intValue());
+    }
 
+    @Test
+    public void ifCourseIsAHtml5VideoThenSayItIs() throws Exception {
+        OnlineCourse isEmbed = new OnlineCourse("id","name","desc", "http://foo/video.mp4",3);
+
+        assertTrue(isEmbed.isEmbedVideo());
+
+        OnlineCourse notembed = new OnlineCourse("id","name","desc", "http://foo/video.html",3);
+
+        assertFalse(notembed.isEmbedVideo());
     }
 }

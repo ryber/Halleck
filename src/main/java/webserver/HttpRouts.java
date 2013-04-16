@@ -107,7 +107,7 @@ public class HttpRouts implements SparkApplication {
             }
         });
 
-        get(new Route("/admin/course/") {
+        get(new Route("/admin/course") {
             @Override
             public Object handle(Request request, Response response) {
                 return view.render("editcourse.mustache");
@@ -121,13 +121,13 @@ public class HttpRouts implements SparkApplication {
             }
         });
 
-        post(new Route("/admin/course/") {
+        post(new Route("/admin/course") {
             @Override
             public Object handle(Request request, Response response) {
 
                 Course apply = mapper.apply(getForm(request));
                 halleck.createCourse(apply);
-                response.redirect("/course/" + apply.getId());
+                response.redirect("/admin/course/" + apply.getId());
                 return null;
             }
         });
