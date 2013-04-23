@@ -1,10 +1,8 @@
 package integrationTests.mocks;
 
-import halleck.Settings;
-import webserver.AppSettings;
+import halleck.api.Settings;
 
 import java.util.List;
-import java.util.Properties;
 
 import static com.google.common.collect.Lists.newArrayList;
 

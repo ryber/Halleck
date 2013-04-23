@@ -1,11 +1,8 @@
 package integrationTests;
 
-import halleck.Settings;
+import halleck.api.Settings;
 import integrationTests.mocks.MockSettings;
-import webserver.AppSettings;
-import ioc.BindingModule;
-import lms.CourseRepository;
-import lms.InMemoryCourseRepository;
+import halleck.appstart.BindingModule;
 
 public class TestBindings extends BindingModule {
     @Override

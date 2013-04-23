@@ -1,7 +1,7 @@
 package integrationTests.mocks;
 
 import integrationTests.SetupFixtures;
-import webserver.mappers.FormVars;
+import halleck.webserver.mappers.FormVars;
 import spark.route.HttpMethod;
 import spark.route.RouteMatcherFactory;
 import spark.webserver.MatcherFilter;

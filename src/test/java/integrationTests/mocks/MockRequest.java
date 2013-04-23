@@ -1,8 +1,8 @@
 package integrationTests.mocks;
 
 import com.google.common.base.Strings;
-import webserver.RequestCookies;
-import webserver.mappers.FormVars;
+import halleck.webserver.RequestCookies;
+import halleck.webserver.mappers.FormVars;
 import spark.route.HttpMethod;
 
 import javax.servlet.*;

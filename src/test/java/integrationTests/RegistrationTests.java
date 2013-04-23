@@ -2,8 +2,7 @@ package integrationTests;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import halleck.Halleck;
-import ioc.BindingModule;
+import halleck.api.Halleck;
 import org.junit.Before;
 import org.junit.Test;
 

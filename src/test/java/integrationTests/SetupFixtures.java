@@ -1,9 +1,9 @@
 package integrationTests;
 
-import halleck.Course;
-import halleck.OnlineCourse;
+import halleck.api.Course;
+import halleck.api.OnlineCourse;
 import integrationTests.mocks.MockSettings;
-import lms.InMemoryCourseRepository;
+import halleck.lms.InMemoryCourseRepository;
 
 public class SetupFixtures {
     private static String currentUser;

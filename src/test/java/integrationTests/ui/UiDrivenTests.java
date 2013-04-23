@@ -1,14 +1,14 @@
 package integrationTests.ui;
 
-import halleck.Course;
+import halleck.api.Course;
 import integrationTests.SetupFixtures;
 import integrationTests.TestBindings;
 import integrationTests.mocks.Result;
-import ioc.CLI;
+import halleck.appstart.CLI;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import webserver.mappers.FormVars;
+import halleck.webserver.mappers.FormVars;
 
 import static integrationTests.SetupFixtures.givenCourse;
 import static integrationTests.mocks.FakeAppServer.exec;
