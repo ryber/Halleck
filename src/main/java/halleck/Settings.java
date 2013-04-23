@@ -9,4 +9,6 @@ public interface Settings {
     String getSiteName();
     int getAppPort();
     List<String> getAdmins();
+    String getUsername();
+    char[] getPassword();
 }

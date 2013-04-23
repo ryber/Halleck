@@ -1,9 +1,11 @@
 package lms;
 
+import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.mongodb.*;
 import halleck.Course;
 import halleck.OnlineCourse;
+import halleck.Settings;
 
 import java.util.List;
 
@@ -13,10 +15,12 @@ import static com.google.common.collect.Lists.newArrayList;
 public class MongoCourseRepository implements CourseRepository {
 
     private Mongo mongoClient;
+    private Settings settings;
 
     @Inject
-    public MongoCourseRepository(Mongo mongoClient) {
+    public MongoCourseRepository(Mongo mongoClient, Settings settings) {
         this.mongoClient = mongoClient;
+        this.settings = settings;
     }
 
     @Override
@@ -83,9 +87,26 @@ public class MongoCourseRepository implements CourseRepository {
         return createCourse(getCourses().findOne(getId(courseId)));
     }
 
-
-
     private DBCollection getCourses() {
-        return mongoClient.getDB("halleck").getCollection("courses");
+        DB database = mongoClient.getDB("halleck");
+        if(!Strings.isNullOrEmpty(settings.getUsername())){
+             if(!database.authenticate(settings.getUsername(), settings.getPassword())){
+                 throw new CantAuthenticateToMongo(settings.getUsername());
+             }
+        }
+        return database.getCollection("courses");
+    }
+
+    private static class CantAuthenticateToMongo extends RuntimeException {
+        private String username;
+
+        public CantAuthenticateToMongo(String username) {
+            this.username = username;
+        }
+
+        @Override
+        public String toString() {
+            return "Cant authenticate with the user " + username;
+        }
     }
 }

@@ -41,5 +41,15 @@ public class MockSettings implements Settings {
     public List<String> getAdmins() {
         return newArrayList(admin);
     }
+
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public char[] getPassword() {
+        return new char[0];
+    }
 }
 

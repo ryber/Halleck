@@ -17,6 +17,7 @@ public class BindingModule extends AbstractModule {
     protected void configure() {
         bind(Halleck.class).to(Gurney.class);
         bind(CourseRepository.class).toProvider(RepositoryProvider.class);
+        bind(Mongo.class).toProvider(MongoClientProvider.class);
         bindRepo();
     }
 

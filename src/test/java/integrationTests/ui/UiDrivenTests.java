@@ -75,14 +75,14 @@ public class UiDrivenTests {
         Result result = exec(get, regResult.getRedirect());
 
         assertThat(result.getContent(), containsString("Underwater Basketweaving"));
-        assertThat(result.getContent(), containsString("<source src=\"http://localhost/"));
+        assertThat(result.getContent(), containsString("Launch Course"));
     }
 
     @Test
     public void canVewCourseForm() throws Exception {
         SetupFixtures.setAdmin("Phil");
 
-        Result result = exec(get, "/admin/course/");
+        Result result = exec(get, "/admin/course");
 
         assertHasFormInput(result.getContent(), "id", "");
         assertHasFormInput(result.getContent(), "name", "");
@@ -122,9 +122,9 @@ public class UiDrivenTests {
         form.put("description", "fishy went wherever I did go");
         form.put("url", "http://foo/foo.mp4");
 
-        Result result = exec(post, "/admin/course/", form);
+        Result result = exec(post, "/admin/course", form);
 
-        assertEquals("/course/42", result.getRedirect());
+        assertEquals("/admin/course/42", result.getRedirect());
     }
 
     private void assertHasFormInput(String content, String inputName, String inputValue) {
