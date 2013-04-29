@@ -37,7 +37,7 @@ public class HttpRouts implements SparkApplication {
     public void init() {
 
         setPort(settings.getAppPort());
-        staticFileRoute("/assets");
+        staticFileLocation("/assets");
 
         before(filter);
 
