@@ -1,18 +1,22 @@
 package integrationTests.ui;
 
 import halleck.api.Course;
+import halleck.appstart.CLI;
+import halleck.webserver.mappers.FormVars;
 import integrationTests.SetupFixtures;
 import integrationTests.TestBindings;
 import integrationTests.mocks.Result;
-import halleck.appstart.CLI;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import halleck.webserver.mappers.FormVars;
 
 import static integrationTests.SetupFixtures.givenCourse;
+import static integrationTests.SetupFixtures.setCurrentUser;
 import static integrationTests.mocks.FakeAppServer.exec;
-import static org.junit.Assert.*;
+import static junit.framework.Assert.assertEquals;
+import static org.hamcrest.core.IsNot.not;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 import static org.junit.matchers.JUnitMatchers.containsString;
 import static spark.route.HttpMethod.get;
 import static spark.route.HttpMethod.post;
@@ -68,7 +72,7 @@ public class UiDrivenTests {
     public void ifUserIsRegisteredThenShowTheVideo() throws Exception {
         givenCourse("1", "Underwater Basketweaving");
 
-        SetupFixtures.setCurrentUser("Phil");
+        setCurrentUser("Phil");
 
         Result regResult = exec(post, "/registrations/course/1");
 
@@ -125,6 +129,24 @@ public class UiDrivenTests {
         Result result = exec(post, "/admin/course", form);
 
         assertEquals("/admin/course/42", result.getRedirect());
+    }
+
+    @Test
+    public void canGetAListOfMyCourses() throws Exception {
+        givenCourse("1", "Underwater Basketweaving");
+        givenCourse("2", "How to make tacos");
+        givenCourse("3", "Groundhog Farming");
+
+        setCurrentUser("Phil");
+
+        exec(post, "/registrations/course/1");
+        exec(post, "/registrations/course/3");
+
+        Result r = exec(get, "/my-courses");
+
+        assertThat(r.getContent(), containsString("Underwater Basketweaving"));
+        assertThat(r.getContent(), containsString("Groundhog Farming"));
+        assertThat(r.getContent(), not(containsString("tacos")));
     }
 
     private void assertHasFormInput(String content, String inputName, String inputValue) {

@@ -1,15 +1,16 @@
 package integrationTests;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import halleck.api.Course;
 import halleck.api.Halleck;
 import org.junit.Before;
 import org.junit.Test;
 
 import static integrationTests.SetupFixtures.givenCourse;
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.*;
 
 public class RegistrationTests {
 
@@ -95,5 +96,34 @@ public class RegistrationTests {
         system.register("abc", "shemp");
 
         assertEquals(4, system.getRegistrations("abc").size());
+    }
+
+    @Test
+    public void canGetAListOfMyCourses() throws Exception {
+        givenCourse("a","Underwater Basketweaving");
+        givenCourse("b", "Salami Smuggling 101");
+        givenCourse("c", "Tiny Tim Studies");
+
+        system.register("a", "moe");
+        system.register("c", "moe");
+
+        Iterable<Course> moesCourse = system.getUsersCourses("moe");
+
+        assertEquals(2, Iterables.size(moesCourse));
+        assertTrue(Iterables.any(moesCourse, new HasId("a")));
+        assertTrue(Iterables.any(moesCourse, new HasId("c")));
+    }
+
+    private class HasId implements Predicate<Course> {
+        private String id;
+
+        private HasId(String id) {
+            this.id = id;
+        }
+
+        @Override
+        public boolean apply(Course course) {
+            return course.getId().equals(id);
+        }
     }
 }

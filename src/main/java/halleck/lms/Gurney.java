@@ -3,12 +3,14 @@ package halleck.lms;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import halleck.api.Course;
 import halleck.api.Halleck;
 import halleck.api.Registration;
 import halleck.api.OnlineCourse;
 
+import javax.annotation.Nullable;
 import java.util.Set;
 
 import static com.google.common.collect.Iterables.find;
@@ -26,6 +28,16 @@ public class Gurney implements Halleck {
     @Override
     public Iterable<Course> getAllCourses() {
         return courseRepo.getAllCourses();
+    }
+
+    @Override
+    public Iterable<Course> getUsersCourses(final String userID) {
+        return Iterables.filter(getAllCourses(), new Predicate<Course>() {
+            @Override
+            public boolean apply(@Nullable Course course) {
+                return course.getRegisteredUsers().contains(userID);
+            }
+        });
     }
 
     @Override

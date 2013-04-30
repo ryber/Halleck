@@ -5,6 +5,7 @@ import java.util.Set;
 
 public interface Halleck {
     Iterable<Course> getAllCourses();
+    Iterable<Course> getUsersCourses(String userID);
     Course getCourse(String id);
     Registration getRegistration(String courseID, String userID);
     void register(String courseId, String userID);

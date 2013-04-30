@@ -15,6 +15,7 @@ import halleck.webserver.mappers.FormVars;
 import javax.servlet.http.HttpServletRequest;
 import java.util.NoSuchElementException;
 
+import static halleck.webserver.RequestCookies.getUser;
 import static spark.Spark.*;
 
 public class HttpRouts implements SparkApplication {
@@ -44,17 +45,23 @@ public class HttpRouts implements SparkApplication {
         get(new Route("/") {
             @Override
             public Object handle(Request request, Response response) {
-                return view.render("welcome.mustache", MapMaker.map("courses", halleck.getAllCourses()));
+                return renderCourseList(halleck.getAllCourses());
             }
         });
 
+        get(new Route("/my-courses") {
+            @Override
+            public Object handle(Request request, Response response) {
+                return renderCourseList(halleck.getUsersCourses(getUser(request)));
+            }
+        });
 
         post(new Route("/registrations/course/:id") {
             @Override
             public Object handle(Request request, Response response) {
                 try{
                 String courseID = request.params(":id");
-                halleck.register(courseID, RequestCookies.getUser(request));
+                halleck.register(courseID, getUser(request));
                 response.redirect("/registrations/course/" + courseID);
 
                 }catch (Exception e){
@@ -64,6 +71,8 @@ public class HttpRouts implements SparkApplication {
                 return null;
             }
         });
+
+
 
         get(new Route("/registrations/course/:id") {
             @Override
@@ -132,8 +141,12 @@ public class HttpRouts implements SparkApplication {
 
     }
 
+    private String renderCourseList(Iterable<Course> courses) {
+        return view.render("welcome.mustache", MapMaker.map("courses", courses));
+    }
+
     private Registration getRegistrationId(Request request) {
-        return halleck.getRegistration(request.params(":id"), RequestCookies.getUser(request));
+        return halleck.getRegistration(request.params(":id"), getUser(request));
     }
 
     private FormVars getForm(Request request) {
