@@ -1,9 +1,9 @@
-<h2 xmlns="http://www.w3.org/1999/html">Available Courses</h2>
+<h2>Available Courses</h2>
 
-    {{#courses}}
-        <p>
-        <h4><a href="/registrations/course/{{id}}">{{name}}</a></h4>
-         <span class="tiny">{{descriptionShort}} </span>
-        </p>
-    {{/courses}}
+{{#courses}}
+    <p>
+    <h4><a href="/registrations/course/{{id}}">{{name}}</a></h4>
+    <span class="tiny">{{descriptionShort}}</span>
+    </p>
+{{/courses}}
 

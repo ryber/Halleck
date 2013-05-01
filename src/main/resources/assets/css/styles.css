@@ -1,5 +1,6 @@
 body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    # font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: iABCRegularSC, Georgia, serif;
     font-size: 14px;
     line-height: 24px;
     color: #3D3D3D;
@@ -12,7 +13,8 @@ h1 {
 }
 
 h2 {
-    font-size: 24px;
+    font-size: 34px;
+    text-shadow: rgb(251, 251, 251) 1px 1px 0px, rgb(218, 218, 218) 3px 3px 0px;
 }
 
 a {
@@ -27,7 +29,7 @@ a {
 .logo {
     margin-top:30px;
     margin-left:5px;
-    margin-bottom:10px;
+    margin-bottom:20px;
 }
 
 .header {
