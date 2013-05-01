@@ -16,12 +16,6 @@ public class InMemoryCourseRepository implements CourseRepository {
         return newArrayList(repo.values());
     }
 
-    public static void addCourse(List<Course> allCourses) {
-        for (Course c : allCourses){
-            addCourse(c);
-        }
-    }
-
     public static void addCourse(Course course) {
         repo.put(course.getId().toLowerCase(), course);
     }
