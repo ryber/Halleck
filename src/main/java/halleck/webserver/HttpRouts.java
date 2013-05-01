@@ -23,15 +23,22 @@ public class HttpRouts implements SparkApplication {
     private ViewRenderer view;
     private Settings settings;
     private SecurityFilter filter;
+    private Authenticator auth;
     private Halleck halleck;
 
 
     @Inject
-    public HttpRouts(Halleck halleck, ViewRenderer view, Settings settings, SecurityFilter filter) {
+    public HttpRouts(Halleck halleck,
+                     ViewRenderer view,
+                     Settings settings,
+                     SecurityFilter filter,
+                     Authenticator auth) {
+
         this.halleck = halleck;
         this.view = view;
         this.settings = settings;
         this.filter = filter;
+        this.auth = auth;
     }
 
     @Override
@@ -100,8 +107,13 @@ public class HttpRouts implements SparkApplication {
             @Override
             public Object handle(Request request, Response response) {
                 String username = request.queryParams("username");
-                new ResponseCookies(response).cookie(RequestCookies.HALLECK_NAME, username);
-                return view.render("redirect.mustache", MapMaker.map("url", "/"));
+                String password = request.queryParams("password");
+
+                if(auth.authenticate(username, password)){
+                    new ResponseCookies(response).cookie(RequestCookies.HALLECK_NAME, username);
+                    return view.render("redirect.mustache", MapMaker.map("url", "/"));
+                }
+                return view.render("login.mustache", MapMaker.map("wrong",true));
             }
         });
 

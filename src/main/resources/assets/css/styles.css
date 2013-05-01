@@ -40,6 +40,12 @@ a {
     margin-top: 15px;
 }
 
+.error {
+    font-size: 16px;
+    color: darkred;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
 
 .bigbutton {
     -moz-box-shadow:inset 0px 2px 0px 0px #bbdaf7;

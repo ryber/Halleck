@@ -8,6 +8,7 @@ import javax.naming.Context;
 import javax.naming.directory.DirContext;
 import javax.naming.directory.InitialDirContext;
 import java.util.Hashtable;
+import java.util.Map;
 
 public class LdapAuthenticator implements Authenticator {
 
@@ -39,12 +40,21 @@ public class LdapAuthenticator implements Authenticator {
         env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
         env.put(Context.PROVIDER_URL, settings.getLdapUrl());
         env.put(Context.SECURITY_AUTHENTICATION, "simple");
-        env.put(Context.SECURITY_PRINCIPAL, formatUserName(username)); //we have 2 \\ because it's a escape char
+        env.put(Context.SECURITY_PRINCIPAL, formatUserName(username));
         env.put(Context.SECURITY_CREDENTIALS, password);
+
+        //log(env);
+
         return env;
     }
 
+    private void log(Hashtable<String, String> env) {
+        for(Map.Entry<String, String> c : env.entrySet()){
+            System.out.println(c.getKey() + " :: " + c.getValue());
+        }
+    }
+
     private String formatUserName(String username) {
-        return String.format("%s//%s", settings.getLdapDomain(), username);
+        return String.format("%s\\%s", settings.getLdapDomain(), username);
     }
 }

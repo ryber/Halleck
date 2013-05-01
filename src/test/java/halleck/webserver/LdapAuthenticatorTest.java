@@ -32,8 +32,9 @@ public class LdapAuthenticatorTest {
 
         Hashtable<String, String> query = a.getLDAPCommand("moe", "smootches");
 
+
         assertEquals("ldap://somewhere", query.get(Context.PROVIDER_URL));
-        assertEquals("FOO//moe", query.get(Context.SECURITY_PRINCIPAL));
+        assertEquals("FOO\\moe", query.get(Context.SECURITY_PRINCIPAL));
         assertEquals("smootches", query.get(Context.SECURITY_CREDENTIALS));
 
     }
