@@ -15,14 +15,24 @@ Halleck is of course named after Gurney Halleck; Paul Atreides weapons trainer f
 ## Configuration File
 You can pass halleck the path to a properties file that contains config information. Available properties are:
 
-| Property | Use | Default |
-| === | === | === |
-| site.name | The name of the site | Halleck LMS |
-| site.port | The port to run the app on | 4567 |
-| site.admins | The admin user | ryber |
-| persistence.type | The type of persistence to use. Options are '''memory''' and '''mongo''' | memory |
-| mongo.host | If using MongoDB, the location  | 192.168.56.101 |
-| mongo.port | If using MongoDB,  the port it's on | 27017 |
+* *site.name*
+ * Use: The name of the site
+ * Default: "Halleck LMS"
+* *site.port*
+ * Use: The port to run the app on
+ * Default: 4567
+* *site.admins* 
+ * Use: The admin user
+ * Default: ryber
+* *persistence.type*
+ * Use: The type of persistence to use. Options are *memory* and *mongo* 
+ * Default: *memory*
+* *mongo.host*
+ * Use: If using MongoDB, the location 
+ * Default: 127.0.0.1 
+* *mongo.port*
+ * Use: If using MongoDB,  the port it's on
+ * Default: 27017 
 
 
 ## Road Map
