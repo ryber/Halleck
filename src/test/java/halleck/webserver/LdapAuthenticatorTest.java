@@ -1,20 +1,40 @@
 package halleck.webserver;
 
 
-import org.junit.Ignore;
+import halleck.api.Settings;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertTrue;
+import javax.naming.Context;
+import java.util.Hashtable;
+
+import static junit.framework.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class LdapAuthenticatorTest {
 
+    /*
     @Test
-    @Ignore
     public void testRealLDap() throws Exception {
-        LdapAuthenticator ldap = new LdapAuthenticator();
+        LdapAuthenticator ldap = new LdapAuthenticator(null);
 
-        assertTrue(ldap.authenticate("test", "foo"));
+        assertTrue(ldap.authenticate("foo", "smootches"));
     }
+    */
 
+    @Test
+    public void willGetProperQueryCommand() throws Exception {
+        Settings s = mock(Settings.class);
+        when(s.getLdapUrl()).thenReturn("ldap://somewhere");
+        when(s.getLdapDomain()).thenReturn("FOO");
 
+        LdapAuthenticator a = new LdapAuthenticator(s);
+
+        Hashtable<String, String> query = a.getLDAPCommand("moe", "smootches");
+
+        assertEquals("ldap://somewhere", query.get(Context.PROVIDER_URL));
+        assertEquals("FOO//moe", query.get(Context.SECURITY_PRINCIPAL));
+        assertEquals("smootches", query.get(Context.SECURITY_CREDENTIALS));
+
+    }
 }

@@ -12,14 +12,17 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class AppSettings implements Settings {
 
-    private String mongoHost;
-    private Integer mongoPort;
-    private String siteName;
-    private Integer sitePort;
-    private List<String> admins;
-    private String persistenceType;
-    private String username;
-    private char[] password;
+    private final String ldapURL;
+    private final String ldapDomain;
+    private final String mongoHost;
+    private final Integer mongoPort;
+    private final String siteName;
+    private final Integer sitePort;
+    private final List<String> admins;
+    private final String persistenceType;
+    private final String username;
+    private final char[] password;
+    private final String authType;
 
     public AppSettings(Properties properties) {
         this.mongoHost = properties.getProperty("mongo.host");
@@ -30,6 +33,9 @@ public class AppSettings implements Settings {
         this.persistenceType = properties.getProperty("persistence.type");
         this.username = properties.getProperty("mongo.username");
         this.password = nullToEmpty(properties.getProperty("mongo.password")).toCharArray();
+        this.ldapURL = properties.getProperty("ldap.url");
+        this.ldapDomain = properties.getProperty("ldap.domain");
+        this.authType = properties.getProperty("authentication.type");
     }
 
     private List<String> getAdmins(String propLIst) {
@@ -76,5 +82,20 @@ public class AppSettings implements Settings {
     @Override
     public char[] getPassword() {
         return password;
+    }
+
+    @Override
+    public String getLdapUrl() {
+        return ldapURL;
+    }
+
+    @Override
+    public String getLdapDomain() {
+        return ldapDomain;
+    }
+
+    @Override
+    public String getAuthenticationType() {
+        return authType;
     }
 }

@@ -49,5 +49,20 @@ public class MockSettings implements Settings {
     public char[] getPassword() {
         return new char[0];
     }
+
+    @Override
+    public String getLdapUrl() {
+        return null;
+    }
+
+    @Override
+    public String getLdapDomain() {
+        return null;
+    }
+
+    @Override
+    public String getAuthenticationType() {
+        return null;
+    }
 }
 

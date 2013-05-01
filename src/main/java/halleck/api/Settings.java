@@ -11,4 +11,7 @@ public interface Settings {
     List<String> getAdmins();
     String getUsername();
     char[] getPassword();
+    String getLdapUrl();
+    String getLdapDomain();
+    String getAuthenticationType();
 }
