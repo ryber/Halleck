@@ -83,4 +83,18 @@ public class Gurney implements Halleck {
         courseRepo.putCourse(new OnlineCourse(course));
     }
 
+    @Override
+    public Iterable<Course> search(final String q) {
+        return Iterables.filter(getAllCourses(), new Predicate<Course>() {
+            @Override
+            public boolean apply(@Nullable Course course) {
+                return contains(course.getName()) || contains(course.getDescription());
+            }
+
+            private boolean contains(String item) {
+                return item.toLowerCase().contains(q.toLowerCase());
+            }
+        });
+    }
+
 }

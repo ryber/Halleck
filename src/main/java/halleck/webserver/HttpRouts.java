@@ -63,6 +63,14 @@ public class HttpRouts implements SparkApplication {
             }
         });
 
+        get(new Route("/query/:q") {
+            @Override
+            public Object handle(Request request, Response response) {
+                String q = request.params(":q");
+                return renderCourseList(halleck.search(q));
+            }
+        });
+
         post(new Route("/registrations/course/:id") {
             @Override
             public Object handle(Request request, Response response) {

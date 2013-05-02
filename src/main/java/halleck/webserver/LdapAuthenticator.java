@@ -22,7 +22,6 @@ public class LdapAuthenticator implements Authenticator {
     public boolean authenticate(String username, String password){
         try
         {
-
             DirContext ctx = new InitialDirContext(getLDAPCommand(username, password));
             ctx.close();
 
@@ -30,7 +29,7 @@ public class LdapAuthenticator implements Authenticator {
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            // e.printStackTrace();
             return false;
         }
     }

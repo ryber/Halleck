@@ -1,9 +1,14 @@
 <h2>Available Courses</h2>
 
+<div class="courses">
 {{#courses}}
-    <p>
-    <h4><a href="/registrations/course/{{id}}">{{name}}</a></h4>
-    <span class="tiny">{{descriptionShort}}</span>
-    </p>
+   <div class="course-title">
+    <a href="/registrations/course/{{id}}">{{name}}</a>
+    </div>
+
+    <div class="desc-short">
+        {{descriptionShort}}
+     </div>
 {{/courses}}
+</div>
 

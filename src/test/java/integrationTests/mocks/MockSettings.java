@@ -62,7 +62,7 @@ public class MockSettings implements Settings {
 
     @Override
     public String getAuthenticationType() {
-        return null;
+        return "";
     }
 }
 

@@ -47,6 +47,10 @@ a {
     margin-bottom: 10px;
 }
 
+.courses {
+    margin-top: 30px;
+}
+
 .bigbutton {
     -moz-box-shadow:inset 0px 2px 0px 0px #bbdaf7;
     -webkit-box-shadow:inset 0px 2px 0px 0px #bbdaf7;
