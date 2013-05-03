@@ -64,5 +64,10 @@ public class MockSettings implements Settings {
     public String getAuthenticationType() {
         return "";
     }
+
+    @Override
+    public String getExternalMediaLocation() {
+        return null;
+    }
 }
 

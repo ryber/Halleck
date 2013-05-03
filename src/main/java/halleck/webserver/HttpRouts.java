@@ -1,5 +1,6 @@
 package halleck.webserver;
 
+import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import halleck.api.Course;
 import halleck.api.Halleck;
@@ -48,6 +49,8 @@ public class HttpRouts implements SparkApplication {
 
         setPort(settings.getAppPort());
         staticFileLocation("/assets");
+        setExternalMedia();
+
         before(filter);
 
         get(new Route("/") {
@@ -166,6 +169,12 @@ public class HttpRouts implements SparkApplication {
             }
         });
 
+    }
+
+    private void setExternalMedia() {
+        if(!Strings.isNullOrEmpty(settings.getExternalMediaLocation())) {
+            externalStaticFileLocation(settings.getExternalMediaLocation());
+        }
     }
 
     private String renderCourseList(Iterable<Course> courses, Request request) {

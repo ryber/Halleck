@@ -23,6 +23,7 @@ public class AppSettings implements Settings {
     private final String username;
     private final char[] password;
     private final String authType;
+    private final String externalMedia;
 
     public AppSettings(Properties properties) {
         this.mongoHost = properties.getProperty("mongo.host");
@@ -36,6 +37,7 @@ public class AppSettings implements Settings {
         this.ldapURL = properties.getProperty("ldap.url");
         this.ldapDomain = properties.getProperty("ldap.domain");
         this.authType = properties.getProperty("authentication.type");
+        this.externalMedia = properties.getProperty("site.externalmedia");
     }
 
     private List<String> getAdmins(String propLIst) {
@@ -97,5 +99,10 @@ public class AppSettings implements Settings {
     @Override
     public String getAuthenticationType() {
         return authType;
+    }
+
+    @Override
+    public String getExternalMediaLocation() {
+        return externalMedia;
     }
 }
