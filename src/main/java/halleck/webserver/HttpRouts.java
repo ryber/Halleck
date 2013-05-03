@@ -1,22 +1,22 @@
 package halleck.webserver;
 
-import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import halleck.api.Course;
 import halleck.api.Halleck;
 import halleck.api.Registration;
 import halleck.api.Settings;
+import halleck.webserver.mappers.CourseMapper;
+import halleck.webserver.mappers.FormVars;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 import spark.servlet.SparkApplication;
-import halleck.webserver.mappers.CourseMapper;
-import halleck.webserver.mappers.FormVars;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import static com.google.common.base.Strings.isNullOrEmpty;
 import static halleck.webserver.MapMaker.map;
 import static halleck.webserver.RequestCookies.getUser;
 import static spark.Spark.*;
@@ -113,7 +113,7 @@ public class HttpRouts implements SparkApplication {
         get(new Route("/login") {
             @Override
             public Object handle(Request request, Response response) {
-                return view.render("login.mustache", null);
+                return view.render("login.mustache", request);
             }
         });
 
@@ -172,7 +172,7 @@ public class HttpRouts implements SparkApplication {
     }
 
     private void setExternalMedia() {
-        if(!Strings.isNullOrEmpty(settings.getExternalMediaLocation())) {
+        if(!isNullOrEmpty(settings.getExternalMediaLocation())) {
             externalStaticFileLocation(settings.getExternalMediaLocation());
         }
     }

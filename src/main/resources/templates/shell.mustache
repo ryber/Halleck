@@ -28,16 +28,16 @@
     <div class="row">
 
         <div class="fourcol">
-            {{#isLoggedIn}}
+            {{#user.isLoggedIn}}
               <ul class="navigation">
                   <li><a href="/logout">Logout</a></li>
                   <li><a href="/">All Courses</a></li>
                   <li><a href="/my-courses">My Courses</a></li>
-                  {{#isAdmin}}
+                  {{#user.isAdmin}}
                   <li><a href="/admin/course">New Course</a></li>
-                  {{/isAdmin}}
+                  {{/user.isAdmin}}
               </ul>
-            {{/isLoggedIn}}
+            {{/user.isLoggedIn}}
         </div>
 
         <div class="sevencol last main">

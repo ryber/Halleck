@@ -1,5 +1,5 @@
 
-<div class="course-title">{{registration.course.name}}</div>
+<div class="course-title">{{registration.course.name}}</div> {{#user.isAdmin}} - <a href="/admin/course/{{registration.course.id}}" >edit</a>{{/user.isAdmin}}
 
 <div>
 {{#registration.isRegistered}}
