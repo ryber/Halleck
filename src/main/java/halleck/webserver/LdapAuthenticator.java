@@ -29,7 +29,6 @@ public class LdapAuthenticator implements Authenticator {
         }
         catch (Exception e)
         {
-            // e.printStackTrace();
             return false;
         }
     }
