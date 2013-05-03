@@ -28,7 +28,16 @@
     <div class="row">
 
         <div class="fourcol">
-
+            {{#isLoggedIn}}
+              <ul class="navigation">
+                  <li><a href="/logout">Logout</a></li>
+                  <li><a href="/">All Courses</a></li>
+                  <li><a href="/my-courses">My Courses</a></li>
+                  {{#isAdmin}}
+                  <li><a href="/admin/course">New Course</a></li>
+                  {{/isAdmin}}
+              </ul>
+            {{/isLoggedIn}}
         </div>
 
         <div class="sevencol last main">

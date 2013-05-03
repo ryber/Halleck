@@ -16,7 +16,7 @@ public class RequestCookies {
     }
 
     public static String getUser(Request request) {
-        return requestCookies(request).cookie(HALLECK_NAME);
+        return request == null ? "" : requestCookies(request).cookie(HALLECK_NAME);
     }
 
     /**

@@ -1,7 +1,7 @@
 
-<h4>{{registration.course.name}}</h4>
+<div class="course-title">{{registration.course.name}}</div>
 
-<div class="tiny">
+<div>
 {{#registration.isRegistered}}
 
 
@@ -20,8 +20,9 @@
 {{^registration.isRegistered}}
     {{#registration.canRegister}}
 
+    <br />
     <form action="#" method="post">
-        <input type="submit" value="Register For this course now!">
+        <input type="submit" class="bigbutton" value="Register For this course now!">
     </form>
 
     {{/registration.canRegister}}

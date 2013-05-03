@@ -1,5 +1,4 @@
 body {
-    # font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-family: iABCRegularSC, Georgia, serif;
     font-size: 14px;
     line-height: 24px;
@@ -18,12 +17,21 @@ h2 {
 }
 
 a {
-    color: #5bd698;
+    color: #2CAB09;
     text-decoration: none;
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
     -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
+}
+
+a:hover {
+    color: #40ED11;
+}
+
+.course-title {
+    font-size: 28px;
+    line-height: 32px;
 }
 
 .logo {
@@ -32,6 +40,7 @@ a {
     margin-bottom:20px;
 }
 
+
 .header {
 
 }
@@ -39,6 +48,7 @@ a {
 .main {
     margin-top: 15px;
 }
+
 
 .error {
     font-size: 16px;

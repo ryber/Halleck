@@ -13,8 +13,10 @@ import halleck.webserver.mappers.CourseMapper;
 import halleck.webserver.mappers.FormVars;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
+import static halleck.webserver.MapMaker.map;
 import static halleck.webserver.RequestCookies.getUser;
 import static spark.Spark.*;
 
@@ -46,20 +48,19 @@ public class HttpRouts implements SparkApplication {
 
         setPort(settings.getAppPort());
         staticFileLocation("/assets");
-
         before(filter);
 
         get(new Route("/") {
             @Override
             public Object handle(Request request, Response response) {
-                return renderCourseList(halleck.getAllCourses());
+                return renderCourseList(halleck.getAllCourses(), request);
             }
         });
 
         get(new Route("/my-courses") {
             @Override
             public Object handle(Request request, Response response) {
-                return renderCourseList(halleck.getUsersCourses(getUser(request)));
+                return renderCourseList(halleck.getUsersCourses(getUser(request)), request);
             }
         });
 
@@ -67,7 +68,7 @@ public class HttpRouts implements SparkApplication {
             @Override
             public Object handle(Request request, Response response) {
                 String q = request.params(":q");
-                return renderCourseList(halleck.search(q));
+                return renderCourseList(halleck.search(q), request);
             }
         });
 
@@ -94,13 +95,15 @@ public class HttpRouts implements SparkApplication {
             public Object handle(Request request, Response response) {
 
                 try {
-                    return view.render("course.mustache", MapMaker.map(
-                            "registration", getRegistrationId(request)
-                    ));
+                    return view.render("course.mustache", getRegistrationMap(request), request);
                 } catch (NoSuchElementException e) {
                     response.status(404);
                     return null;
                 }
+            }
+
+            private Map getRegistrationMap(Request request) {
+                return map("registration", getRegistrationId(request));
             }
         });
 
@@ -119,9 +122,9 @@ public class HttpRouts implements SparkApplication {
 
                 if(auth.authenticate(username, password)){
                     new ResponseCookies(response).cookie(RequestCookies.HALLECK_NAME, username);
-                    return view.render("redirect.mustache", MapMaker.map("url", "/"));
+                    return view.render("redirect.mustache", map("url", "/"), request);
                 }
-                return view.render("login.mustache", MapMaker.map("wrong",true));
+                return view.render("login.mustache", map("wrong", true), request);
             }
         });
 
@@ -137,14 +140,18 @@ public class HttpRouts implements SparkApplication {
         get(new Route("/admin/course") {
             @Override
             public Object handle(Request request, Response response) {
-                return view.render("editcourse.mustache");
+                return view.render("editcourse.mustache", request);
             }
         });
 
         get(new Route("/admin/course/:id") {
             @Override
             public Object handle(Request request, Response response) {
-                return view.render("editcourse.mustache", MapMaker.map("course", halleck.getCourse(request.params(":id"))));
+                return view.render("editcourse.mustache", getCourseMap(request), request);
+            }
+
+            private Map getCourseMap(Request request) {
+                return map("course", halleck.getCourse(request.params(":id")));
             }
         });
 
@@ -161,8 +168,8 @@ public class HttpRouts implements SparkApplication {
 
     }
 
-    private String renderCourseList(Iterable<Course> courses) {
-        return view.render("welcome.mustache", MapMaker.map("courses", courses));
+    private String renderCourseList(Iterable<Course> courses, Request request) {
+        return view.render("welcome.mustache", map("courses", courses), request);
     }
 
     private Registration getRegistrationId(Request request) {

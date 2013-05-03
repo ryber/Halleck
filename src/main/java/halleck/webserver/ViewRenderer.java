@@ -5,25 +5,28 @@ import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
 import com.google.inject.Inject;
 import halleck.api.Settings;
+import spark.Request;
 
 import java.io.IOException;
 import java.io.StringWriter;
 
+import static com.google.common.base.Strings.isNullOrEmpty;
+
 public class ViewRenderer {
 
-    private String siteName;
+    private Settings settings;
 
     @Inject
     public ViewRenderer(Settings settings){
-        this.siteName = settings.getSiteName();
+        this.settings = settings;
     }
 
-    public String render(String templateName) {
-        return render(templateName, null);
+    public String render(String templateName, Request request) {
+        return render(templateName, null, request);
     }
 
-    public String render(String template, Object data){
-        return renderTemplate("shell.mustache", new Body(renderTemplate(template, data)));
+    public String render(String template, Object data, Request request){
+        return renderTemplate("shell.mustache", new Body(renderTemplate(template, data), request));
     }
 
     private String renderTemplate(String template, Object data) {
@@ -43,11 +46,15 @@ public class ViewRenderer {
         public String body;
         public String title;
         public String user;
+        public boolean isAdmin;
+        public boolean isLoggedIn;
 
-        public Body(String body) {
+        public Body(String body, Request request) {
             this.body = body;
-            this.title = siteName;
-            this.user = "ryber";
+            this.title = settings.getSiteName();
+            this.user = RequestCookies.getUser(request);
+            this.isLoggedIn = !isNullOrEmpty(user);
+            this.isAdmin = settings.getAdmins().contains(user);
         }
     }
 }
