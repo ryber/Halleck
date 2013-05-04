@@ -1,7 +1,7 @@
 # Halleck Micro-LMS
 
 <img src="http://upload.wikimedia.org/wikipedia/en/0/04/Gurney-1984.jpg" align="right" hspace="10" vspace="10" alt="Moods are for cattle and loveplay. Not fighting!" />
-Halleck is a "micro-learning management system" (or LMS) aimed at small teams and organizations that want to track learning activities. It aims at being fast and minimal, without the bloat of traditional LMS's.
+Halleck is free and open source "micro- learning management system" (or LMS) aimed at small teams and organizations that want to track learning activities. It aims at being fast and minimal, without the bloat of traditional LMS's.
 
 Halleck is of course named after Gurney Halleck; Paul Atreides weapons trainer from Frank Herbert's 'Dune'
 
@@ -49,9 +49,10 @@ You can pass halleck the path to a properties file that contains config informat
 ## Road Map
 
 ### Soon
-* Navigation
-* The ability to log out
-* A 'My Courses' page
+* Different types of courses:
+ * Embeded Videos
+ * External URL launch
+* Admin view to registration count and who is registered.
 
 ### Long Term Goals
 * anyone can create and publish content
