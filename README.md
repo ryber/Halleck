@@ -24,6 +24,9 @@ You can pass halleck the path to a properties file that contains config informat
 * *site.admins* 
  * Use: The admin user
  * Default: ryber
+* *site.externalmedia*
+ * Use: A location, external to the jar. That contains static resources. Perfect for courses or videos. The root of this directory will be available from the root of Halleck.  
+ * Default: none configured.
 * *persistence.type*
  * Use: The type of persistence to use. Options are *memory* and *mongo* 
  * Default: *memory*
@@ -33,7 +36,15 @@ You can pass halleck the path to a properties file that contains config informat
 * *mongo.port*
  * Use: If using MongoDB,  the port it's on
  * Default: 27017 
-
+* *authentication.type*
+ * Use: The kind of authentication to use. Options are *fake* and *LDAP*. Fake will pass any username and password as OK. LDAP uses a LDAP server.
+ * Default: fake
+* *ldap.url* 
+ * Use: The URI to the ldap server. Needs to include the port and any CN's or other needed params.
+ * Default: ldap://127.0.0.1:389
+* *ldap.domain*
+ * Use: A optional domain to prepend to all usernames. e.g. a value of "FOO" for a user named "Leto" will result in "FOO/Leto"
+ * Default: 
 
 ## Road Map
 
