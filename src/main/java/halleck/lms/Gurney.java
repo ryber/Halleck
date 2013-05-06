@@ -2,17 +2,17 @@ package halleck.lms;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import halleck.api.Course;
 import halleck.api.Halleck;
-import halleck.api.Registration;
 import halleck.api.OnlineCourse;
+import halleck.api.Registration;
 
 import javax.annotation.Nullable;
 import java.util.Set;
 
+import static com.google.common.collect.FluentIterable.from;
 import static com.google.common.collect.Iterables.find;
 import static com.google.common.collect.Iterables.transform;
 
@@ -67,14 +67,14 @@ public class Gurney implements Halleck {
     public Set<Registration> getRegistrations(final String courseID) {
         final Course course = getCourse(courseID);
 
-        return FluentIterable.from(transform(getCourse(courseID).getRegisteredUsers(),
-            new Function<String, Registration>() {
-            @Override
-            public Registration apply(String s) {
+        return from(transform(getCourse(courseID).getRegisteredUsers(),
+                new Function<String, Registration>() {
+                    @Override
+                    public Registration apply(String s) {
 
-                return new UserRegistration(course, s);
-            }
-        }
+                        return new UserRegistration(course, s);
+                    }
+                }
         )).toSet();
     }
 
@@ -95,6 +95,13 @@ public class Gurney implements Halleck {
                 return item.toLowerCase().contains(q.toLowerCase());
             }
         });
+    }
+
+    @Override
+    public void createCourses(Iterable<Course> courseArray) {
+        for (Course c : courseArray){
+            createCourse(c);
+        }
     }
 
 }

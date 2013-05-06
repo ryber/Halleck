@@ -69,5 +69,10 @@ public class MockSettings implements Settings {
     public String getExternalMediaLocation() {
         return null;
     }
+
+    @Override
+    public String getCourseLoadLocation() {
+        return null;
+    }
 }
 

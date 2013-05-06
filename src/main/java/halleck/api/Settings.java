@@ -15,4 +15,5 @@ public interface Settings {
     String getLdapDomain();
     String getAuthenticationType();
     String getExternalMediaLocation();
+    String getCourseLoadLocation();
 }

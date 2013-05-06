@@ -24,6 +24,7 @@ public class AppSettings implements Settings {
     private final char[] password;
     private final String authType;
     private final String externalMedia;
+    private final String courseLoadLocation;
 
     public AppSettings(Properties properties) {
         this.mongoHost = properties.getProperty("mongo.host");
@@ -38,7 +39,10 @@ public class AppSettings implements Settings {
         this.ldapDomain = properties.getProperty("ldap.domain");
         this.authType = properties.getProperty("authentication.type");
         this.externalMedia = properties.getProperty("site.externalmedia");
+        this.courseLoadLocation = properties.getProperty("course.load");
     }
+
+
 
     private List<String> getAdmins(String propLIst) {
         return newArrayList(
@@ -104,5 +108,10 @@ public class AppSettings implements Settings {
     @Override
     public String getExternalMediaLocation() {
         return externalMedia;
+    }
+
+    @Override
+    public String getCourseLoadLocation() {
+        return courseLoadLocation;
     }
 }

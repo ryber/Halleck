@@ -28,6 +28,7 @@ public class HttpRouts implements SparkApplication {
     private SecurityFilter filter;
     private Authenticator auth;
     private Halleck halleck;
+    private CourseLoader courseLoader;
 
 
     @Inject
@@ -35,18 +36,30 @@ public class HttpRouts implements SparkApplication {
                      ViewRenderer view,
                      Settings settings,
                      SecurityFilter filter,
-                     Authenticator auth) {
+                     Authenticator auth,
+                     CourseLoader courseLoader) {
 
         this.halleck = halleck;
         this.view = view;
         this.settings = settings;
         this.filter = filter;
         this.auth = auth;
+        this.courseLoader = courseLoader;
     }
 
     @Override
     public void init() {
 
+        loadDefaultCourses();
+        configureRouts();
+
+    }
+
+    private void loadDefaultCourses() {
+       courseLoader.load();
+    }
+
+    private void configureRouts() {
         setPort(settings.getAppPort());
         staticFileLocation("/assets");
         setExternalMedia();
@@ -90,8 +103,6 @@ public class HttpRouts implements SparkApplication {
                 return null;
             }
         });
-
-
 
         get(new Route("/registrations/course/:id") {
             @Override
@@ -168,7 +179,6 @@ public class HttpRouts implements SparkApplication {
                 return null;
             }
         });
-
     }
 
     private void setExternalMedia() {
