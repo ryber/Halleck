@@ -51,16 +51,16 @@ You can pass halleck the path to a properties file that contains config informat
 
 ## Course Load Format
 
-   [
-   	{
-   		"id":"42",
-   		"name":"Underwater Basketweaving",
-   		"descrription":"a long long description",
-   		"maxCapacity":2,
-   		"registeredUsers":[],
-   		"url":"http://ryber.github.com"
-   	}
-   ]
+    [
+        {
+            "id":"42",
+            "name":"Underwater Basketweaving",
+            "descrription":"a long long description",
+            "maxCapacity":2,
+            "registeredUsers":[],
+            "url":"http://ryber.github.com"
+        }
+    ]
 
 
 ## Road Map
