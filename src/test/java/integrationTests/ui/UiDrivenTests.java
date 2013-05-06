@@ -165,6 +165,21 @@ public class UiDrivenTests {
         assertThat(r.getContent(), containsString("Groundhog Farming"));
     }
 
+    @Test
+    public void adminsCanViewRegistrations() throws Exception {
+        SetupFixtures.setAdmin("Phil");
+        setCurrentUser("Phil");
+
+        givenCourse("1", "Underwater Basketweaving");
+
+        exec(post, "/registrations/course/1");
+
+        Result result = exec(get, "/admin/course/1/registrations");
+
+        assertThat(result.getContent(), containsString("Underwater Basketweaving"));
+        assertThat(result.getContent(), containsString("Phil"));
+    }
+
     private void assertHasFormInput(String content, String inputName, String inputValue) {
         try{
             assertThat(content, containsString(String.format("name=\"%s\"", inputName)));

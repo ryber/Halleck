@@ -163,11 +163,16 @@ public class HttpRouts implements SparkApplication {
             public Object handle(Request request, Response response) {
                 return view.render("editcourse.mustache", getCourseMap(request), request);
             }
+        });
 
-            private Map getCourseMap(Request request) {
-                return map("course", halleck.getCourse(request.params(":id")));
+        get(new Route("/admin/course/:id/registrations") {
+            @Override
+            public Object handle(Request request, Response response) {
+                return view.render("registrations.mustache", getCourseMap(request), request);
             }
         });
+
+
 
         post(new Route("/admin/course") {
             @Override
@@ -179,6 +184,10 @@ public class HttpRouts implements SparkApplication {
                 return null;
             }
         });
+    }
+
+    private Map getCourseMap(Request request) {
+        return map("course", halleck.getCourse(request.params(":id")));
     }
 
     private void setExternalMedia() {

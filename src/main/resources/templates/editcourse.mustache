@@ -27,7 +27,7 @@
         </div>
         <div class="row">
             <div class="threecol">
-                Current Enrollment: {{course.registeredUsers.size}}
+                Current Enrollment: {{course.registeredUsers.size}} {{#course.id}} - <a href="/admin/course/{{course.id}}/registrations">view{{/course.id}}
             </div>
         </div>
         <div class="row">
