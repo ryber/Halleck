@@ -44,7 +44,24 @@ You can pass halleck the path to a properties file that contains config informat
  * Default: ldap://127.0.0.1:389
 * *ldap.domain*
  * Use: A optional domain to prepend to all usernames. e.g. a value of "FOO" for a user named "Leto" will result in "FOO/Leto"
- * Default: 
+ * Default:
+* *course.load*
+ * Use: The location to a json file of courses to load at start up. (see next section for JSON description.
+ * Default:
+
+## Course Load Format
+
+   [
+   	{
+   		"id":"42",
+   		"name":"Underwater Basketweaving",
+   		"descrription":"a long long description",
+   		"maxCapacity":2,
+   		"registeredUsers":[],
+   		"url":"http://ryber.github.com"
+   	}
+   ]
+
 
 ## Road Map
 
