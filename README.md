@@ -62,6 +62,7 @@ You can pass halleck the path to a properties file that contains config informat
         }
     ]
 
+*note on course URLs:* any course URL ending with .mp4 will be embeded into the launch lage. All other urls will launch into a new window.
 
 ## Road Map
 
