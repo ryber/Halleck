@@ -39,21 +39,6 @@
 
     <developers />
 
-    <!--
-    <repositories>
-        <repository>
-            <id>Spark repository</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-        </repository>
-
-        <repository>
-            <id>morphia</id>
-            <url>http://morphia.googlecode.com/svn/mavenrepo/</url>
-        </repository>
-    </repositories>
-    -->
-
-
     <dependencies>
         <dependency>
             <groupId>com.sparkjava</groupId>
