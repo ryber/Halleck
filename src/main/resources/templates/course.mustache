@@ -1,5 +1,7 @@
 
-<div class="course-title">{{registration.course.name}}</div> {{#user.isAdmin}} - <a href="/admin/course/{{registration.course.id}}" >edit</a>{{/user.isAdmin}}
+<div class="course-title">
+    {{registration.course.name}} {{#user.isAdmin}} <a class="edit" href="/admin/course/{{registration.course.id}}" > :: edit</a>{{/user.isAdmin}}
+</div>
 
 <div>
 {{#registration.isRegistered}}
@@ -8,7 +10,7 @@
      {{#registration.course.isEmbedVideo}}
     <video width="720"  controls>
         <source src="{{registration.course.url}}" type="video/mp4">
-        Your browser does not support the video tag.
+        Your browser does not support the video tag. Please use a modern web browser like Chrome, Safari or Firefox.
     </video>
     {{/registration.course.isEmbedVideo}}
     {{^registration.course.isEmbedVideo}}
@@ -20,18 +22,17 @@
 {{^registration.isRegistered}}
     {{#registration.canRegister}}
 
-    <br />
     <form action="#" method="post">
         <input type="submit" class="bigbutton" value="Register For this course now!">
     </form>
 
     {{/registration.canRegister}}
     {{^registration.canRegister}}
-       The class is full. Please contact your team lead to have registrations added.
+       <div class="error">The class is full. Please contact your team lead to have registrations added.</div>
     {{/registration.canRegister}}
 
 
-    <p>{{registration.course.description}}</p>
+    <p class="course-desc">{{registration.course.description}}</p>
 {{/registration.isRegistered}}
 
 

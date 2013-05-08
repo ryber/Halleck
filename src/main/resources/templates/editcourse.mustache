@@ -1,33 +1,33 @@
 <form method="post" action="/admin/course">
     <div class="container intro">
         <div class="row">
-            <div class="threecol">
+            <div class="fourcol">
                 Course Id: <input name="id" value="{{course.id}}" size="75" />
             </div>
         </div>
         <div class="row">
-            <div class="threecol">
+            <div class="fourcol">
                 Name: <input name="name" value="{{course.name}}"  size="75"/>
             </div>
         </div>
         <div class="row">
-            <div class="threecol">
+            <div class="fourcol">
                 Description: <textarea name="description" cols="58" rows="10">{{course.description}}</textarea>
             </div>
         </div>
         <div class="row">
-            <div class="threecol">
+            <div class="fourcol">
                 URL: <input name="url" type="text" value="{{course.url}}" size="75"/>
             </div>
         </div>
         <div class="row">
-            <div class="threecol">
+            <div class="fourcol">
                 Max Enrollment: <input name="max" type="number" value="{{course.maxEnrollment}}"/>
             </div>
         </div>
         <div class="row">
-            <div class="threecol">
-                Current Enrollment: {{course.registeredUsers.size}} {{#course.id}} - <a href="/admin/course/{{course.id}}/registrations">view{{/course.id}}
+            <div class="fourcol">
+                Current Enrollment: {{course.registeredUsers.size}} {{#course.id}} - <a href="/admin/course/{{course.id}}/registrations">view</a>{{/course.id}}
             </div>
         </div>
         <div class="row">
