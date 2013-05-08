@@ -15,3 +15,5 @@ bin
 .pdm
 .idea
 reports
+*.releaseBackup
+release.properties
