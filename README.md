@@ -12,6 +12,10 @@ Halleck is of course named after Gurney Halleck; Paul Atreides weapons trainer f
 * Run the jar (java --jar halleck.jar)
 * Goto http://localhost:4567
 
+## Requirements
+* Java 1.7
+* MongoDB if you want long term persistence 
+
 ## Configuration File
 You can pass halleck the path to a properties file that contains config information. Available properties are:
 
@@ -67,14 +71,11 @@ You can pass halleck the path to a properties file that contains config informat
 ## Road Map
 
 ### Soon
-* Different types of courses:
- * Embeded Videos
- * External URL launch
-* Admin view to registration count and who is registered.
+* Courses are "owned" by their creators.
+* Users can "publish" their content to the catalog for others to take.
+* Dynamic searching of the catalog.
+* the ability to group courses into 'katas'
 
-### Long Term Goals
-* anyone can create and publish content
-* the ability to group content into 'boot camps'
 
 ### Things Halleck will never do
 * SCORM / AICC
