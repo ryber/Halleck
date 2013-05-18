@@ -55,4 +55,18 @@ public class OnlineCourseTest {
 
         assertFalse(notembed.isEmbedVideo());
     }
+
+    @Test
+    public void addingAndRemovingCourses(){
+        OnlineCourse parent = new OnlineCourse("id","Foo","desc");
+        Course child = new OnlineCourse("42","bar","desc");
+
+        parent.addCourse(child);
+
+        assertTrue(parent.children().contains(child));
+
+        parent.removeCourse("42");
+
+        assertEquals(0, parent.children().size());
+    }
 }
