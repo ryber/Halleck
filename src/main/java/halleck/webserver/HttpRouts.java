@@ -15,6 +15,7 @@ import spark.servlet.SparkApplication;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
 import static halleck.webserver.MapMaker.map;
@@ -124,7 +125,11 @@ public class HttpRouts implements SparkApplication {
         get(new Route("/login") {
             @Override
             public Object handle(Request request, Response response) {
-                return view.render("login.mustache", request);
+                return view.render("login.mustache", getSettings(), request);
+            }
+
+            private Map getSettings() {
+                return map("showpass", !Objects.equals(settings.getAuthenticationType(), "fake"));
             }
         });
 

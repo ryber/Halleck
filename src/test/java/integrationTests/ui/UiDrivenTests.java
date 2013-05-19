@@ -65,7 +65,7 @@ public class UiDrivenTests {
         Result result = exec(get, "/registrations/course/1");
 
         assertThat(result.getContent(), containsString("Underwater Basketweaving"));
-        assertThat(result.getContent(), containsString(" The class is full. Please contact your team lead to have registrations added."));
+        assertThat(result.getContent(), containsString("The class is full. Please contact your team lead to have registrations added."));
     }
 
     @Test
