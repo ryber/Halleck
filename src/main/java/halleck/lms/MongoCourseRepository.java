@@ -7,6 +7,7 @@ import halleck.api.Course;
 import halleck.api.OnlineCourse;
 import halleck.api.Settings;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -18,7 +19,7 @@ public class MongoCourseRepository implements CourseRepository {
     private Settings settings;
 
     @Inject
-    public MongoCourseRepository(Mongo mongoClient, Settings settings) {
+    public MongoCourseRepository(@Nullable Mongo mongoClient, Settings settings) {
         this.mongoClient = mongoClient;
         this.settings = settings;
     }

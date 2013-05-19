@@ -1,0 +1,19 @@
+[
+    {
+        "id":"182",
+        "name":"Underwater Basketweaving",
+        "descrription":"In weaving willow baskets, a trough of water is needed in which to soak the dried willow rods. They are then left to stand until pliable and ready to be used in weaving. The weaving is, however, not done under water.[2] An issue of The American Philatelist from 1956 refers to an Alaskan village where 'Underwater basket weaving is the principal industry of the employables among the 94 Eskimos here. By way of explanation – the native reeds used in this form of basketry are soaked in water and the weavers create their handiwork with their hands and raw materials completely submerged in water throughout the process of manufacture'",
+        "maxCapacity":2,
+        "registeredUsers":["ryber", "fred"],
+        "url":"http://en.wikipedia.org/wiki/Underwater_basket_weaving"
+    },
+
+    {
+        "id":"42",
+        "name":"Answer to the Ultimate Question of Life, the Universe, and Everything",
+        "descrription":"Forty-two is a pronic number and an abundant number; its prime factorization 2 · 3 · 7 makes it the second sphenic number and also the second of the form { 2 · 3 · r }. As with all sphenic numbers of this form, the aliquot sum is abundant by 12. 42 is also the second sphenic number to be bracketed by twin primes; 30 is also a pronic number and also rests between two primes. 42 has a 14 member aliquot sequence 42, 54, 66, 78, 90, 144, 259, 45, 33, 15, 9, 4, 3, 1, 0 and is itself part of the aliquot sequence commencing with the first sphenic number 30. Further, 42 is the 10th member of the 3-aliquot tree.",
+        "maxCapacity":42,
+        "registeredUsers":[],
+        "url":"http://ryber.github.com"
+    }
+]
