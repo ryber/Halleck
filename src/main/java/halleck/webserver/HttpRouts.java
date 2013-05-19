@@ -20,6 +20,7 @@ import java.util.Objects;
 import static com.google.common.base.Strings.isNullOrEmpty;
 import static halleck.webserver.MapMaker.map;
 import static halleck.webserver.RequestCookies.getUser;
+import static java.util.Objects.equals;
 import static spark.Spark.*;
 
 public class HttpRouts implements SparkApplication {
@@ -183,7 +184,7 @@ public class HttpRouts implements SparkApplication {
             @Override
             public Object handle(Request request, Response response) {
 
-                Course apply = mapper.apply(getForm(request));
+                Course apply = mapper.apply(new FormVars(request));
                 halleck.createCourse(apply);
                 response.redirect("/admin/course/" + apply.getId());
                 return null;
@@ -208,15 +209,4 @@ public class HttpRouts implements SparkApplication {
     private Registration getRegistrationId(Request request) {
         return halleck.getRegistration(request.params(":id"), getUser(request));
     }
-
-    private FormVars getForm(Request request) {
-        FormVars vars = new FormVars();
-        HttpServletRequest raw = request.raw();
-
-        for (Object key : raw.getParameterMap().keySet()) {
-            vars.put(key.toString(), raw.getParameter(key.toString()));
-        }
-        return vars;
-    }
-
 }
