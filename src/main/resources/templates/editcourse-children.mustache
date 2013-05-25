@@ -1,0 +1,15 @@
+{{> editcourse-nav}}
+
+<br />
+<form method="post">
+    <input class="biginput" placeholder="enter keyword" name="keyword" id="keyword" />
+</form>
+
+<br />
+
+Children Courses:
+<ul>
+    {{#course.children}}
+       {{name}}
+    {{/course.children}}
+</ul>

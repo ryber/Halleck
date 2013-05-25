@@ -178,7 +178,12 @@ public class HttpRouts implements SparkApplication {
             }
         });
 
-
+        get(new Route("/admin/course/:id/children") {
+            @Override
+            public Object handle(Request request, Response response) {
+                return view.render("editcourse-children.mustache", getCourseMap(request), request);
+            }
+        });
 
         post(new Route("/admin/course") {
             @Override
