@@ -12,7 +12,6 @@ import spark.Response;
 import spark.Route;
 import spark.servlet.SparkApplication;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -20,7 +19,6 @@ import java.util.Objects;
 import static com.google.common.base.Strings.isNullOrEmpty;
 import static halleck.webserver.MapMaker.map;
 import static halleck.webserver.RequestCookies.getUser;
-import static java.util.Objects.equals;
 import static spark.Spark.*;
 
 public class HttpRouts implements SparkApplication {
@@ -82,13 +80,6 @@ public class HttpRouts implements SparkApplication {
             }
         });
 
-        get(new Route("/query/:q") {
-            @Override
-            public Object handle(Request request, Response response) {
-                String q = request.params(":q");
-                return renderCourseList(halleck.search(q), request);
-            }
-        });
 
         post(new Route("/registrations/course/:id") {
             @Override
@@ -154,6 +145,15 @@ public class HttpRouts implements SparkApplication {
                 new ResponseCookies(response).removeCookie(RequestCookies.HALLECK_NAME);
                 response.redirect("/login");
                 return null;
+            }
+        });
+
+        get(new Route("/admin/courses") {
+            @Override
+            public Object handle(Request request, Response response) {
+                response.type("application/json");
+                Iterable<Course> allCourses = halleck.getAllCourses();
+                return view.renderJson(allCourses, response);
             }
         });
 

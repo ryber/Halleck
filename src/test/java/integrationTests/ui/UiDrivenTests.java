@@ -150,22 +150,6 @@ public class UiDrivenTests {
     }
 
     @Test
-    public void canSearchAllCourses() throws Exception {
-        givenCourse("1", "Underwater Basketweaving");
-        givenCourse("2", "How to make tacos");
-        givenCourse("3", "Groundhog Farming", "Underwater",null,1);
-
-
-        setCurrentUser("Phil");
-
-        Result r = exec(get, "/query/Underwater");
-
-        assertThat(r.getContent(), containsString("Underwater Basketweaving"));
-        assertThat(r.getContent(), not(containsString("tacos")));
-        assertThat(r.getContent(), containsString("Groundhog Farming"));
-    }
-
-    @Test
     public void adminsCanViewRegistrations() throws Exception {
         SetupFixtures.setAdmin("Phil");
         setCurrentUser("Phil");

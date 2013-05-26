@@ -5,9 +5,11 @@ import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
 import com.google.common.base.Strings;
 import com.google.common.io.Resources;
+import com.google.gson.Gson;
 import com.google.inject.Inject;
 import halleck.api.Settings;
 import spark.Request;
+import spark.Response;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -53,6 +55,11 @@ public class ViewRenderer {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public String renderJson(Object datamap, Response response) {
+        response.type("application/json");
+        return new Gson().toJson(datamap);
     }
 
     private class Body {
