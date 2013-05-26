@@ -1,15 +1,14 @@
-
 <!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>{{title}}</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <link rel="stylesheet" href="/css/1140.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="/css/styles.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/css/1140.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="/css/styles.css" type="text/css" media="screen"/>
 
     <link rel="apple-touch-icon-precomposed" href="img/appletouchicon.png"/>
 </head>
@@ -20,7 +19,7 @@
 <div class="container header">
     <div class="row">
         <div class="logo"><h1>{{title}}</h1></div>
-        <hr />
+        <hr/>
     </div>
 </div>
 
@@ -29,14 +28,14 @@
 
         <div class="fourcol">
             {{#user.isLoggedIn}}
-              <ul class="navigation">
-                  <li><a href="/logout">Logout</a></li>
-                  <li><a href="/">All Courses</a></li>
-                  <li><a href="/my-courses">My Courses</a></li>
-                  {{#user.isAdmin}}
-                  <li><a href="/admin/course">New Course</a></li>
-                  {{/user.isAdmin}}
-              </ul>
+                <ul class="navigation">
+                    <li><a href="/logout">Logout</a></li>
+                    <li><a href="/">All Courses</a></li>
+                    <li><a href="/my-courses">My Courses</a></li>
+                    {{#user.isAdmin}}
+                        <li><a href="/admin/course">New Course</a></li>
+                    {{/user.isAdmin}}
+                </ul>
             {{/user.isLoggedIn}}
         </div>
 
@@ -44,11 +43,15 @@
             {{{body}}}
         </div>
     </div>
-</div> <!--/container-->
+</div>
+<!--/container-->
 
 
-
-
+{{#javascript}}
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="{{{javascript}}}"></script>
+{{/javascript}}
 
 </body>
 
