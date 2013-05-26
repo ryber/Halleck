@@ -13,4 +13,5 @@ public interface Halleck {
     void createCourse(Course course);
     Iterable<Course> search(String q);
     void createCourses(Iterable<Course> courseArray);
+    void addChild(String parentId, String childId);
 }

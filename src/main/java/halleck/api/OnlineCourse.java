@@ -43,6 +43,10 @@ public class OnlineCourse implements Course {
         this.maxCapacity = max;
     }
 
+    public OnlineCourse(String id) {
+        this(id,id,id);
+    }
+
     @Override
     public String getId() {
         return id;

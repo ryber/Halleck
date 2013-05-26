@@ -21,7 +21,7 @@ public class Gurney implements Halleck {
     private CourseRepository courseRepo;
 
     @Inject
-    public Gurney(CourseRepository courseRepo){
+    public Gurney(CourseRepository courseRepo) {
         this.courseRepo = courseRepo;
     }
 
@@ -99,9 +99,16 @@ public class Gurney implements Halleck {
 
     @Override
     public void createCourses(Iterable<Course> courseArray) {
-        for (Course c : courseArray){
+        for (Course c : courseArray) {
             createCourse(c);
         }
+    }
+
+    @Override
+    public void addChild(String parentId, String childId) {
+        Course c = getCourse(parentId);
+        c.addCourse(getCourse(childId));
+        courseRepo.putCourse(c);
     }
 
 }
