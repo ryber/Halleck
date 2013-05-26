@@ -38,8 +38,7 @@ public class ViewRenderer {
     }
 
     private String addJs(String template) {
-        String javaScriptFileForStache = jslocations.getJavaScriptFileForStache(template);
-        return javaScriptFileForStache;
+        return jslocations.getJavaScriptFileForStache(template);
     }
 
 
