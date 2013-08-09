@@ -4,12 +4,12 @@
     <div class="container intro">
         <div class="row">
             <div class="fourcol">
-                Course Id: <input name="id" value="{{course.id}}" size="75" />
+                Course Id: <input name="id" value="{{course.id}}" size="75" required="true" />
             </div>
         </div>
         <div class="row">
             <div class="fourcol">
-                Name: <input name="name" value="{{course.name}}"  size="75"/>
+                Name: <input name="name" value="{{course.name}}"  size="75" required="true" />
             </div>
         </div>
         <div class="row">
@@ -27,6 +27,7 @@
                 Max Enrollment: <input name="max" type="number" value="{{course.maxEnrollment}}"/>
             </div>
         </div>
+        {{#course.id}}
         <div class="row">
             <div class="fourcol">
                 Current Enrollment: {{course.registeredUsers.size}} {{#course.id}} - <a href="/admin/course/{{course.id}}/registrations">view</a>{{/course.id}}
@@ -34,11 +35,16 @@
         </div>
         <div class="row">
                     <div class="fourcol">
-                        Child Courses: {{course.children.size}} - <a href="/admin/course/{{course.id}}/registrations">edit</a>
+                        Child Courses: {{course.children.size}} - <a href="/admin/course/{{course.id}}/children">edit</a>
                     </div>
-                </div>
+        </div>
+
+        {{/course.id}}
+
+        <br />
         <div class="row">
             <div class="threecol">
-                <input type="submit"/>
+                <input type="submit" class="bigbutton" />
             </div>
+        </div>
 </form>

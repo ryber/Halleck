@@ -28,9 +28,12 @@ public class SettingsProvider implements Provider<Settings> {
         if(args != null && args.length > 0){
             File prop = new File(args[0]);
             if(prop.exists()){
+                System.out.println("Loading with properties: " + prop.getPath());
                 return prop;
             }
         }
+
+        System.out.println("Loading with default properties");
 
         return null;
     }

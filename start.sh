@@ -1,0 +1,1 @@
+/c/java/java7/bin/java -jar ./target/halleck-lms-1.0.jar -properties=c:\halleck.properties
