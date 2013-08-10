@@ -35,7 +35,7 @@
 
         <div class="fourcol">
             {{#user.isLoggedIn}}
-                <ul class="navigation">
+                <ul class="navigation" role="navigation" tabindex="-1">
                     <li><a href="/logout">Logout</a></li>
                     <li><a href="/">All Courses</a></li>
                     <li><a href="/my-courses">My Courses</a></li>
@@ -46,7 +46,7 @@
             {{/user.isLoggedIn}}
         </div>
 
-        <div class="sevencol last main">
+        <div class="sevencol last main" role="main">
             {{{body}}}
         </div>
     </div>

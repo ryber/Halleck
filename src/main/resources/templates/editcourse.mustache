@@ -4,38 +4,38 @@
     <div class="container intro">
         <div class="row">
             <div class="fourcol">
-                Course Id: <input name="id" value="{{course.id}}" size="75" required="true" />
+                <label for="id" id="courseid-label">Course Id:</label> <input id="id" name="id" value="{{course.id}}" aria-labelledby="courseid-label" size="75" required="true" />
             </div>
         </div>
         <div class="row">
             <div class="fourcol">
-                Name: <input name="name" value="{{course.name}}"  size="75" required="true" />
+                <label for="name" id="name-label">Name:</label> <input id="name" name="name" value="{{course.name}}"  aria-labelledby="name-label"  size="75" required="true" />
             </div>
         </div>
         <div class="row">
             <div class="fourcol">
-                Description: <textarea name="description" cols="58" rows="10">{{course.description}}</textarea>
+                <label for="description" id="desc-label">Description:</label> <textarea id="description" name="description" aria-labelledby="desc-label" cols="58" rows="10">{{course.description}}</textarea>
             </div>
         </div>
         <div class="row">
             <div class="fourcol">
-                URL: <input name="url" type="text" value="{{course.url}}" size="75"/>
+                <label for="url" id="url-label">Path:</label> <input id="url" name="url" aria-labelledby="url-label" type="text" value="{{course.url}}" size="75"/>
             </div>
         </div>
         <div class="row">
             <div class="fourcol">
-                Max Enrollment: <input name="max" type="number" value="{{course.maxEnrollment}}"/>
+                <label for="max" id="max-label">Max Enrollment:</label> <input id="max-label" name="max" type="number" aria-labelledby="max-label" value="{{course.maxEnrollment}}"/>
             </div>
         </div>
         {{#course.id}}
         <div class="row">
             <div class="fourcol">
-                Current Enrollment: {{course.registeredUsers.size}} {{#course.id}} - <a href="/admin/course/{{course.id}}/registrations">view</a>{{/course.id}}
+                Current Enrollment: {{course.registeredUsers.size}} {{#course.id}} - <a href="/admin/course/{{course.id}}/registrations" title="View course enrrollments">view</a>{{/course.id}}
             </div>
         </div>
         <div class="row">
                     <div class="fourcol">
-                        Child Courses: {{course.children.size}} - <a href="/admin/course/{{course.id}}/children">edit</a>
+                        Child Courses: {{course.children.size}} - <a href="/admin/course/{{course.id}}/children" title="View child courses">edit</a>
                     </div>
         </div>
 
@@ -44,7 +44,7 @@
         <br />
         <div class="row">
             <div class="threecol">
-                <input type="submit" class="bigbutton" />
+                <input type="submit" value="Submit" class="bigbutton" />
             </div>
         </div>
 </form>
