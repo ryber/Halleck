@@ -49,7 +49,7 @@ public class GurneyTest {
         ArgumentCaptor<Course> captor = ArgumentCaptor.forClass(Course.class);
         doNothing().when(courseRepo).putCourse(captor.capture());
 
-        gurney.createCourse(new OnlineCourse("42","Underwater Basketweaving", "a desc", "http://foo", null));
+        gurney.createCourse(new OnlineCourse("42","Underwater Basketweaving", "a desc", "http://foo", null, "something different"));
 
         Course result = captor.getValue();
 
@@ -57,6 +57,7 @@ public class GurneyTest {
         assertEquals("Underwater Basketweaving", result.getName());
         assertEquals("a desc", result.getDescription());
         assertEquals("http://foo", result.getUrl());
+        assertEquals("something different", result.getContent());
     }
 
 }

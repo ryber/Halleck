@@ -15,6 +15,7 @@ public class OnlineCourse implements Course {
     private Set<String> registeredUsers = Sets.newHashSet();
     public static final int UNLIMITED_ENROLLMENT = 999;
     private String url = "";
+    private String content = "";
 
     public OnlineCourse(String id, String name, String descrription) {
         this.id = id;
@@ -26,12 +27,14 @@ public class OnlineCourse implements Course {
         this(courseInput.getId(), courseInput.getName(), courseInput.getDescription());
         this.url = nullToEmpty(courseInput.getUrl());
         this.maxCapacity = courseInput.getMaxEnrollment();
+        this.content = nullToEmpty(courseInput.getContent());
     }
 
-    public OnlineCourse(String id, String name, String description, String url, Integer max) {
+    public OnlineCourse(String id, String name, String description, String url, Integer max, String content) {
         this(id, name, description);
         this.url = nullToEmpty(url);
         this.maxCapacity = max;
+        this.content = nullToEmpty(content);
     }
 
     public OnlineCourse(String id) {
@@ -103,6 +106,14 @@ public class OnlineCourse implements Course {
         return url.endsWith("mp4");
     }
 
+    @Override
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String value) {
+        this.content = value;
+    }
 
     public void addRegisteredUsers(Iterable<String> users) {
         for(String u : users){

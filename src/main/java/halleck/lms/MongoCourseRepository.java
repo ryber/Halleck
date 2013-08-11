@@ -46,7 +46,10 @@ public class MongoCourseRepository implements CourseRepository {
                 next.get("name").toString(),
                 next.get("description").toString(),
                 next.get("url").toString(),
-                (Integer) next.get("max"));
+                (Integer) next.get("max"),
+                next.get("content").toString()
+                );
+
         onlineCourse.addRegisteredUsers((Iterable<String>)next.get("users"));
         return onlineCourse;
     }

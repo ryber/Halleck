@@ -13,7 +13,7 @@ public class SetupFixtures {
     }
 
     public static Course givenCourse(String id, String name, String desc, String url, Integer max) {
-        Course c = new OnlineCourse(id, name, desc, url, max);
+        Course c = new OnlineCourse(id, name, desc, url, max, null);
         InMemoryCourseRepository.addCourse(c);
         return c;
     }

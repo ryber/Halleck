@@ -16,7 +16,9 @@ public class CourseMapper implements Function<FormVars, Course> {
                 request.get("name"),
                 request.get("description"),
                 request.get("url"),
-                toInt(request.get("max")));
+                toInt(request.get("max")),
+                request.get("content")
+                );
     }
 
     private Integer toInt(String max) {

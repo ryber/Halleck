@@ -35,6 +35,7 @@ public class OnlineCourseTest {
         when(i.getDescription()).thenReturn("boo!");
         when(i.getUrl()).thenReturn("http://bar");
         when(i.getMaxEnrollment()).thenReturn(54);
+        when(i.getContent()).thenReturn("some content");
 
         OnlineCourse t = new OnlineCourse(i);
 
@@ -43,15 +44,16 @@ public class OnlineCourseTest {
         assertEquals("http://bar", t.getUrl());
         assertEquals("boo!", t.getDescription());
         assertEquals(54, t.getMaxEnrollment().intValue());
+        assertEquals("some content", t.getContent());
     }
 
     @Test
     public void ifCourseIsAHtml5VideoThenSayItIs() throws Exception {
-        OnlineCourse isEmbed = new OnlineCourse("id","name","desc", "http://foo/video.mp4",3);
+        OnlineCourse isEmbed = new OnlineCourse("id","name","desc", "http://foo/video.mp4",3, null);
 
         assertTrue(isEmbed.isEmbedVideo());
 
-        OnlineCourse notembed = new OnlineCourse("id","name","desc", "http://foo/video.html",3);
+        OnlineCourse notembed = new OnlineCourse("id","name","desc", "http://foo/video.html",3, null);
 
         assertFalse(notembed.isEmbedVideo());
     }

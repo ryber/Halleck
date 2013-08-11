@@ -15,4 +15,5 @@ public interface Course {
     void addRegisteredUser(String user);
     boolean hasFreeSeats();
     boolean isEmbedVideo();
+    String getContent();
 }

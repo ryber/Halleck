@@ -24,6 +24,11 @@
         </div>
         <div class="row">
             <div class="fourcol">
+                <label for="content" id="content-label">Content:</label> <textarea id="content" name="content" aria-labelledby="content-label" cols="58" rows="20">{{course.content}}</textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fourcol">
                 <label for="max" id="max-label">Max Enrollment:</label> <input id="max-label" name="max" type="number" aria-labelledby="max-label" value="{{course.maxEnrollment}}"/>
             </div>
         </div>

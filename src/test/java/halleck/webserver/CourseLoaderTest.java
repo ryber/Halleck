@@ -15,7 +15,8 @@ public class CourseLoaderTest {
     public void testGSonStuff() throws Exception {
         CourseLoader l = new CourseLoader(null, null);
 
-        Course source = new OnlineCourse("42","Underwater Basketweaving", "a long long description", "http://www.google.com",2);
+        Course source = new OnlineCourse("42","Underwater Basketweaving",
+                "a long long description", "http://www.google.com",2, "fishy content");
 
         Iterable<Course> courses = l.createCourseArray(new Gson().toJson(newArrayList(source)));
         Course c = Iterables.get(courses,0);
@@ -26,6 +27,7 @@ public class CourseLoaderTest {
         assertEquals("a long long description", c.getDescription());
         assertEquals("http://www.google.com", c.getUrl());
         assertEquals((Integer)2, c.getMaxEnrollment());
+        assertEquals("fishy content", c.getContent());
 
     }
 }
