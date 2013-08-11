@@ -164,17 +164,6 @@ public class UiDrivenTests {
         assertThat(result.getContent(), containsString("Phil"));
     }
 
-    @Test
-    public void willIncludeJavaScriptForTemplate(){
-        SetupFixtures.setAdmin("Phil");
-        setCurrentUser("Phil");
-
-        givenCourse("1", "Underwater Basketweaving");
-
-        Result result = exec(get, "/admin/course/1/children");
-
-        assertThat(result.getContent(), containsString("src=\"/js/editcourse-children.js\""));
-    }
 
     @Test
     public void templatesThatDoNotHaveJavascriptsWillNotRenderAnyJs(){

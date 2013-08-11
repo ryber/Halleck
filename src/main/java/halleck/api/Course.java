@@ -1,7 +1,5 @@
 package halleck.api;
 
-import com.google.common.collect.ImmutableSet;
-
 import java.util.Set;
 
 public interface Course {
@@ -17,7 +15,4 @@ public interface Course {
     void addRegisteredUser(String user);
     boolean hasFreeSeats();
     boolean isEmbedVideo();
-    ImmutableSet<Course> children();
-    void addCourse(Course course);
-    void removeCourse(String courseId);
 }

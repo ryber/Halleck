@@ -33,11 +33,6 @@
                 Current Enrollment: {{course.registeredUsers.size}} {{#course.id}} - <a href="/admin/course/{{course.id}}/registrations" title="View course enrrollments">view</a>{{/course.id}}
             </div>
         </div>
-        <div class="row">
-                    <div class="fourcol">
-                        Child Courses: {{course.children.size}} - <a href="/admin/course/{{course.id}}/children" title="View child courses">edit</a>
-                    </div>
-        </div>
 
         {{/course.id}}
 

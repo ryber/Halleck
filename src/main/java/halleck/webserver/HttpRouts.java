@@ -1,6 +1,5 @@
 package halleck.webserver;
 
-import com.google.common.primitives.Ints;
 import com.google.inject.Inject;
 import halleck.api.Course;
 import halleck.api.Halleck;
@@ -179,20 +178,6 @@ public class HttpRouts implements SparkApplication {
             }
         });
 
-        get(new Route("/admin/course/:id/children") {
-            @Override
-            public Object handle(Request request, Response response) {
-                return view.render("editcourse-children.mustache", getCourseMap(request), request);
-            }
-        });
-
-        post(new Route("/admin/course/:id/children") {
-            @Override
-            public Object handle(Request request, Response response) {
-                halleck.addChild(request.params(":id"), request.params(""));
-                return view.render("editcourse-children.mustache", getCourseMap(request), request);
-            }
-        });
 
         post(new Route("/admin/course") {
             @Override

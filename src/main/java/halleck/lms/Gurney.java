@@ -104,11 +104,5 @@ public class Gurney implements Halleck {
         }
     }
 
-    @Override
-    public void addChild(String parentId, String childId) {
-        Course c = getCourse(parentId);
-        c.addCourse(getCourse(childId));
-        courseRepo.putCourse(c);
-    }
 
 }

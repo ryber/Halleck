@@ -1,19 +1,11 @@
 package halleck.api;
 
-import com.google.common.base.Optional;
-import com.google.common.base.Predicate;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
-
 import javax.annotation.Nullable;
-import java.util.Objects;
 import java.util.Set;
 
-import static com.google.common.base.Optional.fromNullable;
 import static com.google.common.base.Strings.nullToEmpty;
-import static com.google.common.collect.Iterables.find;
 
 public class OnlineCourse implements Course {
     private final String id;
@@ -23,7 +15,6 @@ public class OnlineCourse implements Course {
     private Set<String> registeredUsers = Sets.newHashSet();
     public static final int UNLIMITED_ENROLLMENT = 999;
     private String url = "";
-    private Set<Course> children = Sets.newHashSet();
 
     public OnlineCourse(String id, String name, String descrription) {
         this.id = id;
@@ -112,33 +103,6 @@ public class OnlineCourse implements Course {
         return url.endsWith("mp4");
     }
 
-    @Override
-    public ImmutableSet<Course> children() {
-        return ImmutableSet.copyOf(children);
-    }
-
-    @Override
-    public void addCourse(Course course) {
-        children.add(course);
-    }
-
-    @Override
-    public void removeCourse(final String courseId) {
-        Optional<Course> toRemote = getCourse(courseId);
-
-        if(toRemote.isPresent()){
-            children.remove(toRemote.get());
-        }
-    }
-
-    private Optional<Course> getCourse(final String courseId) {
-        return fromNullable(find(children, new Predicate<Course>() {
-            @Override
-            public boolean apply(@Nullable Course course) {
-                return Objects.equals(courseId, course.getId());
-            }
-        }, null));
-    }
 
     public void addRegisteredUsers(Iterable<String> users) {
         for(String u : users){

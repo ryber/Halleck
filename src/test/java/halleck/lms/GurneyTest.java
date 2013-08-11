@@ -13,8 +13,6 @@ import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static junit.framework.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.matchers.JUnitMatchers.hasItem;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -60,19 +58,5 @@ public class GurneyTest {
         assertEquals("a desc", result.getDescription());
         assertEquals("http://foo", result.getUrl());
     }
-
-    @Test
-    public void canAddChildrenByIds(){
-        Course homer = new OnlineCourse("homer");
-        Course bart = new OnlineCourse("bart");
-
-        when(courseRepo.getAllCourses()).thenReturn(newArrayList(homer, bart));
-
-        gurney.addChild("homer", "bart");
-
-        assertThat(homer.children(), hasItem(bart));
-        verify(courseRepo).putCourse(homer);
-    }
-
 
 }
