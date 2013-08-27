@@ -24,15 +24,15 @@ public class RegistrationTests {
     public void canRegisterForCourse() throws Exception {
         givenCourse("abc", "Underwater Basketweaving");
 
-        assertFalse(isRegisteredForCourse("abc", "barry"));
+        assertFalse(userIsRegisteredForCourse("barry", "abc"));
 
         registerUserForCourse("abc", "barry");
 
-        assertTrue(isRegisteredForCourse("abc", "barry"));
+        assertTrue(userIsRegisteredForCourse("barry", "abc"));
 
         registerUserForCourse("abc", "barry");
 
-        assertTrue(isRegisteredForCourse("abc", "barry"));
+        assertTrue(userIsRegisteredForCourse("barry", "abc"));
     }
 
 
@@ -111,7 +111,7 @@ public class RegistrationTests {
         String a = "a";
         String c = "c";
 
-        userIsRegisteredForCourse(moe, a, c);
+        assertTrue(userIsRegisteredForCourse(moe, a, c));
     }
 
 }

@@ -1,18 +1,18 @@
 package BDDTests.fixtures;
 
 import BDDTests.TestBindings;
+import BDDTests.mocks.MockSettings;
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
+import com.google.common.collect.FluentIterable;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import halleck.api.Course;
 import halleck.api.Halleck;
 import halleck.api.OnlineCourse;
-import BDDTests.mocks.MockSettings;
 import halleck.lms.InMemoryCourseRepository;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
+import javax.annotation.Nullable;
+import java.util.Arrays;
 
 public class ApplicationFixture {
     private static String currentUser;
@@ -36,10 +36,6 @@ public class ApplicationFixture {
 
     public static void registerUserForCourse(String courseName, String userName){
         system.register(courseName, userName);
-    }
-
-    public static boolean isRegisteredForCourse(String courseName, String userName) {
-        return system.getRegistration(courseName, userName).isRegistered();
     }
 
     public static void reset() {
@@ -72,25 +68,13 @@ public class ApplicationFixture {
         return system.getCourse(abc).getFreeSeats();
     }
 
-    public static void userIsRegisteredForCourse(String userName, String... couseIds) {
-        Iterable<Course> moesCourse = system.getUsersCourses(userName);
-
-        assertEquals(couseIds.length, Iterables.size(moesCourse));
-        for(String id : couseIds){
-            assertTrue(Iterables.any(moesCourse, new HasId(id)));
-        }
-    }
-
-    private static class HasId implements Predicate<Course> {
-        private String id;
-
-        private HasId(String id) {
-            this.id = id;
-        }
-
-        @Override
-        public boolean apply(Course course) {
-            return course.getId().equals(id);
-        }
+    public static boolean userIsRegisteredForCourse(final String userName, String... couseIds) {
+        return FluentIterable.from(Arrays.asList(couseIds))
+                .allMatch(new Predicate<String>() {
+                    @Override
+                    public boolean apply(@Nullable String input) {
+                        return system.getRegistration(input, userName).isRegistered();
+                    }
+                });
     }
 }
