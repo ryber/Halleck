@@ -1,4 +1,4 @@
-package integrationTests;
+package BDDTests;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -9,7 +9,7 @@ import halleck.api.Halleck;
 import org.junit.Before;
 import org.junit.Test;
 
-import static integrationTests.SetupFixtures.givenCourse;
+import static BDDTests.SetupFixtures.givenCourse;
 import static junit.framework.Assert.*;
 
 public class RegistrationTests {

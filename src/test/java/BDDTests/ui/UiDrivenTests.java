@@ -1,18 +1,18 @@
-package integrationTests.ui;
+package BDDTests.ui;
 
 import halleck.api.Course;
 import halleck.appstart.CLI;
 import halleck.webserver.mappers.FormVars;
-import integrationTests.SetupFixtures;
-import integrationTests.TestBindings;
-import integrationTests.mocks.Result;
+import BDDTests.SetupFixtures;
+import BDDTests.TestBindings;
+import BDDTests.mocks.Result;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static integrationTests.SetupFixtures.givenCourse;
-import static integrationTests.SetupFixtures.setCurrentUser;
-import static integrationTests.mocks.FakeAppServer.exec;
+import static BDDTests.SetupFixtures.givenCourse;
+import static BDDTests.SetupFixtures.setCurrentUser;
+import static BDDTests.mocks.FakeAppServer.exec;
 import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertThat;

@@ -1,4 +1,4 @@
-package integrationTests.mocks;
+package BDDTests.mocks;
 
 import com.google.common.base.Strings;
 import halleck.webserver.RequestCookies;

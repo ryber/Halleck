@@ -1,4 +1,4 @@
-package integrationTests.mocks;
+package BDDTests.mocks;
 
 public class Result {
     private final int status;

@@ -1,7 +1,7 @@
-package integrationTests;
+package BDDTests;
 
 import halleck.api.Settings;
-import integrationTests.mocks.MockSettings;
+import BDDTests.mocks.MockSettings;
 import halleck.appstart.BindingModule;
 
 public class TestBindings extends BindingModule {
