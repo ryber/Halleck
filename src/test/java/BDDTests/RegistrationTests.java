@@ -1,5 +1,6 @@
 package BDDTests;
 
+import BDDTests.fixtures.SetupFixtures;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.inject.Guice;
@@ -9,7 +10,7 @@ import halleck.api.Halleck;
 import org.junit.Before;
 import org.junit.Test;
 
-import static BDDTests.SetupFixtures.givenCourse;
+import static BDDTests.fixtures.SetupFixtures.givenCourse;
 import static junit.framework.Assert.*;
 
 public class RegistrationTests {

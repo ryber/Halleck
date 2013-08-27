@@ -1,6 +1,6 @@
 package BDDTests.mocks;
 
-import BDDTests.SetupFixtures;
+import BDDTests.fixtures.SetupFixtures;
 import halleck.webserver.mappers.FormVars;
 import spark.route.HttpMethod;
 import spark.route.RouteMatcherFactory;

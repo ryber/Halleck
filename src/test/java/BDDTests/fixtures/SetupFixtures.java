@@ -1,4 +1,4 @@
-package BDDTests;
+package BDDTests.fixtures;
 
 import halleck.api.Course;
 import halleck.api.OnlineCourse;

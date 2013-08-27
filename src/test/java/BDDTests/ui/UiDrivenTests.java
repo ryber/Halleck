@@ -3,15 +3,15 @@ package BDDTests.ui;
 import halleck.api.Course;
 import halleck.appstart.CLI;
 import halleck.webserver.mappers.FormVars;
-import BDDTests.SetupFixtures;
+import BDDTests.fixtures.SetupFixtures;
 import BDDTests.TestBindings;
 import BDDTests.mocks.Result;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static BDDTests.SetupFixtures.givenCourse;
-import static BDDTests.SetupFixtures.setCurrentUser;
+import static BDDTests.fixtures.SetupFixtures.givenCourse;
+import static BDDTests.fixtures.SetupFixtures.setCurrentUser;
 import static BDDTests.mocks.FakeAppServer.exec;
 import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.core.IsNot.not;
