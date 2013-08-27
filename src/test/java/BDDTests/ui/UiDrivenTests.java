@@ -1,17 +1,17 @@
 package BDDTests.ui;
 
+import BDDTests.fixtures.ApplicationFixture;
 import halleck.api.Course;
 import halleck.appstart.CLI;
 import halleck.webserver.mappers.FormVars;
-import BDDTests.fixtures.SetupFixtures;
 import BDDTests.TestBindings;
 import BDDTests.mocks.Result;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static BDDTests.fixtures.SetupFixtures.givenCourse;
-import static BDDTests.fixtures.SetupFixtures.setCurrentUser;
+import static BDDTests.fixtures.ApplicationFixture.givenCourse;
+import static BDDTests.fixtures.ApplicationFixture.setCurrentUser;
 import static BDDTests.mocks.FakeAppServer.exec;
 import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.core.IsNot.not;
@@ -35,7 +35,7 @@ public class UiDrivenTests {
 
     @After
     public void tearDown(){
-        SetupFixtures.reset();
+        ApplicationFixture.reset();
     }
 
     @Test
@@ -84,7 +84,7 @@ public class UiDrivenTests {
 
     @Test
     public void canVewCourseForm() throws Exception {
-        SetupFixtures.setAdmin("Phil");
+        ApplicationFixture.setAdmin("Phil");
 
         Result result = exec(get, "/admin/course");
 
@@ -96,7 +96,7 @@ public class UiDrivenTests {
 
     @Test
     public void canVewCourseFormForExistingCourse() throws Exception {
-        SetupFixtures.setAdmin("Phil");
+        ApplicationFixture.setAdmin("Phil");
 
         givenCourse("42", "Find The Fish", "a nice course", "http://foo", 42);
 
@@ -118,7 +118,7 @@ public class UiDrivenTests {
 
     @Test
     public void canCreateNewCourse() throws Exception {
-        SetupFixtures.setAdmin("Phil");
+        ApplicationFixture.setAdmin("Phil");
 
         FormVars form = new FormVars();
         form.put("id", 42);
@@ -151,7 +151,7 @@ public class UiDrivenTests {
 
     @Test
     public void adminsCanViewRegistrations() throws Exception {
-        SetupFixtures.setAdmin("Phil");
+        ApplicationFixture.setAdmin("Phil");
         setCurrentUser("Phil");
 
         givenCourse("1", "Underwater Basketweaving");
@@ -167,7 +167,7 @@ public class UiDrivenTests {
 
     @Test
     public void templatesThatDoNotHaveJavascriptsWillNotRenderAnyJs(){
-        SetupFixtures.setAdmin("Phil");
+        ApplicationFixture.setAdmin("Phil");
         setCurrentUser("Phil");
 
         givenCourse("1", "Underwater Basketweaving");

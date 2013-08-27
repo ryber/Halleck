@@ -1,6 +1,6 @@
 package BDDTests.mocks;
 
-import BDDTests.fixtures.SetupFixtures;
+import BDDTests.fixtures.ApplicationFixture;
 import halleck.webserver.mappers.FormVars;
 import spark.route.HttpMethod;
 import spark.route.RouteMatcherFactory;
@@ -16,7 +16,7 @@ public class FakeAppServer {
         MatcherFilter matcherFilter = new MatcherFilter(RouteMatcherFactory.get(), false, false);
         matcherFilter.init(null);
 
-        MockRequest request = new MockRequest(method, path, SetupFixtures.getCurrentUser(), form);
+        MockRequest request = new MockRequest(method, path, ApplicationFixture.getCurrentUser(), form);
 
 
         MockResponse response = new MockResponse();
