@@ -1,13 +1,10 @@
 package halleck.lms;
 
-import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.mongodb.*;
 import halleck.api.Course;
 import halleck.api.OnlineCourse;
-import halleck.api.Settings;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -15,13 +12,11 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class MongoCourseRepository implements CourseRepository {
 
-    private Mongo mongoClient;
-    private Settings settings;
+    private final MongoConnectionFactory mongoFactory;
 
     @Inject
-    public MongoCourseRepository(@Nullable Mongo mongoClient, Settings settings) {
-        this.mongoClient = mongoClient;
-        this.settings = settings;
+    public MongoCourseRepository(MongoConnectionFactory mongoFactory) {
+        this.mongoFactory = mongoFactory;
     }
 
     @Override
@@ -54,10 +49,8 @@ public class MongoCourseRepository implements CourseRepository {
         return onlineCourse;
     }
 
-
     @Override
     public void putCourse(Course course) {
-
         if(exists(course.getId())){
             getCourses().update(getId(course), map(course));
         }else {
@@ -92,25 +85,7 @@ public class MongoCourseRepository implements CourseRepository {
     }
 
     private DBCollection getCourses() {
-        DB database = mongoClient.getDB("halleck");
-        if(!Strings.isNullOrEmpty(settings.getUsername())){
-             if(!database.authenticate(settings.getUsername(), settings.getPassword())){
-                 throw new CantAuthenticateToMongo(settings.getUsername());
-             }
-        }
+        DB database = mongoFactory.getDB();
         return database.getCollection("courses");
-    }
-
-    private static class CantAuthenticateToMongo extends RuntimeException {
-        private String username;
-
-        public CantAuthenticateToMongo(String username) {
-            this.username = username;
-        }
-
-        @Override
-        public String toString() {
-            return "Cant authenticate with the user " + username;
-        }
     }
 }
