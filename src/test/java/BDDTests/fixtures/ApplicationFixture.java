@@ -30,7 +30,7 @@ public class ApplicationFixture {
 
     public static CourseBuilder givenCourse(String id, String name, String desc, String url, Integer max) {
         Course c = new OnlineCourse(id, name, desc, url, max, null);
-        InMemoryCourseRepository.addCourse(c);
+        system.createCourse(c);
         return new CourseBuilder(c);
     }
 
@@ -51,7 +51,7 @@ public class ApplicationFixture {
         return currentUser;
     }
 
-    public static void setAdmin(String name) {
+    public static void givenAdminIsLoggedIn(String name) {
         setCurrentUser(name);
         MockSettings.admin = name;
     }

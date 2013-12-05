@@ -63,7 +63,7 @@ public class RegistrationUITests extends UITEstRunner {
 
     @Test
     public void canVewCourseForm() throws Exception {
-        ApplicationFixture.setAdmin("Phil");
+        ApplicationFixture.givenAdminIsLoggedIn("Phil");
 
         Result result = exec(get, "/admin/course");
 
@@ -75,7 +75,7 @@ public class RegistrationUITests extends UITEstRunner {
 
     @Test
     public void canVewCourseFormForExistingCourse() throws Exception {
-        ApplicationFixture.setAdmin("Phil");
+        ApplicationFixture.givenAdminIsLoggedIn("Phil");
 
         givenCourse("42", "Find The Fish", "a nice course", "http://foo", 42);
 
@@ -97,7 +97,7 @@ public class RegistrationUITests extends UITEstRunner {
 
     @Test
     public void canCreateNewCourse() throws Exception {
-        ApplicationFixture.setAdmin("Phil");
+        ApplicationFixture.givenAdminIsLoggedIn("Phil");
 
         FormVars form = new FormVars();
         form.put("id", 42);
@@ -130,7 +130,7 @@ public class RegistrationUITests extends UITEstRunner {
 
     @Test
     public void adminsCanViewRegistrations() throws Exception {
-        ApplicationFixture.setAdmin("Phil");
+        ApplicationFixture.givenAdminIsLoggedIn("Phil");
         setCurrentUser("Phil");
 
         givenCourse("1", "Underwater Basketweaving");
@@ -146,7 +146,7 @@ public class RegistrationUITests extends UITEstRunner {
 
     @Test
     public void templatesThatDoNotHaveJavascriptsWillNotRenderAnyJs(){
-        ApplicationFixture.setAdmin("Phil");
+        ApplicationFixture.givenAdminIsLoggedIn("Phil");
         setCurrentUser("Phil");
 
         givenCourse("1", "Underwater Basketweaving");

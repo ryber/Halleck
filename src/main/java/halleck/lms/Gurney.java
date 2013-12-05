@@ -6,7 +6,6 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import halleck.api.Course;
 import halleck.api.Halleck;
-import halleck.api.OnlineCourse;
 import halleck.api.Registration;
 
 import javax.annotation.Nullable;
@@ -80,7 +79,7 @@ public class Gurney implements Halleck {
 
     @Override
     public void createCourse(Course course) {
-        courseRepo.putCourse(new OnlineCourse(course));
+        courseRepo.putCourse(course);
     }
 
     @Override
