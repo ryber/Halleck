@@ -1,12 +1,8 @@
 package BDDTests.ui;
 
-import BDDTests.TestBindings;
 import BDDTests.fixtures.ApplicationFixture;
 import BDDTests.mocks.Result;
-import halleck.appstart.CLI;
 import halleck.webserver.mappers.FormVars;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import static BDDTests.fixtures.ApplicationFixture.givenCourse;
@@ -20,22 +16,7 @@ import static org.junit.matchers.JUnitMatchers.containsString;
 import static spark.route.HttpMethod.get;
 import static spark.route.HttpMethod.post;
 
-public class UiDrivenTests {
-
-    private static boolean serverStarted = false;
-
-    @Before
-    public void setUp() throws Exception {
-        if(!serverStarted){
-            CLI.startServer(new TestBindings());
-            serverStarted = true;
-        }
-    }
-
-    @After
-    public void tearDown(){
-        ApplicationFixture.reset();
-    }
+public class RegistrationUITests extends UITEstRunner {
 
     @Test
     public void canViewIndexOfAllCourses() throws Exception {
