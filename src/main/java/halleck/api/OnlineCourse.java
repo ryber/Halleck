@@ -16,6 +16,7 @@ public class OnlineCourse implements Course {
     public static final int UNLIMITED_ENROLLMENT = 999;
     private String url = "";
     private String content = "";
+    private String owner = "";
 
     public OnlineCourse(String id, String name, String descrription) {
         this.id = id;
@@ -109,6 +110,11 @@ public class OnlineCourse implements Course {
     @Override
     public String getContent() {
         return content;
+    }
+
+    @Override
+    public String getOwner() {
+        return owner;
     }
 
     public void setContent(String value) {

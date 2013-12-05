@@ -3,9 +3,11 @@ package BDDTests;
 import BDDTests.fixtures.ApplicationFixture;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static BDDTests.fixtures.ApplicationFixture.givenAdminIsLoggedIn;
+import static BDDTests.fixtures.ApplicationFixture.givenCourse;
 
 public class CourseCreationTests {
     @Before
@@ -19,10 +21,12 @@ public class CourseCreationTests {
     }
 
     @Test
+    @Ignore
     public void coursesAreOwnedByTheirCreator() throws Exception {
         givenAdminIsLoggedIn("Fred");
 
-
-
+        givenCourse("2", "Java For Dummies").assertHasOwner("Fred");
     }
+
+
 }

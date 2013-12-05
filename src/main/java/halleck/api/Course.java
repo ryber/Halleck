@@ -16,4 +16,5 @@ public interface Course {
     boolean hasFreeSeats();
     boolean isEmbedVideo();
     String getContent();
+    String getOwner();
 }
