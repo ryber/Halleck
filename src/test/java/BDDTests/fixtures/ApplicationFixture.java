@@ -24,14 +24,14 @@ public class ApplicationFixture {
         system = injector.getInstance(Halleck.class);
     }
 
-    public static Course givenCourse(String id, String name) {
+    public static CourseBuilder givenCourse(String id, String name) {
         return givenCourse(id, name, null, null, null);
     }
 
-    public static Course givenCourse(String id, String name, String desc, String url, Integer max) {
+    public static CourseBuilder givenCourse(String id, String name, String desc, String url, Integer max) {
         Course c = new OnlineCourse(id, name, desc, url, max, null);
         InMemoryCourseRepository.addCourse(c);
-        return c;
+        return new CourseBuilder(c);
     }
 
     public static void registerUserForCourse(String courseName, String userName){

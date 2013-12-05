@@ -54,7 +54,7 @@ public class RegistrationTests {
 
     @Test
      public void canTrackCapacity() throws Exception {
-        givenCourse("abc", "Underwater Basketweaving").setMaxCapacity(2);
+        givenCourse("abc", "Underwater Basketweaving").withMaxCapacity(2);
 
         assertEquals(2, getCountOfOpenSeatsForCourse("abc"));
 
@@ -73,7 +73,7 @@ public class RegistrationTests {
 
     @Test
     public void canDetectIfRegistrationIsPossible() throws Exception {
-        givenCourse("abc", "Underwater Basketweaving").setMaxCapacity(2);
+        givenCourse("abc", "Underwater Basketweaving").withMaxCapacity(2);
 
         assertTrue(canUserRegisterForCourse("abc", "Moe"));
 
@@ -88,7 +88,7 @@ public class RegistrationTests {
 
     @Test
     public void canRegisterAsManyPeopleAsWeWantIfMaxCapacityIsOff() throws Exception {
-        givenCourse("abc", "Underwater Basketweaving").setMaxCapacity(null);
+        givenCourse("abc", "Underwater Basketweaving").withMaxCapacity(null);
 
         registerUserForCourse("abc", "moe");
         registerUserForCourse("abc", "larry");

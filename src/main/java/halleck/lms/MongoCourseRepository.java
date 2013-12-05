@@ -22,7 +22,7 @@ public class MongoCourseRepository implements CourseRepository {
     @Override
     public List<Course> getAllCourses() {
         List<Course> result = newArrayList();
-        DBCursor allCourses = getCourses().find();
+        DBCursor allCourses = getCourseCollection().find();
 
         try {
             while (allCourses.hasNext()) {
@@ -52,9 +52,9 @@ public class MongoCourseRepository implements CourseRepository {
     @Override
     public void putCourse(Course course) {
         if(exists(course.getId())){
-            getCourses().update(getId(course), map(course));
+            getCourseCollection().update(getId(course), map(course));
         }else {
-            getCourses().insert(map(course));
+            getCourseCollection().insert(map(course));
         }
     }
 
@@ -67,7 +67,7 @@ public class MongoCourseRepository implements CourseRepository {
     }
 
     private boolean exists(final String courseId) {
-        return getCourses().count(getId(courseId)) > 0;
+        return getCourseCollection().count(getId(courseId)) > 0;
     }
 
     private DBObject map(Course course) {
@@ -81,11 +81,10 @@ public class MongoCourseRepository implements CourseRepository {
 
     @Override
     public Course getCourse(final String courseId) {
-        return createCourse(getCourses().findOne(getId(courseId)));
+        return createCourse(getCourseCollection().findOne(getId(courseId)));
     }
 
-    private DBCollection getCourses() {
-        DB database = mongoFactory.getDB();
-        return database.getCollection("courses");
+    private DBCollection getCourseCollection() {
+        return mongoFactory.getDB().getCollection("courses");
     }
 }

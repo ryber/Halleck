@@ -1,11 +1,10 @@
 package BDDTests.ui;
 
+import BDDTests.TestBindings;
 import BDDTests.fixtures.ApplicationFixture;
-import halleck.api.Course;
+import BDDTests.mocks.Result;
 import halleck.appstart.CLI;
 import halleck.webserver.mappers.FormVars;
-import BDDTests.TestBindings;
-import BDDTests.mocks.Result;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -59,8 +58,7 @@ public class UiDrivenTests {
 
     @Test
     public void willNotGetRegistrationButtonIfFull() throws Exception {
-        Course c = givenCourse("1", "Underwater Basketweaving");
-        c.setMaxCapacity(0);
+        givenCourse("1", "Underwater Basketweaving").withMaxCapacity(0);
 
         Result result = exec(get, "/registrations/course/1");
 
