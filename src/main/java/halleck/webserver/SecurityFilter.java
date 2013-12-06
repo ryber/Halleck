@@ -11,6 +11,7 @@ import static halleck.webserver.RequestCookies.requestCookies;
 
 public class SecurityFilter extends Filter {
 
+    public static final String USERNAME_COOKIE = "halleckName";
     private Settings settings;
 
     @Inject
@@ -38,10 +39,12 @@ public class SecurityFilter extends Filter {
     }
 
     private boolean isExempt(String path) {
-        return path.contains("login") || path.contains("css") || path.contains("img");
+        return path.contains("login")
+                || path.endsWith(".css")
+                || path.endsWith(".png");
     }
 
     private boolean hasUserCookieSet(Request request) {
-        return requestCookies(request).cookie("halleckName") != null;
+        return requestCookies(request).cookie(USERNAME_COOKIE) != null;
     }
 }

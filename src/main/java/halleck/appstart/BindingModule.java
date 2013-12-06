@@ -5,8 +5,10 @@ import com.google.inject.multibindings.Multibinder;
 import com.mongodb.Mongo;
 import halleck.api.Halleck;
 import halleck.api.Settings;
+import halleck.lms.AppContext;
 import halleck.lms.CourseRepository;
 import halleck.lms.Gurney;
+import halleck.lms.contexts.PerThreadContext;
 import halleck.webserver.Authenticator;
 import halleck.webserver.routs.AdminRouts;
 import halleck.webserver.routs.AuthenticationRouts;
@@ -22,6 +24,7 @@ public class BindingModule extends AbstractModule {
         bind(CourseRepository.class).toProvider(RepositoryProvider.class);
         bind(Mongo.class).toProvider(MongoClientProvider.class);
         bind(Authenticator.class).toProvider(AuthenticatorProvider.class);
+        bind(AppContext.class).to(PerThreadContext.class);
         bindRouts();
         bindRepo();
     }

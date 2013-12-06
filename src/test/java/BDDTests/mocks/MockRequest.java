@@ -30,6 +30,11 @@ public class MockRequest implements HttpServletRequest {
         setupUserCookies(currentUser);
     }
 
+    public MockRequest(String path) {
+        this(HttpMethod.get, path, "",null);
+
+    }
+
     private void setForm(FormVars input) {
         if(input != null){
             this.form = input;
