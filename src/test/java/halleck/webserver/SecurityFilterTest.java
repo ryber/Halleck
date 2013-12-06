@@ -2,6 +2,7 @@ package halleck.webserver;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import halleck.lms.AppContext;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -27,6 +28,9 @@ public class SecurityFilterTest {
 
     @Mock
     private Response response;
+
+    @Mock
+    private AppContext appContext;
 
     @InjectMocks
     private SecurityFilter filter;
@@ -96,6 +100,17 @@ public class SecurityFilterTest {
         verifyZeroInteractions(response);
     }
 
+    @Test
+    public void willCreateUserOnContextFromCookie() throws Exception {
+        Request request = new MockSparkRequest("/courses");
+        when(settings.getAdmins()).thenReturn(Lists.newArrayList("Fred"));
+        request.cookies().putIfAbsent(SecurityFilter.USERNAME_COOKIE, "Fred");
+
+        filter.handle(request, response);
+
+        verify(appContext).setCurrentUser("Fred");
+    }
+
     private class MockSparkRequest extends Request {
         private final String path;
         private HashMap<String,String> cookies = Maps.newHashMap();;
@@ -112,6 +127,11 @@ public class SecurityFilterTest {
         @Override
         public Map<String, String> cookies() {
             return cookies;
+        }
+
+        @Override
+        public String cookie(String name) {
+            return cookies.get(name);
         }
     }
 }
