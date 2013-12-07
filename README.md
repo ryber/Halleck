@@ -13,7 +13,7 @@ Halleck is of course named after Gurney Halleck; Paul Atreides weapons trainer f
 * Goto http://localhost:4567
 
 ## Requirements
-* Java 1.7
+* Java 1.8
 * MongoDB if you want long term persistence 
 
 ## Configuration File
