@@ -1,17 +1,32 @@
 package BDDTests.mocks;
 
 import com.google.common.base.Strings;
-import halleck.webserver.RequestCookies;
+import halleck.webserver.SecurityFilter;
 import halleck.webserver.mappers.FormVars;
 import spark.route.HttpMethod;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
+import javax.servlet.AsyncContext;
+import javax.servlet.DispatcherType;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletInputStream;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
-import java.util.*;
+import java.util.Collection;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -43,7 +58,7 @@ public class MockRequest implements HttpServletRequest {
 
     private void setupUserCookies(String currentUser) {
         if(!Strings.isNullOrEmpty(currentUser)){
-            cookies.add(new Cookie(RequestCookies.HALLECK_NAME, currentUser));
+            cookies.add(new Cookie(SecurityFilter.USERNAME_COOKIE, currentUser));
         }
     }
 

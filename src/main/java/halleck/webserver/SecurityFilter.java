@@ -7,8 +7,6 @@ import spark.Filter;
 import spark.Request;
 import spark.Response;
 
-import static halleck.webserver.RequestCookies.getUser;
-import static halleck.webserver.RequestCookies.requestCookies;
 
 public class SecurityFilter extends Filter {
 
@@ -26,16 +24,18 @@ public class SecurityFilter extends Filter {
     public void handle(Request request, Response response) {
         String user = getUserFromCookies(request);
 
-        if(!hasUserCookieSet(request) && !isExempt(request.pathInfo())){
+        if(user == null && !isExempt(request.pathInfo())){
             response.redirect("/login");
         }
 
         setUserOnContext(user);
 
-        if(isAdminPage(request) && !userIsAdmin(getUser(request))){
+        if(isAdminPage(request) && !userIsAdmin(user)){
             halt(403);
         }
     }
+
+
 
     private void setUserOnContext(String user) {
         context.setCurrentUser(user);
@@ -59,7 +59,5 @@ public class SecurityFilter extends Filter {
                 || path.endsWith(".png");
     }
 
-    private boolean hasUserCookieSet(Request request) {
-        return requestCookies(request).cookie(USERNAME_COOKIE) != null;
-    }
+
 }

@@ -111,6 +111,8 @@ public class SecurityFilterTest {
         verify(appContext).setCurrentUser("Fred");
     }
 
+
+
     private class MockSparkRequest extends Request {
         private final String path;
         private HashMap<String,String> cookies = Maps.newHashMap();;

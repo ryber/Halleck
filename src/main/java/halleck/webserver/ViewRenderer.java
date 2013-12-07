@@ -3,11 +3,10 @@ package halleck.webserver;
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
-import com.google.common.base.Strings;
-import com.google.common.io.Resources;
 import com.google.gson.Gson;
 import com.google.inject.Inject;
 import halleck.api.Settings;
+import halleck.lms.AppContext;
 import spark.Request;
 import spark.Response;
 
@@ -20,13 +19,15 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 
 public class ViewRenderer {
 
-    private Settings settings;
-    private JsLocations jslocations;
+    private final Settings settings;
+    private final JsLocations jslocations;
+    private final AppContext context;
 
     @Inject
-    public ViewRenderer(Settings settings, JsLocations jslocations){
+    public ViewRenderer(Settings settings, JsLocations jslocations, AppContext context){
         this.settings = settings;
         this.jslocations = jslocations;
+        this.context = context;
     }
 
     public String render(String templateName, Request request) {
@@ -34,7 +35,7 @@ public class ViewRenderer {
     }
 
     public String render(String template, Map data, Request request){
-        User u  = new User(request);
+        User u  = new User();
         data.put("user", u);
         return renderTemplate("shell.mustache", new Body(renderTemplate(template, data), u, addJs(template)));
     }
@@ -82,8 +83,8 @@ public class ViewRenderer {
         public boolean isAdmin;
         public boolean isLoggedIn;
 
-        public User(Request request){
-            this.user = RequestCookies.getUser(request);
+        public User(){
+            this.user = context.currentUser();
             this.isLoggedIn = !isNullOrEmpty(user);
             this.isAdmin = settings.getAdmins().contains(user);
         }

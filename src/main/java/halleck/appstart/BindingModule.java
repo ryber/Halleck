@@ -24,7 +24,7 @@ public class BindingModule extends AbstractModule {
         bind(CourseRepository.class).toProvider(RepositoryProvider.class);
         bind(Mongo.class).toProvider(MongoClientProvider.class);
         bind(Authenticator.class).toProvider(AuthenticatorProvider.class);
-        bind(AppContext.class).to(PerThreadContext.class);
+
         bindRouts();
         bindRepo();
     }
@@ -39,5 +39,6 @@ public class BindingModule extends AbstractModule {
 
     protected void bindRepo() {
         bind(Settings.class).toProvider(SettingsProvider.class);
+        bind(AppContext.class).to(PerThreadContext.class);
     }
 }

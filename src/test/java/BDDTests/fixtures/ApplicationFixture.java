@@ -1,5 +1,6 @@
 package BDDTests.fixtures;
 
+import BDDTests.StaticContext;
 import BDDTests.TestBindings;
 import BDDTests.mocks.MockSettings;
 import com.google.common.base.Predicate;
@@ -41,6 +42,7 @@ public class ApplicationFixture {
     public static void reset() {
         InMemoryCourseRepository.reset();
         MockSettings.admin = null;
+        StaticContext.reset();
     }
 
     public static void setCurrentUser(String name) {

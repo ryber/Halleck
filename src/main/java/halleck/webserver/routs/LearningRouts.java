@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import halleck.api.Course;
 import halleck.api.Halleck;
 import halleck.api.Registration;
+import halleck.lms.AppContext;
 import halleck.webserver.ViewRenderer;
 import spark.Request;
 import spark.Response;
@@ -13,18 +14,21 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 import static halleck.webserver.MapMaker.map;
-import static halleck.webserver.RequestCookies.getUser;
+
 
 public class LearningRouts extends SparkRoutCollector {
     private ViewRenderer view;
+    private final AppContext context;
     private Halleck halleck;
 
 
     @Inject
     public LearningRouts(Halleck halleck,
-                         ViewRenderer view) {
+                         ViewRenderer view,
+                         AppContext context) {
         this.halleck = halleck;
         this.view = view;
+        this.context = context;
     }
 
     public void init() {
@@ -38,7 +42,7 @@ public class LearningRouts extends SparkRoutCollector {
         get(new Route("/my-courses") {
             @Override
             public Object handle(Request request, Response response) {
-                return renderCourseList(halleck.getUsersCourses(getUser(request)), request);
+                return renderCourseList(halleck.getUsersCourses(getUser()), request);
             }
         });
 
@@ -48,7 +52,7 @@ public class LearningRouts extends SparkRoutCollector {
             public Object handle(Request request, Response response) {
                 try {
                     String courseID = request.params(":id");
-                    halleck.register(courseID, getUser(request));
+                    halleck.register(courseID, getUser());
                     response.redirect("/registrations/course/" + courseID);
 
                 } catch (Exception e) {
@@ -77,12 +81,16 @@ public class LearningRouts extends SparkRoutCollector {
         });
     }
 
+    private String getUser() {
+        return context.currentUser();
+    }
+
     private String renderCourseList(Iterable<Course> courses, Request request) {
         return view.render("welcome.mustache", map("courses", courses), request);
     }
 
     private Registration getRegistrationId(Request request) {
-        return halleck.getRegistration(request.params(":id"), getUser(request));
+        return halleck.getRegistration(request.params(":id"), getUser());
     }
 
 }
