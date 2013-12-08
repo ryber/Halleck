@@ -1,11 +1,15 @@
 package halleck.lms;
 
 import com.google.inject.Inject;
-import com.mongodb.*;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import halleck.api.Course;
 import halleck.api.OnlineCourse;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -20,7 +24,7 @@ public class MongoCourseRepository implements CourseRepository {
     }
 
     @Override
-    public List<Course> getAllCourses() {
+    public Stream<Course> getAllCourses() {
         List<Course> result = newArrayList();
         DBCursor allCourses = getCourseCollection().find();
 
@@ -32,7 +36,7 @@ public class MongoCourseRepository implements CourseRepository {
         } finally {
             allCourses.close();
         }
-        return result;
+        return result.stream();
     }
 
     private OnlineCourse createCourse(DBObject next) {

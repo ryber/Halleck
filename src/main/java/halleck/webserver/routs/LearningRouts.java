@@ -12,14 +12,16 @@ import spark.Route;
 
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.stream.Stream;
 
 import static halleck.webserver.MapMaker.map;
+import static java.util.stream.Collectors.toList;
 
 
 public class LearningRouts extends SparkRoutCollector {
-    private ViewRenderer view;
+    private final ViewRenderer view;
     private final AppContext context;
-    private Halleck halleck;
+    private final Halleck halleck;
 
 
     @Inject
@@ -85,8 +87,8 @@ public class LearningRouts extends SparkRoutCollector {
         return context.currentUser();
     }
 
-    private String renderCourseList(Iterable<Course> courses, Request request) {
-        return view.render("welcome.mustache", map("courses", courses), request);
+    private String renderCourseList(Stream<Course> courses, Request request) {
+        return view.render("welcome.mustache", map("courses", courses.collect(toList())), request);
     }
 
     private Registration getRegistrationId(Request request) {

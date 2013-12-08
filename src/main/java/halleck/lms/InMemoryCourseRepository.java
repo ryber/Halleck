@@ -3,8 +3,8 @@ package halleck.lms;
 import com.google.common.collect.Maps;
 import halleck.api.Course;
 
-import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -12,8 +12,8 @@ public class InMemoryCourseRepository implements CourseRepository {
 
     private static Map<String, Course> repo = Maps.newHashMap();
 
-    public List<Course> getAllCourses() {
-        return newArrayList(repo.values());
+    public Stream<Course> getAllCourses() {
+        return newArrayList(repo.values()).stream();
     }
 
     public static void addCourse(Course course) {

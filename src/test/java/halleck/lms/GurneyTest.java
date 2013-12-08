@@ -9,11 +9,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.List;
+import java.util.stream.Stream;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static junit.framework.Assert.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GurneyTest {
@@ -26,21 +27,20 @@ public class GurneyTest {
 
     @Test
     public void getAllReturnsAllFromRepo() throws Exception {
-        List<Course> courses = newArrayList(mock(Course.class));
-        when(courseRepo.getAllCourses()).thenReturn(courses);
+        Course mock = mock(Course.class);
+        when(courseRepo.getAllCourses()).thenReturn(Stream.of(mock));
 
-        assertEquals(courses, gurney.getAllCourses());
+        assertEquals(mock, gurney.getAllCourses().findFirst().get());
     }
 
     @Test
     public void willReturnDesiredCourse() throws Exception {
         Course c1 = new OnlineCourse("foo",null,null);
         Course c2 = new OnlineCourse("bar",null,null);
-        List<Course> courses = newArrayList(c1, c2);
 
-        when(courseRepo.getAllCourses()).thenReturn(courses);
+        when(courseRepo.getAllCourses()).thenReturn(Stream.of(c1, c2));
 
-        assertEquals(c2, gurney.getCourse("bar"));
+        assertEquals(c2, gurney.getCourse("bar").get());
     }
 
     @Test

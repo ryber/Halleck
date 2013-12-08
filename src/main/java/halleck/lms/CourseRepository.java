@@ -2,10 +2,10 @@ package halleck.lms;
 
 import halleck.api.Course;
 
-import java.util.List;
+import java.util.stream.Stream;
 
 public interface CourseRepository {
-    List<Course> getAllCourses();
+    Stream<Course> getAllCourses();
     void putCourse(Course course);
     Course getCourse(String courseId);
 }

@@ -67,7 +67,7 @@ public class ApplicationFixture {
     }
 
     public static int getCountOfOpenSeatsForCourse(String abc) {
-        return system.getCourse(abc).getFreeSeats();
+        return system.getCourse(abc).get().getFreeSeats();
     }
 
     public static boolean userIsRegisteredForCourse(final String userName, String... couseIds) {

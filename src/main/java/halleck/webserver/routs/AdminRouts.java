@@ -10,9 +10,12 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static halleck.webserver.MapMaker.map;
+import static java.util.stream.Collectors.toList;
 
 public class AdminRouts extends SparkRoutCollector {
     private CourseMapper mapper = new CourseMapper();
@@ -31,7 +34,7 @@ public class AdminRouts extends SparkRoutCollector {
             @Override
             public Object handle(Request request, Response response) {
                 response.type("application/json");
-                Iterable<Course> allCourses = halleck.getAllCourses();
+                List<Course> allCourses = halleck.getAllCourses().collect(toList());
                 return view.renderJson(allCourses, response);
             }
         });
@@ -71,6 +74,7 @@ public class AdminRouts extends SparkRoutCollector {
     }
 
     private Map getCourseMap(Request request) {
-        return map("course", halleck.getCourse(request.params(":id")));
+        Optional<Course> course = halleck.getCourse(request.params(":id"));
+        return map("course", course.get());
     }
 }
