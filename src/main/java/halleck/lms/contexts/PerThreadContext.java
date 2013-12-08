@@ -4,7 +4,7 @@ import halleck.lms.AppContext;
 
 public class PerThreadContext implements AppContext {
 
-    private ThreadLocal<String> user = new ThreadLocal<>();
+    private static final ThreadLocal<String> user = new ThreadLocal<>();
 
     @Override
     public String currentUser() {

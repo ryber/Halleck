@@ -79,14 +79,14 @@ public class ViewRenderer {
     }
 
     private class User {
-        public String user;
+        public String name;
         public boolean isAdmin;
         public boolean isLoggedIn;
 
         public User(){
-            this.user = context.currentUser();
-            this.isLoggedIn = !isNullOrEmpty(user);
-            this.isAdmin = settings.getAdmins().contains(user);
+            this.name = context.currentUser();
+            this.isLoggedIn = !isNullOrEmpty(name);
+            this.isAdmin = settings.getAdmins().contains(name);
         }
     }
 }

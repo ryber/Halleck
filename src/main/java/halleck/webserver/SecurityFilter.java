@@ -22,9 +22,14 @@ public class SecurityFilter extends Filter {
 
     @Override
     public void handle(Request request, Response response) {
-        String user = getUserFromCookies(request);
+        if(!isExempt(request.pathInfo())){
+            handleNonExemptPages(request, response);
+        }
+    }
 
-        if(user == null && !isExempt(request.pathInfo())){
+    private void handleNonExemptPages(Request request, Response response) {
+        String user = getUserFromCookies(request);
+        if(user == null){
             response.redirect("/login");
         }
 
@@ -34,7 +39,6 @@ public class SecurityFilter extends Filter {
             halt(403);
         }
     }
-
 
 
     private void setUserOnContext(String user) {

@@ -11,7 +11,6 @@ import spark.Response;
 import spark.Route;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import static halleck.webserver.MapMaker.map;
@@ -49,14 +48,14 @@ public class AdminRouts extends SparkRoutCollector {
         get(new Route("/admin/course/:id") {
             @Override
             public Object handle(Request request, Response response) {
-                return view.render("editcourse.mustache", getCourseMap(request), request);
+                return handleCourseDetailsForPane(request, "editcourse.mustache");
             }
         });
 
         get(new Route("/admin/course/:id/registrations") {
             @Override
             public Object handle(Request request, Response response) {
-                return view.render("registrations.mustache", getCourseMap(request), request);
+                return handleCourseDetailsForPane(request, "registrations.mustache");
             }
         });
 
@@ -73,8 +72,13 @@ public class AdminRouts extends SparkRoutCollector {
         });
     }
 
-    private Map getCourseMap(Request request) {
+    private Object handleCourseDetailsForPane(Request request, String template) {
         Optional<Course> course = halleck.getCourse(request.params(":id"));
-        return map("course", course.get());
+        if(course.isPresent()){
+            return view.render(template, map("course", course.get()), request);
+        }
+
+        return view.render("unknowncourse.mustache", request);
     }
+
 }
