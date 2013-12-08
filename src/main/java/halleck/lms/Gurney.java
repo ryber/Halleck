@@ -15,11 +15,13 @@ import static com.google.common.collect.Iterables.transform;
 
 public class Gurney implements Halleck {
 
-    private CourseRepository courseRepo;
+    private final CourseRepository courseRepo;
+    private final AppContext context;
 
     @Inject
-    public Gurney(CourseRepository courseRepo) {
+    public Gurney(CourseRepository courseRepo, AppContext context) {
         this.courseRepo = courseRepo;
+        this.context = context;
     }
 
     @Override
@@ -68,6 +70,8 @@ public class Gurney implements Halleck {
 
     @Override
     public void createCourse(Course course) {
+        String owner = context.currentUser();
+        course.setOwner(owner);
         courseRepo.putCourse(course);
     }
 

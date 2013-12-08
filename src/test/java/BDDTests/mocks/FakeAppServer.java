@@ -16,7 +16,7 @@ public class FakeAppServer {
         MatcherFilter matcherFilter = new MatcherFilter(RouteMatcherFactory.get(), false, false);
         matcherFilter.init(null);
 
-        MockRequest request = new MockRequest(method, path, ApplicationFixture.getCurrentUser(), form);
+        MockRequest request = new MockRequest(method, path, ApplicationFixture.getContext(), form);
 
 
         MockResponse response = new MockResponse();

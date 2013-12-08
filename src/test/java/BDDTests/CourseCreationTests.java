@@ -3,7 +3,6 @@ package BDDTests;
 import BDDTests.fixtures.ApplicationFixture;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static BDDTests.fixtures.ApplicationFixture.givenAdminIsLoggedIn;
@@ -21,7 +20,6 @@ public class CourseCreationTests {
     }
 
     @Test
-    @Ignore
     public void coursesAreOwnedByTheirCreator() throws Exception {
         givenAdminIsLoggedIn("Fred");
 

@@ -6,7 +6,7 @@ import halleck.webserver.mappers.FormVars;
 import org.junit.Test;
 
 import static BDDTests.fixtures.ApplicationFixture.givenCourse;
-import static BDDTests.fixtures.ApplicationFixture.setCurrentUser;
+import static BDDTests.fixtures.ApplicationFixture.setContext;
 import static BDDTests.mocks.FakeAppServer.exec;
 import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.core.IsNot.not;
@@ -51,7 +51,7 @@ public class RegistrationUITests extends UITEstRunner {
     public void ifUserIsRegisteredThenShowTheVideo() throws Exception {
         givenCourse("1", "Underwater Basketweaving");
 
-        setCurrentUser("Phil");
+        setContext("Phil");
 
         Result regResult = exec(post, "/registrations/course/1");
 
@@ -116,7 +116,7 @@ public class RegistrationUITests extends UITEstRunner {
         givenCourse("2", "How to make tacos");
         givenCourse("3", "Groundhog Farming");
 
-        setCurrentUser("Phil");
+        setContext("Phil");
 
         exec(post, "/registrations/course/1");
         exec(post, "/registrations/course/3");
@@ -131,7 +131,7 @@ public class RegistrationUITests extends UITEstRunner {
     @Test
     public void adminsCanViewRegistrations() throws Exception {
         ApplicationFixture.givenAdminIsLoggedIn("Phil");
-        setCurrentUser("Phil");
+        setContext("Phil");
 
         givenCourse("1", "Underwater Basketweaving");
 
@@ -147,7 +147,7 @@ public class RegistrationUITests extends UITEstRunner {
     @Test
     public void templatesThatDoNotHaveJavascriptsWillNotRenderAnyJs(){
         ApplicationFixture.givenAdminIsLoggedIn("Phil");
-        setCurrentUser("Phil");
+        setContext("Phil");
 
         givenCourse("1", "Underwater Basketweaving");
 

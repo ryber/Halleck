@@ -16,10 +16,11 @@ import javax.annotation.Nullable;
 import java.util.Arrays;
 
 public class ApplicationFixture {
-    private static String currentUser;
+    private static StaticContext context = new StaticContext();
 
     private static Injector injector = Guice.createInjector(new TestBindings());
     private static Halleck system = injector.getInstance(Halleck.class);
+
 
     public static void init() {
         system = injector.getInstance(Halleck.class);
@@ -45,16 +46,16 @@ public class ApplicationFixture {
         StaticContext.reset();
     }
 
-    public static void setCurrentUser(String name) {
-        currentUser = name;
+    public static void setContext(String name) {
+        context.setCurrentUser(name);
     }
 
-    public static String getCurrentUser() {
-        return currentUser;
+    public static String getContext() {
+        return context.currentUser();
     }
 
     public static void givenAdminIsLoggedIn(String name) {
-        setCurrentUser(name);
+        setContext(name);
         MockSettings.admin = name;
     }
 

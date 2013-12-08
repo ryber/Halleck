@@ -17,4 +17,5 @@ public interface Course {
     boolean isEmbedVideo();
     String getContent();
     String getOwner();
+    void setOwner(String owner);
 }

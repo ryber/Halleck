@@ -22,6 +22,9 @@ public class GurneyTest {
     @Mock
     private InMemoryCourseRepository courseRepo;
 
+    @Mock
+    private AppContext context;
+
     @InjectMocks
     private Gurney gurney;
 

@@ -117,6 +117,11 @@ public class OnlineCourse implements Course {
         return owner;
     }
 
+    @Override
+    public void setOwner(String value) {
+        owner = value;
+    }
+
     public void setContent(String value) {
         this.content = value;
     }
