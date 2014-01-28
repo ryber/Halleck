@@ -19,13 +19,11 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 public class ViewRenderer {
 
     private final Settings settings;
-    private final JsLocations jslocations;
     private final AppContext context;
 
     @Inject
-    public ViewRenderer(Settings settings, JsLocations jslocations, AppContext context){
+    public ViewRenderer(Settings settings, AppContext context){
         this.settings = settings;
-        this.jslocations = jslocations;
         this.context = context;
     }
 
@@ -36,12 +34,9 @@ public class ViewRenderer {
     public String render(String template, Map data){
         User u  = new User();
         data.put("user", u);
-        return renderTemplate("shell.mustache", new Body(renderTemplate(template, data), u, addJs(template)));
+        return renderTemplate("shell.mustache", new Body(renderTemplate(template, data), u));
     }
 
-    private String addJs(String template) {
-        return jslocations.getJavaScriptFileForStache(template);
-    }
 
 
     private String renderTemplate(String template, Object data) {
@@ -66,12 +61,10 @@ public class ViewRenderer {
         public String body;
         public String title;
         public User user;
-        public String javascript;
 
 
-        public Body(String body, User request, String javascript) {
+        public Body(String body, User request) {
             this.body = body;
-            this.javascript = javascript;
             this.title = settings.getSiteName();
             this.user = request;
         }
