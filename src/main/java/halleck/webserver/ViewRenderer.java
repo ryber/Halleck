@@ -37,8 +37,6 @@ public class ViewRenderer {
         return renderTemplate("shell.mustache", new Body(renderTemplate(template, data), u));
     }
 
-
-
     private String renderTemplate(String template, Object data) {
         MustacheFactory mustacheFactory = new DefaultMustacheFactory("templates/");
         Mustache mustache = mustacheFactory.compile(template);
