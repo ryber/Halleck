@@ -35,7 +35,7 @@ public class AuthenticationRouts extends SparkRoutCollector {
         get(new Route("/login") {
             @Override
             public Object handle(Request request, Response response) {
-                return view.render("login.mustache", getSettings(), request);
+                return view.render("login.mustache", getSettings());
             }
 
             private Map getSettings() {
@@ -51,9 +51,9 @@ public class AuthenticationRouts extends SparkRoutCollector {
 
                 if(auth.authenticate(username, password)){
                     response.cookie(SecurityFilter.USERNAME_COOKIE, username);
-                    return view.render("redirect.mustache", map("url", "/"), request);
+                    return view.render("redirect.mustache", map("url", "/"));
                 }
-                return view.render("login.mustache", map("wrong", true), request);
+                return view.render("login.mustache", map("wrong", true));
             }
         });
 

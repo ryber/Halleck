@@ -41,7 +41,7 @@ public class AdminRouts extends SparkRoutCollector {
         get(new Route("/admin/course") {
             @Override
             public Object handle(Request request, Response response) {
-                return view.render("editcourse.mustache", request);
+                return view.render("editcourse.mustache");
             }
         });
 
@@ -75,10 +75,10 @@ public class AdminRouts extends SparkRoutCollector {
     private Object handleCourseDetailsForPane(Request request, String template) {
         Optional<Course> course = halleck.getCourse(request.params(":id"));
         if(course.isPresent()){
-            return view.render(template, map("course", course.get()), request);
+            return view.render(template, map("course", course.get()));
         }
 
-        return view.render("unknowncourse.mustache", request);
+        return view.render("unknowncourse.mustache");
     }
 
 }

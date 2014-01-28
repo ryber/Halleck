@@ -5,8 +5,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static BDDTests.fixtures.ApplicationFixture.*;
 import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertEquals;
 
 public class RegistrationTests {
 
@@ -36,6 +40,14 @@ public class RegistrationTests {
     }
 
 
+    @Test
+    public void erasure() throws Exception {
+        List<String> foo = new ArrayList<String>();
+        List<Integer> bars = new ArrayList<Integer>();
+
+        assertEquals(foo.getClass(), bars.getClass());
+
+    }
 
     @Test
     public void canCountRegistrations() throws Exception {

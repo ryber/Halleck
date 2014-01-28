@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import com.google.inject.Inject;
 import halleck.api.Settings;
 import halleck.lms.AppContext;
-import spark.Request;
 import spark.Response;
 
 import java.io.IOException;
@@ -30,11 +29,11 @@ public class ViewRenderer {
         this.context = context;
     }
 
-    public String render(String templateName, Request request) {
-        return render(templateName, new HashMap(), request);
+    public String render(String templateName) {
+        return render(templateName, new HashMap());
     }
 
-    public String render(String template, Map data, Request request){
+    public String render(String template, Map data){
         User u  = new User();
         data.put("user", u);
         return renderTemplate("shell.mustache", new Body(renderTemplate(template, data), u, addJs(template)));

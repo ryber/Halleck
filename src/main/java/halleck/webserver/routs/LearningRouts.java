@@ -70,7 +70,7 @@ public class LearningRouts extends SparkRoutCollector {
             public Object handle(Request request, Response response) {
 
                 try {
-                    return view.render("course.mustache", getRegistrationMap(request), request);
+                    return view.render("course.mustache", getRegistrationMap(request));
                 } catch (NoSuchElementException e) {
                     response.status(404);
                     return null;
@@ -88,7 +88,7 @@ public class LearningRouts extends SparkRoutCollector {
     }
 
     private String renderCourseList(Stream<Course> courses, Request request) {
-        return view.render("welcome.mustache", map("courses", courses.collect(toList())), request);
+        return view.render("welcome.mustache", map("courses", courses.collect(toList())));
     }
 
     private Registration getRegistrationId(Request request) {
