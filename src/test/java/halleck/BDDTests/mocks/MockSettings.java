@@ -1,4 +1,4 @@
-package BDDTests.mocks;
+package halleck.BddTests.mocks;
 
 import halleck.api.Settings;
 

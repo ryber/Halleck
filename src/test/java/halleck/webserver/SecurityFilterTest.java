@@ -1,7 +1,6 @@
 package halleck.webserver;
 
-import BDDTests.mocks.MockSettings;
-import com.google.common.collect.Lists;
+import halleck.BddTests.mocks.MockSettings;
 import com.google.common.collect.Maps;
 import halleck.api.Settings;
 import halleck.lms.AppContext;
@@ -9,7 +8,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import spark.HaltException;
@@ -21,7 +19,6 @@ import java.util.Map;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
 
 
 @RunWith(MockitoJUnitRunner.class)

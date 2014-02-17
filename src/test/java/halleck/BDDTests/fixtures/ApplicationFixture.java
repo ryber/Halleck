@@ -1,8 +1,8 @@
-package BDDTests.fixtures;
+package halleck.BddTests.fixtures;
 
-import BDDTests.StaticContext;
-import BDDTests.TestBindings;
-import BDDTests.mocks.MockSettings;
+import halleck.BddTests.StaticContext;
+import halleck.BddTests.TestBindings;
+import halleck.BddTests.mocks.MockSettings;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.inject.Guice;

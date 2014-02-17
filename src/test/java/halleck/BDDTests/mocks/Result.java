@@ -1,4 +1,4 @@
-package BDDTests.mocks;
+package halleck.BddTests.mocks;
 
 public class Result {
     private final int status;

@@ -37,11 +37,18 @@ public abstract class FullPage extends TemplateViewRoute {
 
     @Override
     public final ModelAndView handle(Request request, Response response) {
-        ModelAndView original = action(request, response);
-        String innercontent = renderTemplate(original.getViewName(), original.getModel());
+        String innercontent = getOriginalContent(request, response);
 
         Body body = new Body(innercontent, (User) request.attribute(USER_KEY), (String) request.attribute(SITE_NAME));
         return new ModelAndView(body, "shell.mustache");
+    }
+
+    private String getOriginalContent(Request request, Response response) {
+        ModelAndView original = action(request, response);
+        if(original != null){
+            return renderTemplate(original.getViewName(), original.getModel());
+        }
+        return null;
     }
 
 

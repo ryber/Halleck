@@ -1,14 +1,14 @@
-package BDDTests;
+package halleck.BddTests;
 
-import BDDTests.fixtures.ApplicationFixture;
+import halleck.BddTests.fixtures.ApplicationFixture;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static BDDTests.fixtures.ApplicationFixture.givenAdminIsLoggedIn;
-import static BDDTests.fixtures.ApplicationFixture.givenCourse;
+import static halleck.BddTests.fixtures.ApplicationFixture.givenAdminIsLoggedIn;
+import static halleck.BddTests.fixtures.ApplicationFixture.givenCourse;
 
-public class CourseCreationTests {
+public class CourseCreationTest {
     @Before
     public void setUp() throws Exception {
         ApplicationFixture.init();

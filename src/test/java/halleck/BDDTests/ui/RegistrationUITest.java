@@ -1,13 +1,13 @@
-package BDDTests.ui;
+package halleck.BddTests.ui;
 
-import BDDTests.fixtures.ApplicationFixture;
-import BDDTests.mocks.Result;
+import halleck.BddTests.fixtures.ApplicationFixture;
+import halleck.BddTests.mocks.Result;
 import halleck.webserver.mappers.FormVars;
 import org.junit.Test;
 
-import static BDDTests.fixtures.ApplicationFixture.givenCourse;
-import static BDDTests.fixtures.ApplicationFixture.setContext;
-import static BDDTests.mocks.FakeAppServer.exec;
+import static halleck.BddTests.fixtures.ApplicationFixture.givenCourse;
+import static halleck.BddTests.fixtures.ApplicationFixture.setContext;
+import static halleck.BddTests.mocks.FakeAppServer.exec;
 import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertThat;
@@ -16,7 +16,7 @@ import static org.junit.matchers.JUnitMatchers.containsString;
 import static spark.route.HttpMethod.get;
 import static spark.route.HttpMethod.post;
 
-public class RegistrationUITests extends UITEstRunner {
+public class RegistrationUITest extends UITEstRunner {
 
     @Test
     public void canViewIndexOfAllCourses() throws Exception {
