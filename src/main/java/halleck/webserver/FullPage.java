@@ -44,15 +44,16 @@ public abstract class FullPage extends TemplateViewRoute {
     }
 
     private String getOriginalContent(Request request, Response response) {
-        ModelAndView original = action(request, response);
+        ModelMapView original = action(request, response);
         if(original != null){
+            original.getModel().put("user", request.attribute(USER_KEY));
             return renderTemplate(original.getViewName(), original.getModel());
         }
         return null;
     }
 
 
-    public abstract ModelAndView action(Request request, Response response);
+    public abstract ModelMapView action(Request request, Response response);
 
 
     private String renderTemplate(String template, Object data) {

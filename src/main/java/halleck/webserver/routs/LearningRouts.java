@@ -6,6 +6,7 @@ import halleck.api.Halleck;
 import halleck.api.Registration;
 import halleck.lms.AppContext;
 import halleck.webserver.FullPage;
+import halleck.webserver.ModelMapView;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -33,14 +34,14 @@ public class LearningRouts extends SparkRoutCollector {
     public void init() {
         get(new FullPage("/") {
             @Override
-            public ModelAndView action(Request request, Response response) {
+            public ModelMapView action(Request request, Response response) {
                 return renderCourseList(halleck.getAllCourses());
             }
         });
 
         get(new FullPage("/my-courses") {
             @Override
-            public ModelAndView action(Request request, Response response) {
+            public ModelMapView action(Request request, Response response) {
                 return renderCourseList(halleck.getUsersCourses(getUser()));
             }
         });
@@ -48,7 +49,7 @@ public class LearningRouts extends SparkRoutCollector {
 
         post(new FullPage("/registrations/course/:id") {
             @Override
-            public ModelAndView action(Request request, Response response) {
+            public ModelMapView action(Request request, Response response) {
                 try {
                     String courseID = request.params(":id");
                     halleck.register(courseID, getUser());
@@ -64,10 +65,10 @@ public class LearningRouts extends SparkRoutCollector {
 
         get(new FullPage("/registrations/course/:id") {
             @Override
-            public ModelAndView action(Request request, Response response) {
+            public ModelMapView action(Request request, Response response) {
 
                 try {
-                    return new ModelAndView(getRegistrationMap(request), "course.mustache");
+                    return new ModelMapView(getRegistrationMap(request), "course.mustache");
                 } catch (NoSuchElementException e) {
                     response.status(404);
                     return null;
@@ -84,8 +85,8 @@ public class LearningRouts extends SparkRoutCollector {
         return context.currentUser();
     }
 
-    private ModelAndView renderCourseList(Stream<Course> courses) {
-        return new ModelAndView(map("courses", courses.collect(toList())), "welcome.mustache");
+    private ModelMapView renderCourseList(Stream<Course> courses) {
+        return new ModelMapView(map("courses", courses.collect(toList())), "welcome.mustache");
     }
 
     private Registration getRegistrationId(Request request) {

@@ -27,7 +27,7 @@ You can pass halleck the path to a properties file that contains config informat
  * Default: 4567
 * *site.admins* 
  * Use: The admin user
- * Default: ryber
+ * Default: 'admin'
 * *site.externalmedia*
  * Use: A location, external to the jar. That contains static resources. Perfect for courses or videos. The root of this directory will be available from the root of Halleck.  
  * Default: none configured.
