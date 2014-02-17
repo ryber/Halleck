@@ -5,10 +5,10 @@ import halleck.api.Course;
 import halleck.api.Halleck;
 import halleck.api.Registration;
 import halleck.lms.AppContext;
-import halleck.webserver.ViewRenderer;
+import halleck.webserver.FullPage;
+import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import spark.Route;
 
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -19,39 +19,36 @@ import static java.util.stream.Collectors.toList;
 
 
 public class LearningRouts extends SparkRoutCollector {
-    private final ViewRenderer view;
     private final AppContext context;
     private final Halleck halleck;
 
 
     @Inject
     public LearningRouts(Halleck halleck,
-                         ViewRenderer view,
                          AppContext context) {
         this.halleck = halleck;
-        this.view = view;
         this.context = context;
     }
 
     public void init() {
-        get(new Route("/") {
+        get(new FullPage("/") {
             @Override
-            public Object handle(Request request, Response response) {
-                return renderCourseList(halleck.getAllCourses(), request);
+            public ModelAndView action(Request request, Response response) {
+                return renderCourseList(halleck.getAllCourses());
             }
         });
 
-        get(new Route("/my-courses") {
+        get(new FullPage("/my-courses") {
             @Override
-            public Object handle(Request request, Response response) {
-                return renderCourseList(halleck.getUsersCourses(getUser()), request);
+            public ModelAndView action(Request request, Response response) {
+                return renderCourseList(halleck.getUsersCourses(getUser()));
             }
         });
 
 
-        post(new Route("/registrations/course/:id") {
+        post(new FullPage("/registrations/course/:id") {
             @Override
-            public Object handle(Request request, Response response) {
+            public ModelAndView action(Request request, Response response) {
                 try {
                     String courseID = request.params(":id");
                     halleck.register(courseID, getUser());
@@ -65,12 +62,12 @@ public class LearningRouts extends SparkRoutCollector {
             }
         });
 
-        get(new Route("/registrations/course/:id") {
+        get(new FullPage("/registrations/course/:id") {
             @Override
-            public Object handle(Request request, Response response) {
+            public ModelAndView action(Request request, Response response) {
 
                 try {
-                    return view.render("course.mustache", getRegistrationMap(request));
+                    return new ModelAndView(getRegistrationMap(request), "course.mustache");
                 } catch (NoSuchElementException e) {
                     response.status(404);
                     return null;
@@ -87,8 +84,8 @@ public class LearningRouts extends SparkRoutCollector {
         return context.currentUser();
     }
 
-    private String renderCourseList(Stream<Course> courses, Request request) {
-        return view.render("welcome.mustache", map("courses", courses.collect(toList())));
+    private ModelAndView renderCourseList(Stream<Course> courses) {
+        return new ModelAndView(map("courses", courses.collect(toList())), "welcome.mustache");
     }
 
     private Registration getRegistrationId(Request request) {

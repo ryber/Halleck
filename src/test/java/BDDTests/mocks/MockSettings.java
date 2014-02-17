@@ -37,7 +37,7 @@ public class MockSettings implements Settings {
 
     @Override
     public List<String> getAdmins() {
-        return newArrayList(admin);
+        return admin == null ? newArrayList() : newArrayList(admin);
     }
 
     @Override

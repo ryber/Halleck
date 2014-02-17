@@ -7,10 +7,14 @@ import spark.Filter;
 import spark.Request;
 import spark.Response;
 
+import java.util.List;
+
 
 public class SecurityFilter extends Filter {
 
     public static final String USERNAME_COOKIE = "halleckName";
+    public static final String USER_KEY = "USER";
+    public static final String SITE_NAME = "SITE_NAME";
     private final Settings settings;
     private final AppContext context;
 
@@ -33,7 +37,7 @@ public class SecurityFilter extends Filter {
             response.redirect("/login");
         }
 
-        setUserOnContext(user);
+        setUserOnContext(user, request);
 
         if(isAdminPage(request) && !userIsAdmin(user)){
             halt(403);
@@ -41,8 +45,18 @@ public class SecurityFilter extends Filter {
     }
 
 
-    private void setUserOnContext(String user) {
+    private void setUserOnContext(String user, Request request) {
         context.setCurrentUser(user);
+
+        request.attribute(USER_KEY, new User(user, isAdmin(user)));
+        request.attribute(SITE_NAME, settings.getSiteName());
+    }
+
+    private boolean isAdmin(String userName) {
+        if(userName != null){
+            return settings.getAdmins().contains(userName);
+        }
+        return false;
     }
 
     private String getUserFromCookies(Request request) {

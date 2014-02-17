@@ -1,8 +1,12 @@
 package halleck.webserver;
 
+import BDDTests.mocks.MockSettings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import halleck.api.Settings;
 import halleck.lms.AppContext;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -23,8 +27,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class SecurityFilterTest {
 
-    @Mock
-    private AppSettings settings;
+    private Settings settings;
 
     @Mock
     private Response response;
@@ -32,8 +35,18 @@ public class SecurityFilterTest {
     @Mock
     private AppContext appContext;
 
-    @InjectMocks
     private SecurityFilter filter;
+
+    @Before
+    public void setUp(){
+       settings = new MockSettings();
+       filter = new SecurityFilter(settings, appContext);
+    }
+
+    @After
+    public void tearDown(){
+        MockSettings.admin = null;
+    }
 
     @Test
     public void imagesAreNotSecured() throws Exception {
@@ -92,7 +105,7 @@ public class SecurityFilterTest {
     @Test
     public void willNotHaltIfTheUserIsListedAsAnAdmin() throws Exception {
         Request request = new MockSparkRequest("/admin/foo");
-        when(settings.getAdmins()).thenReturn(Lists.newArrayList("Fred"));
+        MockSettings.admin = "Fred";
         request.cookies().putIfAbsent(SecurityFilter.USERNAME_COOKIE, "Fred");
 
         filter.handle(request, response);
@@ -103,7 +116,7 @@ public class SecurityFilterTest {
     @Test
     public void willCreateUserOnContextFromCookie() throws Exception {
         Request request = new MockSparkRequest("/courses");
-        when(settings.getAdmins()).thenReturn(Lists.newArrayList("Fred"));
+        MockSettings.admin = "Fred";
         request.cookies().putIfAbsent(SecurityFilter.USERNAME_COOKIE, "Fred");
 
         filter.handle(request, response);
@@ -116,6 +129,7 @@ public class SecurityFilterTest {
     private class MockSparkRequest extends Request {
         private final String path;
         private HashMap<String,String> cookies = Maps.newHashMap();;
+        private HashMap<String,Object> attributes = Maps.newHashMap();
 
         public MockSparkRequest(String path){
             this.path = path;
@@ -134,6 +148,16 @@ public class SecurityFilterTest {
         @Override
         public String cookie(String name) {
             return cookies.get(name);
+        }
+
+        @Override
+        public void attribute(String attribute, Object value) {
+            attributes.put(attribute, value);
+        }
+
+        @Override
+        public Object attribute(String attribute) {
+            return attributes.get(attribute);
         }
     }
 }

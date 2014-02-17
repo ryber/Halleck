@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import halleck.api.Settings;
 import halleck.lms.AppContext;
 import halleck.webserver.*;
+import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -14,28 +15,24 @@ import java.util.Objects;
 import static halleck.webserver.MapMaker.map;
 
 public class AuthenticationRouts extends SparkRoutCollector {
-    private final ViewRenderer view;
+
     private final Settings settings;
-    private final AppContext context;
     private final Authenticator auth;
 
 
     @Inject
-    public AuthenticationRouts(ViewRenderer view,
-                               Settings settings,
-                               AppContext context,
+    public AuthenticationRouts(Settings settings,
                                Authenticator auth) {
-        this.view = view;
+
         this.settings = settings;
-        this.context = context;
         this.auth = auth;
     }
 
     public void init(){
-        get(new Route("/login") {
+        get(new FullPage("/login") {
             @Override
-            public Object handle(Request request, Response response) {
-                return view.render("login.mustache", getSettings());
+            public ModelAndView action(Request request, Response response) {
+                return new ModelAndView(getSettings(),"login.mustache");
             }
 
             private Map getSettings() {
@@ -43,23 +40,23 @@ public class AuthenticationRouts extends SparkRoutCollector {
             }
         });
 
-        post(new Route("/login") {
+        post(new FullPage("/login") {
             @Override
-            public Object handle(Request request, Response response) {
+            public ModelAndView action(Request request, Response response) {
                 String username = request.queryParams("username");
                 String password = request.queryParams("password");
 
                 if(auth.authenticate(username, password)){
                     response.cookie(SecurityFilter.USERNAME_COOKIE, username);
-                    return view.render("redirect.mustache", map("url", "/"));
+                    return new ModelAndView(map("url", "/"), "redirect.mustache");
                 }
-                return view.render("login.mustache", map("wrong", true));
+                return new ModelAndView(map("wrong", true), "login.mustache");
             }
         });
 
-        get(new Route("/logout") {
+        get(new FullPage("/logout") {
             @Override
-            public Object handle(Request request, Response response) {
+            public ModelAndView action(Request request, Response response) {
                 response.removeCookie(SecurityFilter.USERNAME_COOKIE);
                 response.redirect("/login");
                 return null;
