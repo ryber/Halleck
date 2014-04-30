@@ -8,6 +8,7 @@ import halleck.api.Registration;
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.google.common.collect.FluentIterable.from;
@@ -31,19 +32,17 @@ public class Gurney implements Halleck {
 
     @Override
     public Stream<Course> getUsersCourses(final String userID) {
-
         return getAllCourses().filter(x -> x.getRegisteredUsers().contains(userID));
     }
 
     @Override
     public Optional<Course> getCourse(final String id) {
-        return getAllCourses().filter(x->id.equalsIgnoreCase(x.getId())).findFirst();
+        return getAllCourses().filter(x -> id.equalsIgnoreCase(x.getId())).findFirst();
     }
 
     @Override
     public Registration getRegistration(String courseID, String userID) {
-        Course c = getCourse(courseID).get();
-        return new UserRegistration(c, userID);
+        return new UserRegistration(getCourse(courseID).get(), userID);
     }
 
     @Override
@@ -57,15 +56,11 @@ public class Gurney implements Halleck {
     public Set<Registration> getRegistrations(final String courseID) {
         final Course course = getCourse(courseID).get();
 
-        return from(transform(getCourse(courseID).get().getRegisteredUsers(),
-                new Function<String, Registration>() {
-                    @Override
-                    public Registration apply(String s) {
-
-                        return new UserRegistration(course, s);
-                    }
-                }
-        )).toSet();
+        return getCourse(courseID).get()
+                .getRegisteredUsers()
+                .stream()
+                .map(s -> new UserRegistration(course, s))
+                .collect(Collectors.toSet());
     }
 
     @Override
