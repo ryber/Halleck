@@ -13,6 +13,7 @@ import halleck.api.Settings;
 import javax.inject.Inject;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 
 public class CourseLoader {
@@ -41,7 +42,7 @@ public class CourseLoader {
         }
     }
 
-    Iterable<Course> createCourseArray(String content) {
+    Collection<Course> createCourseArray(String content) {
         Gson g = new Gson();
         return g.fromJson(content, new TypeToken<List<OnlineCourse>>(){}.getType());
     }

@@ -6,8 +6,10 @@ import halleck.api.Course;
 import halleck.api.Halleck;
 import halleck.api.Registration;
 
+import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -72,10 +74,8 @@ public class Gurney implements Halleck {
 
 
     @Override
-    public void createCourses(Iterable<Course> courseArray) {
-        for (Course c : courseArray) {
-            createCourse(c);
-        }
+    public void createCourses(Collection<Course> courseArray) {
+        courseArray.stream().forEach(this::createCourse);
     }
 
 

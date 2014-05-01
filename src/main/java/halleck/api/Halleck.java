@@ -1,6 +1,7 @@
 package halleck.api;
 
 
+import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -13,5 +14,5 @@ public interface Halleck {
     void register(String courseId, String userID);
     Set<Registration> getRegistrations(String courseID);
     void createCourse(Course course);
-    void createCourses(Iterable<Course> courseArray);
+    void createCourses(Collection<Course> courseArray);
 }
