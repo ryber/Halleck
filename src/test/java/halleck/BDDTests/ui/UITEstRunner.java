@@ -2,7 +2,7 @@ package halleck.BddTests.ui;
 
 import halleck.BddTests.TestBindings;
 import halleck.BddTests.fixtures.ApplicationFixture;
-import halleck.appstart.CLI;
+import halleck.appstart.Start;
 import org.junit.After;
 import org.junit.Before;
 
@@ -12,7 +12,7 @@ public class UITEstRunner {
     @Before
     public void setUp() throws Exception {
         if(!serverStarted){
-            CLI.startServer(new TestBindings());
+            Start.startServer(new TestBindings());
             serverStarted = true;
         }
     }

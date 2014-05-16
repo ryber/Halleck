@@ -4,7 +4,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import halleck.webserver.HttpRouts;
 
-public class CLI {
+public class Start {
 
     public static void main(String[] args) {
 

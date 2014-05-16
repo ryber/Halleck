@@ -162,7 +162,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>java/</classpathPrefix>
-                            <mainClass>halleck.appstart.CLI</mainClass>
+                            <mainClass>halleck.appstart.Start</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
