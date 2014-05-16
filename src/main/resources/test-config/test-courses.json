@@ -15,5 +15,15 @@
         "maxCapacity":42,
         "registeredUsers":[],
         "url":"http://ryber.github.com"
-    }
+    },
+
+    {
+            "id":"66",
+            "name":"Honey Badger Don't Care",
+            "descrription":"",
+            "maxCapacity":55,
+            "registeredUsers":["ryber"],
+            "url":"https://www.youtube.com/watch?v=4r7wHMg5Yjg"
+        }
 ]
+

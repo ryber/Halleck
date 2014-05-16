@@ -1,12 +1,12 @@
-package halleck.BddTests;
+package halleck.BDDTests;
 
-import halleck.BddTests.fixtures.ApplicationFixture;
+import halleck.BDDTests.fixtures.ApplicationFixture;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static halleck.BddTests.fixtures.ApplicationFixture.givenAdminIsLoggedIn;
-import static halleck.BddTests.fixtures.ApplicationFixture.givenCourse;
+import static halleck.BDDTests.fixtures.ApplicationFixture.givenAdminIsLoggedIn;
+import static halleck.BDDTests.fixtures.ApplicationFixture.givenCourse;
 
 public class CourseCreationTest {
     @Before

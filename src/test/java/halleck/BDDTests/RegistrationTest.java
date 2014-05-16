@@ -1,6 +1,6 @@
-package halleck.BddTests;
+package halleck.BDDTests;
 
-import halleck.BddTests.fixtures.ApplicationFixture;
+import halleck.BDDTests.fixtures.ApplicationFixture;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static halleck.BddTests.fixtures.ApplicationFixture.*;
+import static halleck.BDDTests.fixtures.ApplicationFixture.*;
 import static junit.framework.Assert.*;
 import static junit.framework.Assert.assertEquals;
 

@@ -1,6 +1,6 @@
 package halleck.webserver;
 
-import halleck.BddTests.mocks.MockSettings;
+import halleck.BDDTests.mocks.MockSettings;
 import com.google.common.collect.Maps;
 import halleck.api.Settings;
 import halleck.lms.AppContext;

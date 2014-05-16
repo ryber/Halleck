@@ -1,12 +1,12 @@
-package halleck.BddTests.fixtures;
+package halleck.BDDTests.fixtures;
 
-import halleck.BddTests.StaticContext;
-import halleck.BddTests.TestBindings;
-import halleck.BddTests.mocks.MockSettings;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import halleck.BDDTests.StaticContext;
+import halleck.BDDTests.TestBindings;
+import halleck.BDDTests.mocks.MockSettings;
 import halleck.api.Course;
 import halleck.api.Halleck;
 import halleck.api.OnlineCourse;

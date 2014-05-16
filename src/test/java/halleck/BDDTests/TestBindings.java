@@ -1,7 +1,7 @@
-package halleck.BddTests;
+package halleck.BDDTests;
 
 import halleck.api.Settings;
-import halleck.BddTests.mocks.MockSettings;
+import halleck.BDDTests.mocks.MockSettings;
 import halleck.appstart.BindingModule;
 import halleck.lms.AppContext;
 

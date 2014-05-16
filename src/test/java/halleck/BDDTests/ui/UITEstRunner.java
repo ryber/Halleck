@@ -1,7 +1,7 @@
-package halleck.BddTests.ui;
+package halleck.BDDTests.ui;
 
-import halleck.BddTests.TestBindings;
-import halleck.BddTests.fixtures.ApplicationFixture;
+import halleck.BDDTests.TestBindings;
+import halleck.BDDTests.fixtures.ApplicationFixture;
 import halleck.appstart.Start;
 import org.junit.After;
 import org.junit.Before;

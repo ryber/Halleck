@@ -1,4 +1,4 @@
-package halleck.BddTests.mocks;
+package halleck.BDDTests.mocks;
 
 import com.google.common.base.Strings;
 import halleck.webserver.SecurityFilter;

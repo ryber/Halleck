@@ -1,4 +1,6 @@
-package halleck.BddTests.mocks;
+package halleck.BDDTests.mocks;
+
+import halleck.BDDTests.mocks.FakeServletOutputStream;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
@@ -12,7 +14,7 @@ public class MockResponse implements HttpServletResponse {
 
     private int status;
 
-    private FakeServletOutputStream  fakeStream = new FakeServletOutputStream();
+    private FakeServletOutputStream fakeStream = new FakeServletOutputStream();
     private String redirectLocation;
 
 

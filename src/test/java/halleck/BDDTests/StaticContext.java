@@ -1,4 +1,4 @@
-package halleck.BddTests;
+package halleck.BDDTests;
 
 import halleck.lms.AppContext;
 
