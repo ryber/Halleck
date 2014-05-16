@@ -8,7 +8,7 @@ public class Start {
 
     public static void main(String[] args) {
 
-        SettingsProvider.setOverrides(args);
+        SettingsProvider.setCustomConfigFile(args);
         startServer(new BindingModule());
 
     }
