@@ -1,6 +1,6 @@
 package halleck.webserver;
 
-import junit.framework.Assert;
+import halleck.webserver.renderers.CourseRenderer;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,13 +26,5 @@ public class CourseRendererTest {
         assertTrue(renderer.render(STANDARD_LINK).contains("<a href"));
     }
 
-    @Test
-    public void mp4LinksAreEmbededVideos() throws Exception {
-        assertEquals(Type.embededVideo, renderer.getType(MP4_LINK));
-    }
 
-    @Test
-    public void youTubeLinksAreForYouTube() throws Exception {
-        assertEquals(CourseRenderer.Type.youTube, renderer.getType(YOUTUBE_LINK));
-    }
 }
