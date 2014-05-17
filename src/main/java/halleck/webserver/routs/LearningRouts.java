@@ -23,7 +23,6 @@ public class LearningRouts extends SparkRoutCollector {
     private final AppContext context;
     private final Halleck halleck;
 
-
     @Inject
     public LearningRouts(Halleck halleck,
                          AppContext context) {
@@ -32,53 +31,36 @@ public class LearningRouts extends SparkRoutCollector {
     }
 
     public void init() {
-        get(new FullPage("/") {
-            @Override
-            public ModelMapView action(Request request, Response response) {
-                return renderCourseList(halleck.getAllCourses());
-            }
-        });
+        get("/", (q,p) -> renderCourseList(halleck.getAllCourses()));
+        get("/my-courses", (q,p) -> renderCourseList(halleck.getUsersCourses(getUser())));
+        post("/registrations/course/:id", (q,p) -> renderCourseDetails(q, p));
+        get("/registrations/course/:id", (q,p) -> renderRegistration(q, p));
+    }
 
-        get(new FullPage("/my-courses") {
-            @Override
-            public ModelMapView action(Request request, Response response) {
-                return renderCourseList(halleck.getUsersCourses(getUser()));
-            }
-        });
+    private ModelMapView renderRegistration(Request request, Response response) {
+        try {
+            return new ModelMapView(getRegistrationMap(request), "course.mustache");
+        } catch (NoSuchElementException e) {
+            response.status(404);
+            return null;
+        }
+    }
 
+    private Map getRegistrationMap(Request request) {
+        return map("registration", getRegistrationId(request));
+    }
 
-        post(new FullPage("/registrations/course/:id") {
-            @Override
-            public ModelMapView action(Request request, Response response) {
-                try {
-                    String courseID = request.params(":id");
-                    halleck.register(courseID, getUser());
-                    response.redirect("/registrations/course/" + courseID);
+    private ModelMapView renderCourseDetails(Request request, Response response) {
+        try {
+            String courseID = request.params(":id");
+            halleck.register(courseID, getUser());
+            response.redirect("/registrations/course/" + courseID);
 
-                } catch (Exception e) {
-                    System.out.println("e = " + e);
-                }
+        } catch (Exception e) {
+            System.out.println("e = " + e);
+        }
 
-                return null;
-            }
-        });
-
-        get(new FullPage("/registrations/course/:id") {
-            @Override
-            public ModelMapView action(Request request, Response response) {
-
-                try {
-                    return new ModelMapView(getRegistrationMap(request), "course.mustache");
-                } catch (NoSuchElementException e) {
-                    response.status(404);
-                    return null;
-                }
-            }
-
-            private Map getRegistrationMap(Request request) {
-                return map("registration", getRegistrationId(request));
-            }
-        });
+        return null;
     }
 
     private String getUser() {
