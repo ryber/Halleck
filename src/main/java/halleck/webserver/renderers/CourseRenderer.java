@@ -17,6 +17,7 @@ public class CourseRenderer {
              new StandardRenderer(),
              new MustacheRenderer());
     }
+
     public CourseRenderer(Iterable<Renderer> customRenderers,
                           Renderer defaultRenderer,
                           MustacheRenderer stach){
@@ -36,8 +37,4 @@ public class CourseRenderer {
                 .findFirst()
                 .orElseGet(() -> standardRenderer);
     }
-
-
-
-
 }
