@@ -21,6 +21,7 @@ import static halleck.webserver.SecurityFilter.USER_KEY;
 public abstract class FullPage extends TemplateViewRoute {
 
     private static final String BODY = "BODY";
+    private final MustacheRenderer renderer = new MustacheRenderer();
 
     protected FullPage(String path) {
         super(path);
@@ -32,7 +33,7 @@ public abstract class FullPage extends TemplateViewRoute {
 
     @Override
     public String render(ModelAndView modelAndView) {
-        return renderTemplate(modelAndView.getViewName(), modelAndView.getModel());
+        return renderer.renderTemplate(modelAndView.getViewName(), modelAndView.getModel());
     }
 
     @Override
@@ -47,27 +48,12 @@ public abstract class FullPage extends TemplateViewRoute {
         ModelMapView original = action(request, response);
         if(original != null){
             original.getModel().put("user", request.attribute(USER_KEY));
-            return renderTemplate(original.getViewName(), original.getModel());
+            return renderer.renderTemplate(original.getViewName(), original.getModel());
         }
         return null;
     }
 
-
     public abstract ModelMapView action(Request request, Response response);
-
-
-    private String renderTemplate(String template, Object data) {
-        MustacheFactory mustacheFactory = new DefaultMustacheFactory("templates/");
-        Mustache mustache = mustacheFactory.compile(template);
-
-        try {
-            StringWriter sw = new StringWriter();
-            mustache.execute(sw, data).flush();
-            return sw.toString();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     private class Body {
         public String body;
