@@ -27,38 +27,29 @@ public class AuthenticationRouts extends SparkRoutCollector {
     }
 
     public void init(){
-        get(new FullPage("/login") {
-            @Override
-            public ModelMapView action(Request request, Response response) {
-                return new ModelMapView(getSettings(),"login.mustache");
-            }
+        get( "/login", (q,p) -> new ModelMapView(getSettings(),"login.mustache"));
+        post("/login", (q,p) -> loginAction(q, p));
+        get("/logout", (q,p) -> logoutAction(p));
+    }
 
-            private Map getSettings() {
-                return map("showpass", !Objects.equals(settings.getAuthenticationType(), "fake"));
-            }
-        });
+    private ModelMapView logoutAction(Response response) {
+        response.removeCookie(SecurityFilter.USERNAME_COOKIE);
+        response.redirect("/login");
+        return null;
+    }
 
-        post(new FullPage("/login") {
-            @Override
-            public ModelMapView action(Request request, Response response) {
-                String username = request.queryParams("username");
-                String password = request.queryParams("password");
+    private ModelMapView loginAction(Request request, Response response) {
+        String username = request.queryParams("username");
+        String password = request.queryParams("password");
 
-                if(auth.authenticate(username, password)){
-                    response.cookie(SecurityFilter.USERNAME_COOKIE, username);
-                    return new ModelMapView(map("url", "/"), "redirect.mustache");
-                }
-                return new ModelMapView(map("wrong", true), "login.mustache");
-            }
-        });
+        if(auth.authenticate(username, password)){
+            response.cookie(SecurityFilter.USERNAME_COOKIE, username);
+            return new ModelMapView(map("url", "/"), "redirect.mustache");
+        }
+        return new ModelMapView(map("wrong", true), "login.mustache");
+    }
 
-        get(new FullPage("/logout") {
-            @Override
-            public ModelMapView action(Request request, Response response) {
-                response.removeCookie(SecurityFilter.USERNAME_COOKIE);
-                response.redirect("/login");
-                return null;
-            }
-        });
+    private Map getSettings() {
+        return map("showpass", !Objects.equals(settings.getAuthenticationType(), "fake"));
     }
 }
