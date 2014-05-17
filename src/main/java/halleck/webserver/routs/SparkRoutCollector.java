@@ -1,6 +1,10 @@
 package halleck.webserver.routs;
 
 import com.google.common.collect.Lists;
+import halleck.webserver.FullPage;
+import halleck.webserver.ModelMapView;
+import spark.Request;
+import spark.Response;
 import spark.Route;
 
 import java.util.List;
@@ -22,6 +26,23 @@ public abstract class SparkRoutCollector {
         posts.add(post);
     }
 
+    public void get(final String path, final RouteFunction get){
+        gets.add(new FullPage(path) {
+            @Override
+            public ModelMapView action(Request request, Response response) {
+                return get.handle(request, response);
+            }
+        });
+    }
+
+    public void post(final String path, final RouteFunction get){
+        posts.add(new FullPage(path) {
+            @Override
+            public ModelMapView action(Request request, Response response) {
+                return get.handle(request, response);
+            }
+        });
+    }
 
     public Iterable<Route> getGets() {
         return gets;

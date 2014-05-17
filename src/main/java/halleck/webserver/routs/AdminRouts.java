@@ -26,38 +26,17 @@ public class AdminRouts extends SparkRoutCollector {
     }
 
     public void init(){
-        get(new FullPage("/admin/course") {
-            @Override
-            public ModelMapView action(Request request, Response response) {
-                return new ModelMapView(null, "editcourse.mustache");
-            }
-        });
+        get("/admin/course",     (q,p) -> new ModelMapView(null, "editcourse.mustache"));
+        get("/admin/course/:id", (q,p) -> handleCourseDetailsForPane(q, "editcourse.mustache"));
+        get("/admin/course/:id/registrations", (q,p) -> handleCourseDetailsForPane(q, "registrations.mustache"));
+        post("/admin/course",    (q,p) -> createCourse(q, p));
+    }
 
-        get(new FullPage("/admin/course/:id") {
-            @Override
-            public ModelMapView action(Request request, Response response) {
-                return handleCourseDetailsForPane(request, "editcourse.mustache");
-            }
-        });
-
-        get(new FullPage("/admin/course/:id/registrations") {
-            @Override
-            public ModelMapView action(Request request, Response response) {
-                return handleCourseDetailsForPane(request, "registrations.mustache");
-            }
-        });
-
-
-        post(new FullPage("/admin/course") {
-            @Override
-            public ModelMapView action(Request request, Response response) {
-
-                Course apply = mapper.apply(new FormVars(request));
-                halleck.createCourse(apply);
-                response.redirect("/admin/course/" + apply.getId());
-                return null;
-            }
-        });
+    private ModelMapView createCourse(Request request, Response response) {
+        Course apply = mapper.apply(new FormVars(request));
+        halleck.createCourse(apply);
+        response.redirect("/admin/course/" + apply.getId());
+        return null;
     }
 
     private ModelMapView handleCourseDetailsForPane(Request request, String template) {
