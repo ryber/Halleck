@@ -1,18 +1,29 @@
 package halleck.webserver.renderers;
 
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
 import halleck.webserver.MustacheRenderer;
 import halleck.webserver.Renderer;
 
 public class CourseRenderer {
 
-    private MustacheRenderer mustacheRenderer = new MustacheRenderer();
-
-    private static final Renderer STANDARD_RENDERER = new StandardRenderer();
-    private static final ImmutableSet<Renderer> RENDERERS = ImmutableSet.<Renderer>of(new YouTubeRenderer(),
-                                                                                      new EmbeddedVideoRenderer());
+    private ImmutableSet<Renderer> renderers;
+    private Renderer standardRenderer;
+    private MustacheRenderer mustacheRenderer;
 
 
+    public CourseRenderer(){
+        this(Lists.newArrayList(new YouTubeRenderer(),new EmbeddedVideoRenderer()),
+             new StandardRenderer(),
+             new MustacheRenderer());
+    }
+    public CourseRenderer(Iterable<Renderer> customRenderers,
+                          Renderer defaultRenderer,
+                          MustacheRenderer stach){
+        this.renderers = ImmutableSet.copyOf(customRenderers);
+        this.standardRenderer = defaultRenderer;
+        this.mustacheRenderer = stach;
+    }
 
     public String render(String standardLink) {
         Renderer renderer = getRenderer(standardLink);
@@ -20,10 +31,10 @@ public class CourseRenderer {
     }
 
     private Renderer getRenderer(String standardLink) {
-        return RENDERERS.stream()
+        return renderers.stream()
                 .filter(r -> r.canRender(standardLink))
                 .findFirst()
-                .orElseGet(() -> STANDARD_RENDERER);
+                .orElseGet(() -> standardRenderer);
     }
 
 
