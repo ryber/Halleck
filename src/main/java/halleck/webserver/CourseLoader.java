@@ -20,6 +20,7 @@ import java.util.List;
 
 public class CourseLoader {
 
+    public static final String RESOURCE_PREFIX = "resource://";
     private Settings settings;
     private Halleck hal;
 
@@ -51,7 +52,7 @@ public class CourseLoader {
 
 
     private String getCourseContent(String courseLoadLocation) {
-        if(courseLoadLocation.startsWith("{rez}")){
+        if(courseLoadLocation.startsWith(RESOURCE_PREFIX)){
             return getCourseResourceContent(courseLoadLocation);
         }else {
             return getCourseContent(new File(courseLoadLocation));
@@ -60,7 +61,7 @@ public class CourseLoader {
 
     private String getCourseResourceContent(String courseLoadLocation) {
         try {
-            URL url = Resources.getResource(courseLoadLocation.substring(5));
+            URL url = Resources.getResource(courseLoadLocation.substring(RESOURCE_PREFIX.length()));
             return Resources.toString(url, Charsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();

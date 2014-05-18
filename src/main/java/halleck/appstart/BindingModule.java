@@ -9,6 +9,8 @@ import halleck.lms.CourseRepository;
 import halleck.lms.Gurney;
 import halleck.lms.contexts.PerThreadContext;
 import halleck.webserver.Authenticator;
+import halleck.webserver.CourseRenderer;
+import halleck.webserver.renderers.RenderingDispatcher;
 
 public class BindingModule extends AbstractModule {
 
@@ -19,6 +21,7 @@ public class BindingModule extends AbstractModule {
         bind(CourseRepository.class).toProvider(RepositoryProvider.class);
         bind(Mongo.class).toProvider(MongoClientProvider.class);
         bind(Authenticator.class).toProvider(AuthenticatorProvider.class);
+        bind(CourseRenderer.class).to(RenderingDispatcher.class);
 
         bindRepo();
     }

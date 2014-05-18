@@ -1,6 +1,6 @@
 package halleck.webserver;
 
-import halleck.webserver.renderers.CourseRenderer;
+import halleck.webserver.renderers.RenderingDispatcher;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,7 +9,7 @@ import java.util.Map;
 import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.Assert.assertEquals;
 
-public class CourseRendererTest {
+public class RenderingDispatcherTest {
 
     private MockStacheRenderer mockStacheRenderer;
 
@@ -20,7 +20,7 @@ public class CourseRendererTest {
 
     @Test
     public void willUseFirstPositiveCustomRenderer() throws Exception {
-        CourseRenderer renderer = new CourseRenderer(newArrayList(new StubRenderer("custom", true)),
+        RenderingDispatcher renderer = new RenderingDispatcher(newArrayList(new StubRenderer("custom", true)),
                                                                   new StubRenderer("standard", true),
                                                                   mockStacheRenderer);
 
@@ -32,7 +32,7 @@ public class CourseRendererTest {
 
     @Test
     public void willUseDefaultIfNoCustomFound() throws Exception {
-        CourseRenderer renderer = new CourseRenderer(newArrayList(new StubRenderer("custom", false)),
+        RenderingDispatcher renderer = new RenderingDispatcher(newArrayList(new StubRenderer("custom", false)),
                 new StubRenderer("standard", false),
                 mockStacheRenderer);
 

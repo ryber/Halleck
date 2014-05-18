@@ -9,6 +9,7 @@ import halleck.webserver.ModelMapView;
 import spark.Request;
 import spark.Response;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.stream.Stream;
@@ -19,13 +20,16 @@ import static java.util.stream.Collectors.toList;
 
 public class LearningController {
     private final AppContext context;
+    private CourseRenderer renderer;
     private final Halleck halleck;
 
     @Inject
     public LearningController(Halleck halleck,
-                              AppContext context) {
+                              AppContext context,
+                              CourseRenderer renderer) {
         this.halleck = halleck;
         this.context = context;
+        this.renderer = renderer;
     }
 
     public ModelMapView getMyCourses() {
@@ -46,7 +50,11 @@ public class LearningController {
     }
 
     private Map getRegistrationMap(Request request) {
-        return map("registration", getRegistrationId(request));
+        Registration reg = getRegistrationId(request);
+        return new HashMap() {{
+            put("registration", reg);
+            put("courseCountent", renderer.render(reg.getCourse().getUrl()));
+        }};
     }
 
 

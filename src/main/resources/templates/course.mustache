@@ -7,15 +7,7 @@
 {{#registration.isRegistered}}
 
 
-     {{#registration.course.isEmbedVideo}}
-    <video width="720"  controls>
-        <source src="{{registration.course.url}}" type="video/mp4">
-        Your browser does not support the video tag. Please use a modern web browser like Chrome, Safari or Firefox.
-    </video>
-    {{/registration.course.isEmbedVideo}}
-    {{^registration.course.isEmbedVideo}}
-       <a href="{{registration.course.url}}" class="bigbutton" target="_blank">Launch Course</a>
-    {{/registration.course.isEmbedVideo}}
+    {{{courseCountent}}}
 
      <br />
      {{registration.course.content}}
