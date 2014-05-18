@@ -5,9 +5,7 @@ import halleck.api.Course;
 import halleck.api.Halleck;
 import halleck.api.Registration;
 import halleck.lms.AppContext;
-import halleck.webserver.FullPage;
 import halleck.webserver.ModelMapView;
-import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
@@ -19,7 +17,7 @@ import static halleck.webserver.MapMaker.map;
 import static java.util.stream.Collectors.toList;
 
 
-public class LearningRouts extends SparkRoutCollector {
+public class LearningRouts  {
     private final AppContext context;
     private final Halleck halleck;
 
@@ -30,14 +28,15 @@ public class LearningRouts extends SparkRoutCollector {
         this.context = context;
     }
 
-    public void init() {
-        get("/", (q,p) -> renderCourseList(halleck.getAllCourses()));
-        get("/my-courses", (q,p) -> renderCourseList(halleck.getUsersCourses(getUser())));
-        post("/registrations/course/:id", (q,p) -> renderCourseDetails(q, p));
-        get("/registrations/course/:id", (q,p) -> renderRegistration(q, p));
+    public ModelMapView getMyCourses() {
+        return renderCourseList(halleck.getUsersCourses(getUser()));
     }
 
-    private ModelMapView renderRegistration(Request request, Response response) {
+    public ModelMapView getCourseCatalog() {
+        return renderCourseList(halleck.getAllCourses());
+    }
+
+    public ModelMapView getCourseDeets(Request request, Response response) {
         try {
             return new ModelMapView(getRegistrationMap(request), "course.mustache");
         } catch (NoSuchElementException e) {
@@ -50,10 +49,12 @@ public class LearningRouts extends SparkRoutCollector {
         return map("registration", getRegistrationId(request));
     }
 
-    private ModelMapView renderCourseDetails(Request request, Response response) {
+
+    public ModelMapView registerForCourse(Request request, Response response) {
         try {
             String courseID = request.params(":id");
-            halleck.register(courseID, getUser());
+            String user = getUser();
+            halleck.register(courseID, user);
             response.redirect("/registrations/course/" + courseID);
 
         } catch (Exception e) {

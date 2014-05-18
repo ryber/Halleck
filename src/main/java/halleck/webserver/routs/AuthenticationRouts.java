@@ -12,7 +12,7 @@ import java.util.Objects;
 
 import static halleck.webserver.MapMaker.map;
 
-public class AuthenticationRouts extends SparkRoutCollector {
+public class AuthenticationRouts {
 
     private final Settings settings;
     private final Authenticator auth;
@@ -26,19 +26,18 @@ public class AuthenticationRouts extends SparkRoutCollector {
         this.auth = auth;
     }
 
-    public void init(){
-        get( "/login", (q,p) -> new ModelMapView(getSettings(),"login.mustache"));
-        post("/login", (q,p) -> loginAction(q, p));
-        get("/logout", (q,p) -> logoutAction(p));
+
+    public ModelMapView getLoginForm() {
+        return new ModelMapView(getSettings(),"login.mustache");
     }
 
-    private ModelMapView logoutAction(Response response) {
+    public ModelMapView logoutAction(Response response) {
         response.removeCookie(SecurityFilter.USERNAME_COOKIE);
         response.redirect("/login");
         return null;
     }
 
-    private ModelMapView loginAction(Request request, Response response) {
+    public ModelMapView loginAction(Request request, Response response) {
         String username = request.queryParams("username");
         String password = request.queryParams("password");
 

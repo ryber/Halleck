@@ -3,11 +3,9 @@ package halleck.webserver.routs;
 import com.google.inject.Inject;
 import halleck.api.Course;
 import halleck.api.Halleck;
-import halleck.webserver.FullPage;
 import halleck.webserver.ModelMapView;
 import halleck.webserver.mappers.CourseMapper;
 import halleck.webserver.mappers.FormVars;
-import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
@@ -15,7 +13,7 @@ import java.util.Optional;
 
 import static halleck.webserver.MapMaker.map;
 
-public class AdminRouts extends SparkRoutCollector {
+public class AdminRouts {
     private CourseMapper mapper = new CourseMapper();
     private Halleck halleck;
 
@@ -25,24 +23,29 @@ public class AdminRouts extends SparkRoutCollector {
         this.halleck = halleck;
     }
 
-    public void init(){
-        get("/admin/course",     (q,p) -> new ModelMapView(null, "editcourse.mustache"));
-        get("/admin/course/:id", (q,p) -> handleCourseDetailsForPane(q, "editcourse.mustache"));
-        get("/admin/course/:id/registrations", (q,p) -> handleCourseDetailsForPane(q, "registrations.mustache"));
-        post("/admin/course",    (q,p) -> createCourse(q, p));
+    public ModelMapView getViewCourse() {
+        return new ModelMapView(null, "editcourse.mustache");
     }
 
-    private ModelMapView createCourse(Request request, Response response) {
+    public ModelMapView createCourse(Request request, Response response) {
         Course apply = mapper.apply(new FormVars(request));
         halleck.createCourse(apply);
         response.redirect("/admin/course/" + apply.getId());
         return null;
     }
 
-    private ModelMapView handleCourseDetailsForPane(Request request, String template) {
+    public ModelMapView getEditCourseView(Request request) {
+        return renderCourseAdmin(request, "editcourse.mustache");
+    }
+
+    public ModelMapView getRegistrationAdminView(Request request) {
+        return renderCourseAdmin(request, "registrations.mustache");
+    }
+
+    private ModelMapView renderCourseAdmin(Request request, String view) {
         Optional<Course> course = halleck.getCourse(request.params(":id"));
         if(course.isPresent()){
-            return new ModelMapView(map("course", course.get()), template);
+            return new ModelMapView(map("course", course.get()), view);
         }
 
         return new ModelMapView(null, "unknowncourse.mustache");

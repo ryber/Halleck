@@ -25,17 +25,9 @@ public class BindingModule extends AbstractModule {
         bind(Mongo.class).toProvider(MongoClientProvider.class);
         bind(Authenticator.class).toProvider(AuthenticatorProvider.class);
 
-        bindRouts();
         bindRepo();
     }
 
-    private void bindRouts() {
-        Multibinder<SparkRoutCollector> uriBinder = Multibinder.newSetBinder(binder(), SparkRoutCollector.class);
-        uriBinder.permitDuplicates();
-        uriBinder.addBinding().to(AdminRouts.class);
-        uriBinder.addBinding().to(LearningRouts.class);
-        uriBinder.addBinding().to(AuthenticationRouts.class);
-    }
 
     protected void bindRepo() {
         bind(Settings.class).toProvider(SettingsProvider.class);
