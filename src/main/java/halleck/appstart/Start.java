@@ -2,6 +2,7 @@ package halleck.appstart;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import halleck.webserver.CourseLoader;
 import halleck.webserver.HttpRouts;
 
 public class Start {
@@ -18,7 +19,8 @@ public class Start {
     public static void startServer(BindingModule bindingModule) {
         Injector injector = Guice.createInjector(bindingModule);
         HttpRouts routs = injector.getInstance(HttpRouts.class);
-
+        CourseLoader loader = injector.getInstance(CourseLoader.class);
+        loader.load();
         routs.init();
     }
 }

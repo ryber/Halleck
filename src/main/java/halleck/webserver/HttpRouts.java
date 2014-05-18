@@ -14,31 +14,25 @@ import static spark.Spark.*;
 public class HttpRouts implements SparkApplication {
     private Settings settings;
     private SecurityFilter filter;
-    private CourseLoader courseLoader;
     private Set<SparkRoutCollector> routes;
 
 
     @Inject
     public HttpRouts(Settings settings,
                      SecurityFilter filter,
-                     CourseLoader courseLoader,
                      Set<SparkRoutCollector> routes) {
 
         this.settings = settings;
         this.filter = filter;
-        this.courseLoader = courseLoader;
         this.routes = routes;
     }
 
     @Override
     public void init() {
-        loadDefaultCourses();
         configureRouts();
     }
 
-    private void loadDefaultCourses() {
-       courseLoader.load();
-    }
+
 
     private void configureRouts() {
         setPort(settings.getAppPort());
