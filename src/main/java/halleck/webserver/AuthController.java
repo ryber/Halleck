@@ -12,15 +12,15 @@ import java.util.Objects;
 
 import static halleck.webserver.MapMaker.map;
 
-public class AuthenticationRouts {
+public class AuthController {
 
     private final Settings settings;
     private final Authenticator auth;
 
 
     @Inject
-    public AuthenticationRouts(Settings settings,
-                               Authenticator auth) {
+    public AuthController(Settings settings,
+                          Authenticator auth) {
 
         this.settings = settings;
         this.auth = auth;

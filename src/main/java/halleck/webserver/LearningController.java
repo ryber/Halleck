@@ -17,13 +17,13 @@ import static halleck.webserver.MapMaker.map;
 import static java.util.stream.Collectors.toList;
 
 
-public class LearningRouts  {
+public class LearningController {
     private final AppContext context;
     private final Halleck halleck;
 
     @Inject
-    public LearningRouts(Halleck halleck,
-                         AppContext context) {
+    public LearningController(Halleck halleck,
+                              AppContext context) {
         this.halleck = halleck;
         this.context = context;
     }

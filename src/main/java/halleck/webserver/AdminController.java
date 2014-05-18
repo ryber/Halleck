@@ -13,13 +13,13 @@ import java.util.Optional;
 
 import static halleck.webserver.MapMaker.map;
 
-public class AdminRouts {
+public class AdminController {
     private CourseMapper mapper = new CourseMapper();
     private Halleck halleck;
 
 
     @Inject
-    public AdminRouts(Halleck halleck) {
+    public AdminController(Halleck halleck) {
         this.halleck = halleck;
     }
 

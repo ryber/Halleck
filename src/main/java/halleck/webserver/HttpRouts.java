@@ -13,17 +13,17 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 public class HttpRouts implements SparkApplication {
     private Settings settings;
     private SecurityFilter filter;
-    private AdminRouts adminRouts;
-    private AuthenticationRouts authentication;
-    private LearningRouts learning;
+    private AdminController adminRouts;
+    private AuthController authentication;
+    private LearningController learning;
 
 
     @Inject
     public HttpRouts(Settings settings,
                      SecurityFilter filter,
-                     AdminRouts adminRouts,
-                     AuthenticationRouts authentication,
-                     LearningRouts learning) {
+                     AdminController adminRouts,
+                     AuthController authentication,
+                     LearningController learning) {
 
         this.settings = settings;
         this.filter = filter;
