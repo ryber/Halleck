@@ -2,10 +2,6 @@ package halleck.webserver;
 
 import com.google.inject.Inject;
 import halleck.api.Settings;
-import halleck.webserver.routs.AdminRouts;
-import halleck.webserver.routs.AuthenticationRouts;
-import halleck.webserver.routs.LearningRouts;
-import halleck.webserver.routs.RouteFunction;
 import spark.Request;
 import spark.Response;
 import spark.Spark;

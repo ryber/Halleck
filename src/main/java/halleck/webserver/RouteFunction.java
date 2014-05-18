@@ -1,4 +1,4 @@
-package halleck.webserver.routs;
+package halleck.webserver;
 
 import halleck.webserver.ModelMapView;
 import spark.Request;

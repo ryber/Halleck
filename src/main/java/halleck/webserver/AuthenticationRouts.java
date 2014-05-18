@@ -1,4 +1,4 @@
-package halleck.webserver.routs;
+package halleck.webserver;
 
 import com.google.inject.Inject;
 import halleck.api.Settings;
