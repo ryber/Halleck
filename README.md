@@ -8,7 +8,7 @@ Halleck is of course named after Gurney Halleck; Paul Atreides weapons trainer f
 <br />
 ## Quick Start
 * Clone it
-* Compile it with Maven (mvn compile)
+* Compile it with Maven (mvn package)
 * Run the jar (java --jar halleck.jar)
 * Goto http://localhost:4567
 
@@ -59,7 +59,7 @@ You can pass halleck the path to a properties file that contains config informat
         {
             "id":"42",
             "name":"Underwater Basketweaving",
-            "descrription":"a long long description",
+            "description":"a long long description",
             "maxCapacity":2,
             "registeredUsers":[],
             "url":"http://ryber.github.com"

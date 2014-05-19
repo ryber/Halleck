@@ -10,7 +10,7 @@ import static com.google.common.base.Strings.nullToEmpty;
 public class OnlineCourse implements Course {
     private final String id;
     private String name;
-    private String descrription = "";
+    private String description = "";
     private Integer maxCapacity;
     private Set<String> registeredUsers = Sets.newHashSet();
     public static final int UNLIMITED_ENROLLMENT = 999;
@@ -18,10 +18,10 @@ public class OnlineCourse implements Course {
     private String content = "";
     private String owner = "";
 
-    public OnlineCourse(String id, String name, String descrription) {
+    public OnlineCourse(String id, String name, String description) {
         this.id = id;
         this.name = name;
-        this.descrription = nullToEmpty(descrription);
+        this.description = nullToEmpty(description);
     }
 
     public OnlineCourse(Course courseInput) {
@@ -54,7 +54,7 @@ public class OnlineCourse implements Course {
 
     @Override
     public String getDescription() {
-        return descrription;
+        return description;
     }
 
     @Override
@@ -69,10 +69,10 @@ public class OnlineCourse implements Course {
 
     @Override
     public String getDescriptionShort() {
-        if(descrription.length() > 100){
-            return descrription.substring(0, 100);
+        if(description.length() > 100){
+            return description.substring(0, 100);
         }
-        return descrription;
+        return description;
     }
 
     @Override
