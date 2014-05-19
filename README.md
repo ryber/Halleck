@@ -12,6 +12,9 @@ Halleck is of course named after Gurney Halleck; Paul Atreides weapons trainer f
 * Run the jar (java --jar halleck.jar)
 * Goto http://localhost:4567
 
+### Starting in demo mode
+* Simply add "demo" as a jar param (e.g. '''java --jar halleck.jar demo''')
+
 ## Requirements
 * Java 1.8
 * MongoDB if you want long term persistence 
