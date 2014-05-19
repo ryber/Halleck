@@ -31,7 +31,11 @@ a:hover {
 .course-title {
     font-size: 28px;
     line-height: 32px;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
+}
+
+.desc-short {
+    margin-bottom: 25px;
 }
 
 .course-title-mini {
