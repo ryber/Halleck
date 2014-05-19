@@ -60,12 +60,12 @@ You can pass halleck the path to a properties file that contains config informat
 
     [
         {
-            "id":"42",
-            "name":"Underwater Basketweaving",
-            "description":"a long long description",
-            "maxCapacity":2,
-            "registeredUsers":[],
-            "url":"http://ryber.github.com"
+            "id":"1",
+            "name":"How To Fold Space",
+            "description":"The beginning is a very delicate time.",
+            "maxCapacity":42,
+            "registeredUsers":["Leto", "Jessica"],
+            "url":"https://www.youtube.com/watch?v=6H5jeLxUy-0"
         }
     ]
 
