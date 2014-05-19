@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static junit.framework.Assert.assertEquals;
@@ -63,4 +64,15 @@ public class GurneyTest {
         assertEquals("something different", result.getContent());
     }
 
+    @Test
+    public void willSortCoursesAlphabetically() throws Exception {
+        Course a = new OnlineCourse("foo","A",null);
+        Course b = new OnlineCourse("bar","B",null);
+        Course c = new OnlineCourse("bar","C",null);
+
+        when(courseRepo.getAllCourses()).thenReturn(Stream.of(c,b,a));
+
+        assertEquals(a, gurney.getAllCourses().collect(Collectors.toList()).get(0));
+
+    }
 }

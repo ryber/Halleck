@@ -29,7 +29,8 @@ public class Gurney implements Halleck {
 
     @Override
     public Stream<Course> getAllCourses() {
-        return courseRepo.getAllCourses();
+        return courseRepo.getAllCourses()
+                         .sorted((l,r) -> l.getName().compareTo(r.getName()));
     }
 
     @Override

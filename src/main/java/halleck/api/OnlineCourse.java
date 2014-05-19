@@ -8,19 +8,20 @@ import java.util.Set;
 import static com.google.common.base.Strings.nullToEmpty;
 
 public class OnlineCourse implements Course {
+    public static final String EMPTY = "";
     private final String id;
-    private String name;
-    private String description = "";
+    private String name = EMPTY;
+    private String description = EMPTY;
     private Integer maxCapacity;
     private Set<String> registeredUsers = Sets.newHashSet();
     public static final int UNLIMITED_ENROLLMENT = 999;
-    private String url = "";
-    private String content = "";
-    private String owner = "";
+    private String url = EMPTY;
+    private String content = EMPTY;
+    private String owner = EMPTY;
 
     public OnlineCourse(String id, String name, String description) {
         this.id = id;
-        this.name = name;
+        this.name = nullToEmpty(name);
         this.description = nullToEmpty(description);
     }
 
