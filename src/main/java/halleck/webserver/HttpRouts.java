@@ -2,10 +2,10 @@ package halleck.webserver;
 
 import com.google.inject.Inject;
 import halleck.api.Settings;
-import spark.Request;
-import spark.Response;
-import spark.Spark;
+import spark.*;
 import spark.servlet.SparkApplication;
+import spark.template.mustache.MustacheTemplateEngine;
+
 import static spark.Spark.*;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
@@ -68,22 +68,12 @@ public class HttpRouts implements SparkApplication {
         }
     }
 
-    public void get(final String path, final RouteFunction get){
-        Spark.get(new FullPage(path) {
-            @Override
-            public ModelMapView action(Request request, Response response) {
-                return get.handle(request, response);
-            }
-        });
+    public void get(final String path, final TemplateViewRoute get){
+        Spark.get(path, get, new ShelledMustache());
     }
 
-    public void post(final String path, final RouteFunction post){
-        Spark.post(new FullPage(path) {
-            @Override
-            public ModelMapView action(Request request, Response response) {
-                return post.handle(request, response);
-            }
-        });
+    public void post(final String path, final TemplateViewRoute post){
+        Spark.post(path, post, new ShelledMustache());
     }
 
 }

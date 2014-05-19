@@ -7,10 +7,10 @@ import spark.Filter;
 import spark.Request;
 import spark.Response;
 
-import java.util.List;
+import static spark.Spark.halt;
 
 
-public class SecurityFilter extends Filter {
+public class SecurityFilter implements Filter {
 
     public static final String USERNAME_COOKIE = "halleckName";
     public static final String USER_KEY = "USER";
@@ -37,7 +37,7 @@ public class SecurityFilter extends Filter {
             response.redirect("/login");
         }
 
-        setUserOnContext(user, request);
+        setUserOnContext(user);
 
         if(isAdminPage(request) && !userIsAdmin(user)){
             halt(403);
@@ -45,11 +45,9 @@ public class SecurityFilter extends Filter {
     }
 
 
-    private void setUserOnContext(String user, Request request) {
+    private void setUserOnContext(String user) {
         context.setCurrentUser(user);
-
-        request.attribute(USER_KEY, new User(user, isAdmin(user)));
-        request.attribute(SITE_NAME, settings.getSiteName());
+        PageContext.set(new User(user, isAdmin(user)), settings.getSiteName());
     }
 
     private boolean isAdmin(String userName) {
