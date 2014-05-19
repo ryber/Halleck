@@ -34,6 +34,7 @@ public class GurneyTest {
         Course mock = mock(Course.class);
         when(courseRepo.getAllCourses()).thenReturn(Stream.of(mock));
 
+
         assertEquals(mock, gurney.getAllCourses().findFirst().get());
     }
 

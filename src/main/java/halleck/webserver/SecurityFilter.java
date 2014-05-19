@@ -47,14 +47,6 @@ public class SecurityFilter implements Filter {
 
     private void setUserOnContext(String user) {
         context.setCurrentUser(user);
-        PageContext.set(new User(user, isAdmin(user)), settings.getSiteName());
-    }
-
-    private boolean isAdmin(String userName) {
-        if(userName != null){
-            return settings.getAdmins().contains(userName);
-        }
-        return false;
     }
 
     private String getUserFromCookies(Request request) {
