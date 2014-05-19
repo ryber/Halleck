@@ -26,15 +26,12 @@ public class MongoCourseRepository implements CourseRepository {
     @Override
     public Stream<Course> getAllCourses() {
         List<Course> result = newArrayList();
-        DBCursor allCourses = getCourseCollection().find();
 
-        try {
+        try (DBCursor allCourses = getCourseCollection().find()) {
             while (allCourses.hasNext()) {
                 DBObject next = allCourses.next();
                 result.add(createCourse(next));
             }
-        } finally {
-            allCourses.close();
         }
         return result.stream();
     }
