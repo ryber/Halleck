@@ -79,7 +79,3 @@ You can pass halleck the path to a properties file that contains config informat
 * Dynamic searching of the catalog.
 * the ability to group courses into 'katas'
 * Some kind of lighter persistence option. More than the in-memory option but still does not require a external service like Mongo to be set up. Suggestions?
-
-
-### Things Halleck will never do
-* SCORM / AICC
