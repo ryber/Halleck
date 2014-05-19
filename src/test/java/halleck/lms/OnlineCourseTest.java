@@ -20,13 +20,6 @@ public class OnlineCourseTest {
     }
 
     @Test
-    public void canSetDescripToNullAndNotDie() throws Exception {
-        OnlineCourse o = new OnlineCourse(null,null,null);
-        assertEquals("", o.getDescription());
-        assertEquals("", o.getDescriptionShort());
-    }
-
-    @Test
     public void willCopyFromInputToMakeACourse(){
         Course i = mock(Course.class);
 
@@ -46,16 +39,4 @@ public class OnlineCourseTest {
         assertEquals(54, t.getMaxEnrollment().intValue());
         assertEquals("some content", t.getContent());
     }
-
-    @Test
-    public void ifCourseIsAHtml5VideoThenSayItIs() throws Exception {
-        OnlineCourse isEmbed = new OnlineCourse("id","name","desc", "http://foo/video.mp4",3, null);
-
-        assertTrue(isEmbed.isEmbedVideo());
-
-        OnlineCourse notembed = new OnlineCourse("id","name","desc", "http://foo/video.html",3, null);
-
-        assertFalse(notembed.isEmbedVideo());
-    }
-
 }

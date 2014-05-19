@@ -69,14 +69,6 @@ public class OnlineCourse implements Course {
     }
 
     @Override
-    public String getDescriptionShort() {
-        if(description.length() > 100){
-            return description.substring(0, 100);
-        }
-        return description;
-    }
-
-    @Override
     public void setMaxCapacity(@Nullable Integer maxCapacity) {
         this.maxCapacity = maxCapacity;
     }
@@ -101,11 +93,6 @@ public class OnlineCourse implements Course {
 
     public boolean hasFreeSeats() {
         return getFreeSeats() > 0;
-    }
-
-    @Override
-    public boolean isEmbedVideo() {
-        return url.endsWith("mp4");
     }
 
     @Override

@@ -8,13 +8,11 @@ public interface Course {
     String getDescription();
     String getUrl();
     Integer getMaxEnrollment();
-    String getDescriptionShort();
     void setMaxCapacity(Integer maxCapacity);
     int getFreeSeats();
     Set<String> getRegisteredUsers();
     void addRegisteredUser(String user);
     boolean hasFreeSeats();
-    boolean isEmbedVideo();
     String getContent();
     String getOwner();
     void setOwner(String owner);
