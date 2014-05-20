@@ -1,6 +1,7 @@
 package halleck.BDDTests.mocks;
 
 import halleck.api.Settings;
+import halleck.lms.Feature;
 
 import java.util.List;
 
@@ -72,6 +73,11 @@ public class MockSettings implements Settings {
 
     @Override
     public String getCourseLoadLocation() {
+        return null;
+    }
+
+    @Override
+    public List<Feature> getEnabledFeatures() {
         return null;
     }
 }

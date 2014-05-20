@@ -1,5 +1,8 @@
 package halleck.api;
 
+import com.google.common.collect.ImmutableSet;
+import halleck.lms.Feature;
+
 import java.util.List;
 
 public interface Settings {
@@ -16,4 +19,5 @@ public interface Settings {
     String getAuthenticationType();
     String getExternalMediaLocation();
     String getCourseLoadLocation();
+    List<Feature> getEnabledFeatures();
 }
