@@ -67,8 +67,8 @@ public class AppSettings implements Settings {
     private List<Feature> parseFeatures(String property) {
         return splitString(property).stream()
                                     .map(f -> Enums.getIfPresent(Feature.class, f))
-                                    .filter(o -> o.isPresent())
-                                    .map(o -> o.get())
+                                    .filter(Optional::isPresent)
+                                    .map(Optional::get)
                                     .collect(Collectors.toList());
     }
 
