@@ -30,7 +30,7 @@ public class UserRegistration implements Registration {
 
     @Override
     public boolean canRegister() {
-        return course.hasFreeSeats() && !isRegistered();
+        return course.getFreeSeats() > 0 && !isRegistered();
     }
 
 }

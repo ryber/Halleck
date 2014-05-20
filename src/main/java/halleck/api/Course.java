@@ -12,7 +12,6 @@ public interface Course {
     int getFreeSeats();
     Set<String> getRegisteredUsers();
     void addRegisteredUser(String user);
-    boolean hasFreeSeats();
     String getContent();
     String getOwner();
     void setOwner(String owner);

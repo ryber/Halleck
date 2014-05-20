@@ -37,7 +37,7 @@ public class UserRegistrationTest {
         Course course = mock(Course.class);
 
         when(course.getRegisteredUsers()).thenReturn(newHashSet("bob"));
-        when(course.hasFreeSeats()).thenReturn(true);
+        when(course.getFreeSeats()).thenReturn(4);
 
         UserRegistration u = new UserRegistration(course, "Chauncey");
 

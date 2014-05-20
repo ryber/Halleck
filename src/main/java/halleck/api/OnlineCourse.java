@@ -91,10 +91,6 @@ public class OnlineCourse implements Course {
         registeredUsers.add(user);
     }
 
-    public boolean hasFreeSeats() {
-        return getFreeSeats() > 0;
-    }
-
     @Override
     public String getContent() {
         return content;
@@ -115,8 +111,6 @@ public class OnlineCourse implements Course {
     }
 
     public void addRegisteredUsers(Iterable<String> users) {
-        for(String u : users){
-            addRegisteredUser(u);
-        }
+        users.forEach(this::addRegisteredUser);
     }
 }
