@@ -14,5 +14,5 @@ public interface Halleck {
     void register(String courseId, String userID);
     Set<Registration> getRegistrations(String courseID);
     void createCourse(Course course);
-    void createCourses(Collection<Course> courseArray);
+    void createCourses(Iterable<Course> courseArray);
 }

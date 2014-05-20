@@ -75,8 +75,8 @@ public class Gurney implements Halleck {
 
 
     @Override
-    public void createCourses(Collection<Course> courseArray) {
-        courseArray.stream().forEach(this::createCourse);
+    public void createCourses(Iterable<Course> courseArray) {
+        courseArray.forEach(this::createCourse);
     }
 
 
