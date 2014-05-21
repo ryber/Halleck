@@ -19,17 +19,14 @@ public class Course {
     private String content = EMPTY;
     private String owner = EMPTY;
 
+    public Course(String id) {
+        this(id,id,id);
+    }
+
     public Course(String id, String name, String description) {
         this.id = id;
         this.name = nullToEmpty(name);
         this.description = nullToEmpty(description);
-    }
-
-    public Course(Course courseInput) {
-        this(courseInput.getId(), courseInput.getName(), courseInput.getDescription());
-        this.url = nullToEmpty(courseInput.getUrl());
-        this.maxCapacity = courseInput.getMaxEnrollment();
-        this.content = nullToEmpty(courseInput.getContent());
     }
 
     public Course(String id, String name, String description, String url, Integer max, String content) {
@@ -37,10 +34,6 @@ public class Course {
         this.url = nullToEmpty(url);
         this.maxCapacity = max;
         this.content = nullToEmpty(content);
-    }
-
-    public Course(String id) {
-        this(id,id,id);
     }
 
     public String getId() {
