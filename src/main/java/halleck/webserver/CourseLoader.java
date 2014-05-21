@@ -40,7 +40,7 @@ public class CourseLoader {
 
                 hal.createCourses(createCourseArray(content));
 
-                System.out.println("Loaded Course Content ");
+                System.out.println("Loaded Course Content from " + courseLoadLocation);
             }
         }
     }
