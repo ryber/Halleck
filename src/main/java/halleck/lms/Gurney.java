@@ -1,20 +1,13 @@
 package halleck.lms;
 
-import com.google.common.base.Function;
 import com.google.inject.Inject;
-import halleck.api.Course;
-import halleck.api.Halleck;
-import halleck.api.Registration;
 
-import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.google.common.collect.FluentIterable.from;
-import static com.google.common.collect.Iterables.transform;
 
 public class Gurney implements Halleck {
 

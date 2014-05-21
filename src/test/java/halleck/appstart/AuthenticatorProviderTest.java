@@ -1,7 +1,7 @@
 package halleck.appstart;
 
 
-import halleck.api.Settings;
+import halleck.lms.Settings;
 import halleck.webserver.FakeAuthenticator;
 import halleck.webserver.LdapAuthenticator;
 import org.junit.Test;

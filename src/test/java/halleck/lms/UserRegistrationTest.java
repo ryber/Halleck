@@ -1,7 +1,5 @@
 package halleck.lms;
 
-import halleck.api.Course;
-import halleck.lms.UserRegistration;
 import org.junit.Test;
 
 import static com.google.common.collect.Sets.newHashSet;

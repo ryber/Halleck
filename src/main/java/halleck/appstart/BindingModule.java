@@ -2,8 +2,8 @@ package halleck.appstart;
 
 import com.google.inject.AbstractModule;
 import com.mongodb.Mongo;
-import halleck.api.Halleck;
-import halleck.api.Settings;
+import halleck.lms.Halleck;
+import halleck.lms.Settings;
 import halleck.lms.AppContext;
 import halleck.lms.CourseRepository;
 import halleck.lms.Gurney;

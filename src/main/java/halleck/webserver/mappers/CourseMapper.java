@@ -3,8 +3,8 @@ package halleck.webserver.mappers;
 
 import com.google.common.base.Strings;
 import com.google.common.primitives.Ints;
-import halleck.api.Course;
-import halleck.api.OnlineCourse;
+import halleck.lms.Course;
+import halleck.lms.OnlineCourse;
 
 import javax.annotation.Nullable;
 import java.util.function.Function;

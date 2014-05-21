@@ -3,7 +3,7 @@ package halleck.appstart;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import halleck.api.Settings;
+import halleck.lms.Settings;
 import halleck.lms.CourseRepository;
 import halleck.lms.InMemoryCourseRepository;
 import halleck.lms.MongoCourseRepository;

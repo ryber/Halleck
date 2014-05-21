@@ -1,6 +1,6 @@
 package halleck.webserver.mappers;
 
-import halleck.api.Course;
+import halleck.lms.Course;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package halleck.api;
+package halleck.lms;
 
 import java.util.Set;
 

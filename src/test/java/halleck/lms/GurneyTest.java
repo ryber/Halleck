@@ -1,7 +1,5 @@
 package halleck.lms;
 
-import halleck.api.Course;
-import halleck.api.OnlineCourse;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;

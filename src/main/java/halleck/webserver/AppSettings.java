@@ -5,7 +5,7 @@ import com.google.common.base.Optional;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.primitives.Ints;
-import halleck.api.Settings;
+import halleck.lms.Settings;
 import halleck.lms.Feature;
 
 import java.util.List;

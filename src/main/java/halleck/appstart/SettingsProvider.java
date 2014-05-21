@@ -2,7 +2,7 @@ package halleck.appstart;
 
 import com.google.common.base.Charsets;
 import com.google.inject.Provider;
-import halleck.api.Settings;
+import halleck.lms.Settings;
 import halleck.webserver.AppSettings;
 
 import java.io.File;

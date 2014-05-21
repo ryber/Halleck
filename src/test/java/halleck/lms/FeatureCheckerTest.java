@@ -1,7 +1,6 @@
 package halleck.lms;
 
 import com.google.common.collect.ImmutableList;
-import halleck.api.Settings;
 import org.junit.Test;
 
 import static com.google.common.collect.Lists.newArrayList;

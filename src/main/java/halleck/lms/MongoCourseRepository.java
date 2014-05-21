@@ -5,8 +5,6 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import halleck.api.Course;
-import halleck.api.OnlineCourse;
 
 import java.util.List;
 import java.util.stream.Stream;

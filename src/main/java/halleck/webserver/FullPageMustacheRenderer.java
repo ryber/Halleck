@@ -1,12 +1,10 @@
 package halleck.webserver;
 
 import com.google.inject.Inject;
-import halleck.api.Settings;
+import halleck.lms.Settings;
 import halleck.lms.AppContext;
 import spark.ModelAndView;
 import spark.template.mustache.MustacheTemplateEngine;
-
-import java.util.Optional;
 
 public class FullPageMustacheRenderer extends MustacheTemplateEngine {
 

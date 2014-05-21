@@ -1,7 +1,7 @@
 package halleck.BDDTests.mocks;
 
 import com.google.common.collect.ImmutableList;
-import halleck.api.Settings;
+import halleck.lms.Settings;
 import halleck.lms.Feature;
 
 import static com.google.common.collect.ImmutableList.of;

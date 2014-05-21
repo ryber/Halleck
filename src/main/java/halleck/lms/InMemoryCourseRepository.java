@@ -1,7 +1,6 @@
 package halleck.lms;
 
 import com.google.common.collect.Maps;
-import halleck.api.Course;
 
 import java.util.Map;
 import java.util.stream.Stream;

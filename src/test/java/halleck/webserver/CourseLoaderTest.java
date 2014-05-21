@@ -3,8 +3,8 @@ package halleck.webserver;
 
 import com.google.common.collect.Iterables;
 import com.google.gson.Gson;
-import halleck.api.Course;
-import halleck.api.OnlineCourse;
+import halleck.lms.Course;
+import halleck.lms.OnlineCourse;
 import org.junit.Test;
 
 import static com.google.common.collect.Lists.newArrayList;

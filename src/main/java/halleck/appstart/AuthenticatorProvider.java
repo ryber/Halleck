@@ -3,7 +3,7 @@ package halleck.appstart;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import halleck.api.Settings;
+import halleck.lms.Settings;
 import halleck.webserver.Authenticator;
 import halleck.webserver.FakeAuthenticator;
 import halleck.webserver.LdapAuthenticator;

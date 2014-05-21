@@ -1,9 +1,7 @@
 package halleck.webserver;
 
 import com.google.inject.Inject;
-import halleck.api.Settings;
-import halleck.webserver.*;
-import spark.ModelAndView;
+import halleck.lms.Settings;
 import spark.Request;
 import spark.Response;
 

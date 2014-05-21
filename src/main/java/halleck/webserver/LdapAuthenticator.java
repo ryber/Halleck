@@ -1,7 +1,7 @@
 package halleck.webserver;
 
 
-import halleck.api.Settings;
+import halleck.lms.Settings;
 
 import javax.inject.Inject;
 import javax.naming.Context;

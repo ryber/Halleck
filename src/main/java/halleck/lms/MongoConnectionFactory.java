@@ -4,11 +4,10 @@ import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.mongodb.DB;
 import com.mongodb.Mongo;
-import halleck.api.Settings;
 
 import javax.annotation.Nullable;
 
-public class MongoConnectionFactory {
+class MongoConnectionFactory {
 
     private static final String DBNAME = "halleck";
     private Mongo mongoClient;

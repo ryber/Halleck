@@ -7,9 +7,9 @@ import com.google.inject.Injector;
 import halleck.BDDTests.StaticContext;
 import halleck.BDDTests.TestBindings;
 import halleck.BDDTests.mocks.MockSettings;
-import halleck.api.Course;
-import halleck.api.Halleck;
-import halleck.api.OnlineCourse;
+import halleck.lms.Course;
+import halleck.lms.Halleck;
+import halleck.lms.OnlineCourse;
 import halleck.lms.InMemoryCourseRepository;
 
 import javax.annotation.Nullable;

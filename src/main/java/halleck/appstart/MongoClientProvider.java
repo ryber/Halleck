@@ -4,7 +4,7 @@ import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.mongodb.Mongo;
-import halleck.api.Settings;
+import halleck.lms.Settings;
 
 import java.net.UnknownHostException;
 

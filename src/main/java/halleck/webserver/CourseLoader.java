@@ -6,10 +6,10 @@ import com.google.common.io.Files;
 import com.google.common.io.Resources;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import halleck.api.Course;
-import halleck.api.Halleck;
-import halleck.api.OnlineCourse;
-import halleck.api.Settings;
+import halleck.lms.Course;
+import halleck.lms.Halleck;
+import halleck.lms.OnlineCourse;
+import halleck.lms.Settings;
 
 import javax.inject.Inject;
 import java.io.File;

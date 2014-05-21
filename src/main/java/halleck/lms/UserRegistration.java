@@ -1,8 +1,5 @@
 package halleck.lms;
 
-import halleck.api.Course;
-import halleck.api.Registration;
-
 public class UserRegistration implements Registration {
     private final Course course;
     private final String userID;

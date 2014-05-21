@@ -1,11 +1,10 @@
 package halleck.webserver;
 
 import com.google.inject.Inject;
-import halleck.api.Course;
-import halleck.api.Halleck;
-import halleck.api.Registration;
+import halleck.lms.Course;
+import halleck.lms.Halleck;
+import halleck.lms.Registration;
 import halleck.lms.AppContext;
-import halleck.webserver.ModelMapView;
 import spark.Request;
 import spark.Response;
 

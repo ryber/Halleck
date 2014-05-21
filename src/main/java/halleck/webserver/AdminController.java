@@ -1,9 +1,8 @@
 package halleck.webserver;
 
 import com.google.inject.Inject;
-import halleck.api.Course;
-import halleck.api.Halleck;
-import halleck.webserver.ModelMapView;
+import halleck.lms.Course;
+import halleck.lms.Halleck;
 import halleck.webserver.mappers.CourseMapper;
 import halleck.webserver.mappers.FormVars;
 import spark.Request;

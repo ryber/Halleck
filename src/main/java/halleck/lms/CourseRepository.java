@@ -1,7 +1,5 @@
 package halleck.lms;
 
-import halleck.api.Course;
-
 import java.util.stream.Stream;
 
 public interface CourseRepository {

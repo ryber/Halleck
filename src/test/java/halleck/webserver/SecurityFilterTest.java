@@ -2,7 +2,7 @@ package halleck.webserver;
 
 import halleck.BDDTests.mocks.MockSettings;
 import com.google.common.collect.Maps;
-import halleck.api.Settings;
+import halleck.lms.Settings;
 import halleck.lms.AppContext;
 import org.junit.After;
 import org.junit.Before;

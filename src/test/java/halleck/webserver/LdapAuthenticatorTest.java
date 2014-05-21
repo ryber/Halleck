@@ -1,7 +1,7 @@
 package halleck.webserver;
 
 
-import halleck.api.Settings;
+import halleck.lms.Settings;
 import org.junit.Test;
 
 import javax.naming.Context;

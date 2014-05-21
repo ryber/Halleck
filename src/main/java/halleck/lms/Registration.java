@@ -1,4 +1,4 @@
-package halleck.api;
+package halleck.lms;
 
 public interface Registration {
     String getUserID();

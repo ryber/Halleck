@@ -1,6 +1,6 @@
 package halleck.BDDTests.fixtures;
 
-import halleck.api.Course;
+import halleck.lms.Course;
 
 import static junit.framework.Assert.assertEquals;
 
