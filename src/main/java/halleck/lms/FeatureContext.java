@@ -4,7 +4,11 @@ import java.util.function.Predicate;
 
 public class FeatureContext {
 
-    private static Predicate<Feature> checker = (f) -> false;
+    private static Predicate<Feature> checker;
+
+    static {
+        clear();
+    }
 
     public static boolean check(Feature feature) {
         return checker.test(feature);
@@ -12,5 +16,9 @@ public class FeatureContext {
 
     public static synchronized void setChecker(Predicate<Feature> check) {
         checker = check;
+    }
+
+    public static void clear() {
+        checker = (f) -> false;
     }
 }

@@ -3,6 +3,7 @@ package halleck.webserver;
 import com.google.common.base.Enums;
 import com.google.common.base.Optional;
 import com.google.common.base.Splitter;
+import com.google.common.collect.ImmutableList;
 import com.google.common.primitives.Ints;
 import halleck.api.Settings;
 import halleck.lms.Feature;
@@ -12,6 +13,7 @@ import java.util.Properties;
 import java.util.stream.Collectors;
 
 import static com.google.common.base.Strings.nullToEmpty;
+import static com.google.common.collect.ImmutableList.copyOf;
 import static com.google.common.collect.Lists.newArrayList;
 
 public class AppSettings implements Settings {
@@ -37,14 +39,14 @@ public class AppSettings implements Settings {
     private final Integer mongoPort;
     private final String siteName;
     private final Integer sitePort;
-    private final List<String> admins;
+    private final ImmutableList<String> admins;
     private final String persistenceType;
     private final String username;
     private final char[] password;
     private final String authType;
     private final String externalMedia;
     private final String courseLoadLocation;
-    private List<Feature> enabledFeatures;
+    private final ImmutableList<Feature> enabledFeatures;
 
 
     public AppSettings(Properties properties) {
@@ -52,7 +54,7 @@ public class AppSettings implements Settings {
         this.mongoPort = tryParse(properties.getProperty(MONGO_PORT));
         this.siteName = properties.getProperty(SITE_NAME);
         this.sitePort = tryParse(properties.getProperty(SITE_PORT));
-        this.admins = splitString(properties.getProperty(SITE_ADMINS));
+        this.admins = copyOf(splitString(properties.getProperty(SITE_ADMINS)));
         this.persistenceType = properties.getProperty(PERSISTENCE_TYPE);
         this.username = properties.getProperty(MONGO_USERNAME);
         this.password = nullToEmpty(properties.getProperty(MONGO_PASSWORD)).toCharArray();
@@ -61,7 +63,7 @@ public class AppSettings implements Settings {
         this.authType = properties.getProperty(AUTHENTICATION_TYPE);
         this.externalMedia = properties.getProperty(SITE_EXTERNALMEDIA);
         this.courseLoadLocation = properties.getProperty(COURSE_LOAD);
-        this.enabledFeatures = parseFeatures(properties.getProperty(ENABLED_FEATURES));
+        this.enabledFeatures = copyOf(parseFeatures(properties.getProperty(ENABLED_FEATURES)));
     }
 
     private List<Feature> parseFeatures(String property) {
@@ -103,7 +105,7 @@ public class AppSettings implements Settings {
     }
 
     @Override
-    public List<String> getAdmins() {
+    public com.google.common.collect.ImmutableList<String> getAdmins() {
         return admins;
     }
 
@@ -143,7 +145,7 @@ public class AppSettings implements Settings {
     }
 
     @Override
-    public List<Feature> getEnabledFeatures() {
+    public com.google.common.collect.ImmutableList<Feature> getEnabledFeatures() {
         return enabledFeatures;
     }
 

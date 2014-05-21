@@ -1,10 +1,10 @@
 package halleck.BDDTests.mocks;
 
+import com.google.common.collect.ImmutableList;
 import halleck.api.Settings;
 import halleck.lms.Feature;
 
-import java.util.List;
-
+import static com.google.common.collect.ImmutableList.of;
 import static com.google.common.collect.Lists.newArrayList;
 
 public class MockSettings implements Settings {
@@ -37,8 +37,8 @@ public class MockSettings implements Settings {
     }
 
     @Override
-    public List<String> getAdmins() {
-        return admin == null ? newArrayList() : newArrayList(admin);
+    public ImmutableList<String> getAdmins() {
+        return admin == null ? of() : of(admin);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class MockSettings implements Settings {
     }
 
     @Override
-    public List<Feature> getEnabledFeatures() {
+    public com.google.common.collect.ImmutableList<Feature> getEnabledFeatures() {
         return null;
     }
 }

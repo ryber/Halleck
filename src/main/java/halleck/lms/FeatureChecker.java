@@ -8,19 +8,16 @@ import java.util.function.Predicate;
 
 public class FeatureChecker implements Predicate<Feature> {
 
-    private final AppContext appContext;
     private final Settings settings;
 
     @Inject
-    public FeatureChecker(AppContext appContext,
-                          Settings settings){
-        this.appContext = appContext;
+    public FeatureChecker(Settings settings){
         this.settings = settings;
     }
 
 
     @Override
     public boolean test(Feature feature) {
-        return false;
+        return settings.getEnabledFeatures().contains(feature);
     }
 }

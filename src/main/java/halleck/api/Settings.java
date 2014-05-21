@@ -1,5 +1,6 @@
 package halleck.api;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import halleck.lms.Feature;
 
@@ -11,7 +12,7 @@ public interface Settings {
     int getMongoPort();
     String getSiteName();
     int getAppPort();
-    List<String> getAdmins();
+    ImmutableList<String> getAdmins();
     String getUsername();
     char[] getPassword();
     String getLdapUrl();
@@ -19,5 +20,5 @@ public interface Settings {
     String getAuthenticationType();
     String getExternalMediaLocation();
     String getCourseLoadLocation();
-    List<Feature> getEnabledFeatures();
+    ImmutableList<Feature> getEnabledFeatures();
 }
