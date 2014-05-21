@@ -9,7 +9,6 @@ import halleck.BDDTests.TestBindings;
 import halleck.BDDTests.mocks.MockSettings;
 import halleck.lms.Course;
 import halleck.lms.Halleck;
-import halleck.lms.OnlineCourse;
 import halleck.lms.InMemoryCourseRepository;
 
 import javax.annotation.Nullable;
@@ -31,7 +30,7 @@ public class ApplicationFixture {
     }
 
     public static CourseFixture givenCourse(String id, String name, String desc, String url, Integer max) {
-        Course c = new OnlineCourse(id, name, desc, url, max, null);
+        Course c = new Course(id, name, desc, url, max, null);
         system.createCourse(c);
         return new CourseFixture(c);
     }

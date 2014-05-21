@@ -34,8 +34,8 @@ public class MongoCourseRepository implements CourseRepository {
         return result.stream();
     }
 
-    private OnlineCourse createCourse(DBObject next) {
-        OnlineCourse onlineCourse = new OnlineCourse(
+    private Course createCourse(DBObject next) {
+        Course course = new Course(
                 next.get("_id").toString(),
                 next.get("name").toString(),
                 next.get("description").toString(),
@@ -44,8 +44,8 @@ public class MongoCourseRepository implements CourseRepository {
                 next.get("content").toString()
                 );
 
-        onlineCourse.addRegisteredUsers((Iterable<String>)next.get("users"));
-        return onlineCourse;
+        course.addRegisteredUsers((Iterable<String>)next.get("users"));
+        return course;
     }
 
     @Override

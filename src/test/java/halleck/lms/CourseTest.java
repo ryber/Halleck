@@ -8,13 +8,13 @@ import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class OnlineCourseTest {
+public class CourseTest {
 
     @Test
     public void ifMaxCapacityIsNullThenFreeSeatsIsAlways99() throws Exception {
-        OnlineCourse o = new OnlineCourse(null,null,null);
+        Course o = new Course(null,null,null);
         o.setMaxCapacity(null);
-        assertEquals(OnlineCourse.UNLIMITED_ENROLLMENT, o.getFreeSeats());
+        assertEquals(Course.UNLIMITED_ENROLLMENT, o.getFreeSeats());
     }
 
     @Test
@@ -28,7 +28,7 @@ public class OnlineCourseTest {
         when(i.getMaxEnrollment()).thenReturn(54);
         when(i.getContent()).thenReturn("some content");
 
-        OnlineCourse t = new OnlineCourse(i);
+        Course t = new Course(i);
 
         assertEquals("fooid", t.getId());
         assertEquals("Underwater Basketweaving", t.getName());

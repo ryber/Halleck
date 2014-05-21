@@ -4,7 +4,6 @@ package halleck.webserver;
 import com.google.common.collect.Iterables;
 import com.google.gson.Gson;
 import halleck.lms.Course;
-import halleck.lms.OnlineCourse;
 import org.junit.Test;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -15,7 +14,7 @@ public class CourseLoaderTest {
     public void testGSonStuff() throws Exception {
         CourseLoader l = new CourseLoader(null, null);
 
-        Course source = new OnlineCourse("42","Underwater Basketweaving",
+        Course source = new Course("42","Underwater Basketweaving",
                 "a long long description", "http://www.google.com",2, "fishy content");
 
         Iterable<Course> courses = l.createCourseArray(new Gson().toJson(newArrayList(source)));

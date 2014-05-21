@@ -8,7 +8,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import halleck.lms.Course;
 import halleck.lms.Halleck;
-import halleck.lms.OnlineCourse;
 import halleck.lms.Settings;
 
 import javax.inject.Inject;
@@ -47,7 +46,7 @@ public class CourseLoader {
 
     Collection<Course> createCourseArray(String content) {
         Gson g = new Gson();
-        return g.fromJson(content, new TypeToken<List<OnlineCourse>>(){}.getType());
+        return g.fromJson(content, new TypeToken<List<Course>>(){}.getType());
     }
 
 

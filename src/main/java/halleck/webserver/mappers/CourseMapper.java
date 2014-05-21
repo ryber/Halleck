@@ -4,7 +4,6 @@ package halleck.webserver.mappers;
 import com.google.common.base.Strings;
 import com.google.common.primitives.Ints;
 import halleck.lms.Course;
-import halleck.lms.OnlineCourse;
 
 import javax.annotation.Nullable;
 import java.util.function.Function;
@@ -12,7 +11,7 @@ import java.util.function.Function;
 public class CourseMapper implements Function<FormVars, Course> {
     @Override
     public Course apply(@Nullable FormVars request) {
-        return new OnlineCourse(
+        return new Course(
                 request.get("id"),
                 request.get("name"),
                 request.get("description"),
