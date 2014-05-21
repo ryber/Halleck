@@ -10,11 +10,11 @@ public class FeatureContextTest {
     @After
     public void tearDown() throws Exception {
         FeatureContext.clear();
-
     }
 
     @Test
     public void byDefaultEverythingIsFalse() {
+        FeatureContext.clear();
         assertEquals(false, FeatureContext.check(Feature.DOJOS));
     }
 

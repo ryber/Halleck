@@ -3,16 +3,18 @@ package halleck.lms;
 import com.google.common.collect.Maps;
 
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Stream;
 
 import static com.google.common.collect.Lists.newArrayList;
 
 public class InMemoryCourseRepository implements CourseRepository {
 
-    private static Map<String, Course> repo = Maps.newHashMap();
+    private static ConcurrentMap<String, Course> repo = Maps.newConcurrentMap();
 
     public Stream<Course> getAllCourses() {
-        return newArrayList(repo.values()).stream();
+        return repo.values().stream();
     }
 
     public static void addCourse(Course course) {
