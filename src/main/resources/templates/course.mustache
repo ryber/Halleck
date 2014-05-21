@@ -17,16 +17,16 @@
 {{/registration.isRegistered}}
 {{^registration.isRegistered}}
     {{#registration.canRegister}}
+    <div class="registration">
+        <form action="#" method="post">
+            <input type="submit" class="bigbutton" value="Register For this course now!">
+        </form>
 
-    <form action="#" method="post">
-        <input type="submit" class="bigbutton" value="Register For this course now!">
-    </form>
-
-    {{/registration.canRegister}}
-    {{^registration.canRegister}}
-       <div class="error">The class is full. Please contact your team lead to have registrations added.</div>
-    {{/registration.canRegister}}
-
+        {{/registration.canRegister}}
+        {{^registration.canRegister}}
+           <div class="error">The class is full. Please contact your team lead to have registrations added.</div>
+        {{/registration.canRegister}}
+    </div>
 
     <p class="course-desc">{{registration.course.description}}</p>
 {{/registration.isRegistered}}
