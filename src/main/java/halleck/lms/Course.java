@@ -20,20 +20,12 @@ public class Course {
     private String owner = EMPTY;
 
     public Course(String id) {
-        this(id,id,id);
+        this(id,id);
     }
 
-    public Course(String id, String name, String description) {
+    public Course(String id, String name) {
         this.id = id;
         this.name = nullToEmpty(name);
-        this.description = nullToEmpty(description);
-    }
-
-    public Course(String id, String name, String description, String url, Integer max, String content) {
-        this(id, name, description);
-        this.url = nullToEmpty(url);
-        this.maxCapacity = max;
-        this.content = nullToEmpty(content);
     }
 
     public String getId() {
@@ -44,8 +36,16 @@ public class Course {
         return name;
     }
 
+    public void setDecription(String value){
+        description = nullToEmpty(value);
+    }
+
     public String getDescription() {
         return description;
+    }
+
+    public void setUrl(String value){
+        url = nullToEmpty(value);
     }
 
     public String getUrl() {

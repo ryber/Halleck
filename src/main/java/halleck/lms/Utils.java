@@ -1,9 +1,13 @@
 package halleck.lms;
 
+import com.google.common.primitives.Ints;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import static com.google.common.base.Strings.nullToEmpty;
 
 public class Utils {
     public static String toSafeString(String url) {
@@ -19,5 +23,9 @@ public class Utils {
             query_pairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"), URLDecoder.decode(pair.substring(idx + 1), "UTF-8"));
         }
         return query_pairs;
+    }
+
+    public static Integer toInteger(String value){
+        return Ints.tryParse(nullToEmpty(value));
     }
 }

@@ -38,8 +38,8 @@ public class GurneyTest {
 
     @Test
     public void willReturnDesiredCourse() throws Exception {
-        Course c1 = new Course("foo",null,null);
-        Course c2 = new Course("bar",null,null);
+        Course c1 = new Course("foo");
+        Course c2 = new Course("bar");
 
         when(courseRepo.getAllCourses()).thenReturn(Stream.of(c1, c2));
 
@@ -52,22 +52,18 @@ public class GurneyTest {
         ArgumentCaptor<Course> captor = ArgumentCaptor.forClass(Course.class);
         doNothing().when(courseRepo).putCourse(captor.capture());
 
-        gurney.createCourse(new Course("42","Underwater Basketweaving", "a desc", "http://foo", null, "something different"));
+        gurney.createCourse(new Course("42"));
 
         Course result = captor.getValue();
 
         assertEquals("42", result.getId());
-        assertEquals("Underwater Basketweaving", result.getName());
-        assertEquals("a desc", result.getDescription());
-        assertEquals("http://foo", result.getUrl());
-        assertEquals("something different", result.getContent());
     }
 
     @Test
     public void willSortCoursesAlphabetically() throws Exception {
-        Course a = new Course("foo","A",null);
-        Course b = new Course("bar","B",null);
-        Course c = new Course("bar","C",null);
+        Course a = new Course("foo","A");
+        Course b = new Course("bar","B");
+        Course c = new Course("bar","C");
 
         when(courseRepo.getAllCourses()).thenReturn(Stream.of(c,b,a));
 

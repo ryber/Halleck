@@ -12,7 +12,7 @@ public class CourseTest {
 
     @Test
     public void ifMaxCapacityIsNullThenFreeSeatsIsAlways99() throws Exception {
-        Course o = new Course(null,null,null);
+        Course o = new Course(null);
         o.setMaxCapacity(null);
         assertEquals(Course.UNLIMITED_ENROLLMENT, o.getFreeSeats());
     }

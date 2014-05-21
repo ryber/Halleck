@@ -4,9 +4,9 @@ import com.google.common.base.Enums;
 import com.google.common.base.Optional;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
-import com.google.common.primitives.Ints;
 import halleck.lms.Settings;
 import halleck.lms.Feature;
+import halleck.lms.Utils;
 
 import java.util.List;
 import java.util.Properties;
@@ -51,9 +51,9 @@ public class AppSettings implements Settings {
 
     public AppSettings(Properties properties) {
         this.mongoHost = properties.getProperty(MONGO_HOST);
-        this.mongoPort = tryParse(properties.getProperty(MONGO_PORT));
+        this.mongoPort = Utils.toInteger(properties.getProperty(MONGO_PORT));
         this.siteName = properties.getProperty(SITE_NAME);
-        this.sitePort = tryParse(properties.getProperty(SITE_PORT));
+        this.sitePort = Utils.toInteger(properties.getProperty(SITE_PORT));
         this.admins = copyOf(splitString(properties.getProperty(SITE_ADMINS)));
         this.persistenceType = properties.getProperty(PERSISTENCE_TYPE);
         this.username = properties.getProperty(MONGO_USERNAME);
@@ -74,10 +74,6 @@ public class AppSettings implements Settings {
                                     .collect(Collectors.toList());
     }
 
-
-    private static Integer tryParse(String value){
-        return Ints.tryParse(nullToEmpty(value));
-    }
 
     @Override
     public String getPersistenceType() {

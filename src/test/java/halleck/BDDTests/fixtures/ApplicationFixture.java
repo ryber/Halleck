@@ -30,7 +30,11 @@ public class ApplicationFixture {
     }
 
     public static CourseFixture givenCourse(String id, String name, String desc, String url, Integer max) {
-        Course c = new Course(id, name, desc, url, max, null);
+        Course c = new Course(id, name){{
+            setDecription(desc);
+            setUrl(url);
+            setMaxCapacity(max);
+        }};
         system.createCourse(c);
         return new CourseFixture(c);
     }
