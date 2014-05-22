@@ -35,14 +35,12 @@ public class MongoCourseRepository implements CourseRepository {
     }
 
     private Course createCourse(DBObject next) {
-        Course course = new Course(next.get("_id").toString(), next.get("name").toString())
-        {{
-            setDecription(next.get("description").toString());
-            setUrl(next.get("url").toString());
-            setMaxCapacity((Integer) next.get("max"));
-            setContent(next.get("content").toString());
-            addRegisteredUsers((Iterable<String>)next.get("users"));
-        }};
+        Course course = new Course(next.get("_id").toString(), next.get("name").toString());
+        course.setDecription(next.get("description").toString());
+        course.setUrl(next.get("url").toString());
+        course.setMaxCapacity((Integer) next.get("max"));
+        course.setContent(next.get("content").toString());
+        course.addRegisteredUsers((Iterable<String>)next.get("users"));
 
         return course;
     }
