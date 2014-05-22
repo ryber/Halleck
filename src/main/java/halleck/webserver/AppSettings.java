@@ -101,7 +101,7 @@ public class AppSettings implements Settings {
     }
 
     @Override
-    public com.google.common.collect.ImmutableList<String> getAdmins() {
+    public ImmutableList<String> getAdmins() {
         return admins;
     }
 
@@ -141,7 +141,7 @@ public class AppSettings implements Settings {
     }
 
     @Override
-    public com.google.common.collect.ImmutableList<Feature> getEnabledFeatures() {
+    public ImmutableList<Feature> getEnabledFeatures() {
         return enabledFeatures;
     }
 
