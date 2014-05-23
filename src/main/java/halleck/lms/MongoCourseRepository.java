@@ -20,7 +20,8 @@ public class MongoCourseRepository implements CourseRepository {
     private final BaseCourseToMongoMapper courseMapper;
 
     @Inject
-    public MongoCourseRepository(MongoConnectionFactory mongoFactory, BaseCourseToMongoMapper courseMapper) {
+    public MongoCourseRepository(MongoConnectionFactory mongoFactory,
+                                 BaseCourseToMongoMapper courseMapper) {
         this.mongoFactory = mongoFactory;
         this.courseMapper = courseMapper;
     }

@@ -1,5 +1,7 @@
 package halleck.webserver;
 
+import halleck.lms.Course;
+
 public interface CourseRenderer {
-    String render(String standardLink);
+    String render(Course standardLink);
 }

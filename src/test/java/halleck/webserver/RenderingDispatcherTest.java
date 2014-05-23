@@ -1,5 +1,6 @@
 package halleck.webserver;
 
+import halleck.lms.Course;
 import halleck.webserver.renderers.RenderingDispatcher;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,10 +13,11 @@ import static org.junit.Assert.assertEquals;
 public class RenderingDispatcherTest {
 
     private MockStacheRenderer mockStacheRenderer;
-
+    private Course course;
     @Before
     public void setUp() throws Exception {
         mockStacheRenderer = new MockStacheRenderer();
+        course = new Course("foo");
     }
 
     @Test
@@ -23,8 +25,8 @@ public class RenderingDispatcherTest {
         RenderingDispatcher renderer = new RenderingDispatcher(newArrayList(new StubRenderer("custom", true)),
                                                                   new StubRenderer("standard", true),
                                                                   mockStacheRenderer);
-
-        renderer.render("http://doesntmatter");
+        course.setUrl("http://doesntmatter");
+        renderer.render(course);
 
         assertEquals("custom", mockStacheRenderer.template);
         assertEquals("http://doesntmatter", mockStacheRenderer.data.get(Renderer.URL));
@@ -36,7 +38,8 @@ public class RenderingDispatcherTest {
                 new StubRenderer("standard", false),
                 mockStacheRenderer);
 
-        renderer.render("http://doesntmatter");
+        course.setUrl("http://doesntmatter");
+        renderer.render(course);
 
         assertEquals("standard", mockStacheRenderer.template);
         assertEquals("http://doesntmatter", mockStacheRenderer.data.get(Renderer.URL));

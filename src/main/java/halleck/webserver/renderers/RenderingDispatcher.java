@@ -2,6 +2,7 @@ package halleck.webserver.renderers;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
+import halleck.lms.Course;
 import halleck.webserver.CourseRenderer;
 import halleck.webserver.MustacheRenderer;
 import halleck.webserver.Renderer;
@@ -28,7 +29,8 @@ public class RenderingDispatcher implements CourseRenderer {
     }
 
     @Override
-    public String render(String standardLink) {
+    public String render(Course course) {
+        String standardLink = course.getUrl();
         Renderer renderer = getRenderer(standardLink);
         return mustacheRenderer.renderTemplate(renderer.mustacheTemplate(), renderer.formatUrl(standardLink));
     }

@@ -52,7 +52,7 @@ public class LearningController {
         Registration reg = getRegistrationId(request);
         return new HashMap() {{
             put("registration", reg);
-            put("courseCountent", renderer.render(reg.getCourse().getUrl()));
+            put("courseCountent", renderer.render(reg.getCourse()));
         }};
     }
 
