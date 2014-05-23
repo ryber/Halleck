@@ -5,20 +5,24 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import halleck.lms.mongomappers.BaseCourseToMongoMapper;
 
 import java.util.List;
 import java.util.stream.Stream;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static halleck.lms.mongomappers.BaseCourseToMongoMapper.*;
 
 
 public class MongoCourseRepository implements CourseRepository {
 
     private final MongoConnectionFactory mongoFactory;
+    private final BaseCourseToMongoMapper courseMapper;
 
     @Inject
-    public MongoCourseRepository(MongoConnectionFactory mongoFactory) {
+    public MongoCourseRepository(MongoConnectionFactory mongoFactory, BaseCourseToMongoMapper courseMapper) {
         this.mongoFactory = mongoFactory;
+        this.courseMapper = courseMapper;
     }
 
     @Override
@@ -40,7 +44,7 @@ public class MongoCourseRepository implements CourseRepository {
         course.setUrl(next.get("url").toString());
         course.setMaxCapacity((Integer) next.get("max"));
         course.setContent(next.get("content").toString());
-        course.addRegisteredUsers((Iterable<String>)next.get("users"));
+        course.addRegisteredUsers((Iterable<String>) next.get("users"));
 
         return course;
     }
@@ -67,12 +71,7 @@ public class MongoCourseRepository implements CourseRepository {
     }
 
     private DBObject map(Course course) {
-        return new BasicDBObject("_id", course.getId())
-                .append("name", course.getName())
-                .append("description", course.getDescription())
-                .append("url", course.getUrl())
-                .append("max", course.getMaxEnrollment())
-                .append("users", course.getRegisteredUsers());
+       return courseMapper.apply(course);
     }
 
     @Override
