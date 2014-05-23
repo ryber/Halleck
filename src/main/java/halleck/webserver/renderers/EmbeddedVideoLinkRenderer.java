@@ -1,6 +1,6 @@
 package halleck.webserver.renderers;
 
-class EmbeddedVideoLinkRenderer extends LinkRenderer {
+class EmbeddedVideoLinkRenderer implements LinkRenderer {
 
     @Override
     public String mustacheTemplate() {

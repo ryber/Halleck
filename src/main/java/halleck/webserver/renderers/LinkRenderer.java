@@ -4,10 +4,10 @@ import halleck.webserver.MapMaker;
 
 import java.util.Map;
 
-public abstract class LinkRenderer {
-    public abstract String mustacheTemplate();
-    public abstract boolean canRender(String url);
-    protected String formatLink(String url){
+interface LinkRenderer {
+    String mustacheTemplate();
+    boolean canRender(String url);
+    default String formatLink(String url){
         return url;
     }
 }

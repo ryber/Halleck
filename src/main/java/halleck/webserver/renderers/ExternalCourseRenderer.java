@@ -9,7 +9,7 @@ import java.util.function.Function;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public class ExternalCourseRenderer implements Function<Course, ModelAndView> {
+class ExternalCourseRenderer implements Function<Course, ModelAndView> {
     public static final String URL = "URL";
 
     private ImmutableSet<LinkRenderer> linkRenderers;

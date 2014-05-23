@@ -1,7 +1,5 @@
 package halleck.webserver.renderers;
 
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Lists;
 import halleck.lms.Course;
 import halleck.webserver.CourseRenderer;
 import halleck.webserver.MustacheRenderer;
@@ -14,7 +12,6 @@ public class RenderingDispatcher implements CourseRenderer {
     private Function<Course, ModelAndView> linkRenderers;
 
     private MustacheRenderer mustacheRenderer;
-
 
     public RenderingDispatcher(){
         this(new ExternalCourseRenderer(),

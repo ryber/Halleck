@@ -2,7 +2,7 @@ package halleck.webserver.renderers;
 
 import halleck.lms.Utils;
 
-class YouTubeLinkRenderer extends LinkRenderer {
+class YouTubeLinkRenderer implements LinkRenderer {
     @Override
     public String mustacheTemplate() {
         return "youTubeRendering.mustache";
@@ -14,7 +14,7 @@ class YouTubeLinkRenderer extends LinkRenderer {
     }
 
     @Override
-    protected String formatLink(String url) {
+    public String formatLink(String url) {
         return String.format("//www.youtube.com/embed/%s", getYouTubeId(url));
     }
 

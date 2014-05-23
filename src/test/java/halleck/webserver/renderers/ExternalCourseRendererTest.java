@@ -35,7 +35,7 @@ public class ExternalCourseRendererTest {
         assertEquals("standard", view.getViewName());
     }
 
-    private static class StubLinkRenderer extends LinkRenderer {
+    private static class StubLinkRenderer implements LinkRenderer {
         private String stache;
         private boolean canRender;
 
