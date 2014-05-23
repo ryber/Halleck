@@ -5,13 +5,13 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class YouTubeRendererTest {
+public class YouTubeLinkRendererTest {
 
-    private YouTubeRenderer renderer;
+    private YouTubeLinkRenderer renderer;
 
     @Before
     public void setUp() throws Exception {
-        renderer = new YouTubeRenderer();
+        renderer = new YouTubeLinkRenderer();
     }
 
     @Test

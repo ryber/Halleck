@@ -3,11 +3,17 @@ package halleck.webserver;
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
+import spark.ModelAndView;
 
 import java.io.IOException;
 import java.io.StringWriter;
 
 public class MustacheRenderer {
+
+    public String render(ModelAndView mv){
+        return renderTemplate(mv.getViewName(), mv.getModel());
+    }
+
     public String renderTemplate(String template, Object data) {
         MustacheFactory mustacheFactory = new DefaultMustacheFactory("templates/");
         Mustache mustache = mustacheFactory.compile(template);

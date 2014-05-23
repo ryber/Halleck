@@ -1,9 +1,11 @@
 package halleck.webserver;
 
 import halleck.lms.Course;
+import halleck.webserver.renderers.LinkRenderer;
 import halleck.webserver.renderers.RenderingDispatcher;
 import org.junit.Before;
 import org.junit.Test;
+import spark.ModelAndView;
 
 import java.util.Map;
 
@@ -12,67 +14,34 @@ import static org.junit.Assert.assertEquals;
 
 public class RenderingDispatcherTest {
 
-    private MockStacheRenderer mockStacheRenderer;
-    private Course course;
-    @Before
-    public void setUp() throws Exception {
-        mockStacheRenderer = new MockStacheRenderer();
-        course = new Course("foo");
-    }
 
     @Test
     public void willUseFirstPositiveCustomRenderer() throws Exception {
-        RenderingDispatcher renderer = new RenderingDispatcher(newArrayList(new StubRenderer("custom", true)),
-                                                                  new StubRenderer("standard", true),
-                                                                  mockStacheRenderer);
-        course.setUrl("http://doesntmatter");
-        renderer.render(course);
+        MockStacheRenderer stach = new MockStacheRenderer("my result");
+        RenderingDispatcher renderer = new RenderingDispatcher(c -> new ModelAndView(c.getId(), "desert-view.mustache"),stach);
 
-        assertEquals("custom", mockStacheRenderer.template);
-        assertEquals("http://doesntmatter", mockStacheRenderer.data.get(Renderer.URL));
-    }
+        String result = renderer.render(new Course("SpiceHarvesterModel"));
 
-    @Test
-    public void willUseDefaultIfNoCustomFound() throws Exception {
-        RenderingDispatcher renderer = new RenderingDispatcher(newArrayList(new StubRenderer("custom", false)),
-                new StubRenderer("standard", false),
-                mockStacheRenderer);
-
-        course.setUrl("http://doesntmatter");
-        renderer.render(course);
-
-        assertEquals("standard", mockStacheRenderer.template);
-        assertEquals("http://doesntmatter", mockStacheRenderer.data.get(Renderer.URL));
-    }
-
-    private static class StubRenderer extends Renderer {
-        private String stache;
-        private boolean canRender;
-
-        StubRenderer(String stache, boolean canRender){
-            this.stache = stache;
-            this.canRender = canRender;
-        }
-        @Override
-        public String mustacheTemplate() {
-            return stache;
-        }
-
-        @Override
-        public boolean canRender(String url) {
-            return canRender;
-        }
+        assertEquals("my result", result);
+        assertEquals("SpiceHarvesterModel", stach.data);
+        assertEquals("desert-view.mustache", stach.template);
     }
 
     private static class MockStacheRenderer extends MustacheRenderer {
         String template;
-        Map<String, Object> data;
+        Object data;
+        private String result;
+
+        public MockStacheRenderer(String result) {
+
+            this.result = result;
+        }
 
         @Override
         public String renderTemplate(String template, Object data) {
             this.template = template;
-            this.data = (Map)data;
-            return "";
+            this.data = data;
+            return result;
         }
     }
 

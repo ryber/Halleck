@@ -1,8 +1,6 @@
 package halleck.webserver.renderers;
 
-import halleck.webserver.Renderer;
-
-class StandardRenderer extends Renderer {
+class StandardLinkRenderer extends LinkRenderer {
 
     @Override
     public String mustacheTemplate() {

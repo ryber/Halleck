@@ -5,40 +5,30 @@ import com.google.common.collect.Lists;
 import halleck.lms.Course;
 import halleck.webserver.CourseRenderer;
 import halleck.webserver.MustacheRenderer;
-import halleck.webserver.Renderer;
+import spark.ModelAndView;
+
+import java.util.function.Function;
 
 public class RenderingDispatcher implements CourseRenderer {
 
-    private ImmutableSet<Renderer> renderers;
-    private Renderer standardRenderer;
+    private Function<Course, ModelAndView> linkRenderers;
+
     private MustacheRenderer mustacheRenderer;
 
 
     public RenderingDispatcher(){
-        this(Lists.newArrayList(new YouTubeRenderer(),new EmbeddedVideoRenderer()),
-             new StandardRenderer(),
+        this(new ExternalCourseRenderer(),
              new MustacheRenderer());
     }
 
-    public RenderingDispatcher(Iterable<Renderer> customRenderers,
-                               Renderer defaultRenderer,
+    public RenderingDispatcher(Function<Course, ModelAndView> ultLinkRenderer,
                                MustacheRenderer stach){
-        this.renderers = ImmutableSet.copyOf(customRenderers);
-        this.standardRenderer = defaultRenderer;
+        this.linkRenderers = ultLinkRenderer;
         this.mustacheRenderer = stach;
     }
 
     @Override
     public String render(Course course) {
-        String standardLink = course.getUrl();
-        Renderer renderer = getRenderer(standardLink);
-        return mustacheRenderer.renderTemplate(renderer.mustacheTemplate(), renderer.formatUrl(standardLink));
-    }
-
-    private Renderer getRenderer(String standardLink) {
-        return renderers.stream()
-                .filter(r -> r.canRender(standardLink))
-                .findFirst()
-                .orElseGet(() -> standardRenderer);
+        return mustacheRenderer.render(linkRenderers.apply(course));
     }
 }

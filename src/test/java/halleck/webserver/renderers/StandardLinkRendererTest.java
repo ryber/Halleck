@@ -5,13 +5,13 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class StandardRendererTest {
+public class StandardLinkRendererTest {
 
-    private StandardRenderer renderer;
+    private StandardLinkRenderer renderer;
 
     @Before
     public void setUp() throws Exception {
-        renderer = new StandardRenderer();
+        renderer = new StandardLinkRenderer();
     }
 
     @Test

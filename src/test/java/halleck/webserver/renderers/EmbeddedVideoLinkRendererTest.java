@@ -5,13 +5,13 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class EmbeddedVideoRendererTest {
+public class EmbeddedVideoLinkRendererTest {
 
-    private EmbeddedVideoRenderer renderer;
+    private EmbeddedVideoLinkRenderer renderer;
 
     @Before
     public void setUp() throws Exception {
-        renderer = new EmbeddedVideoRenderer();
+        renderer = new EmbeddedVideoLinkRenderer();
     }
 
     @Test

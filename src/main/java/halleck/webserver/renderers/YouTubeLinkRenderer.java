@@ -1,9 +1,8 @@
 package halleck.webserver.renderers;
 
 import halleck.lms.Utils;
-import halleck.webserver.Renderer;
 
-class YouTubeRenderer extends Renderer {
+class YouTubeLinkRenderer extends LinkRenderer {
     @Override
     public String mustacheTemplate() {
         return "youTubeRendering.mustache";
