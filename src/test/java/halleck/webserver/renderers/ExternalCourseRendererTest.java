@@ -19,18 +19,20 @@ public class ExternalCourseRendererTest {
 
     @Test
     public void willUseFirstPositiveCustomRenderer() throws Exception {
-        ExternalCourseRenderer renderer = new ExternalCourseRenderer(newArrayList(new StubLinkRenderer("custom", true)), new StubLinkRenderer("standard", true));
+        ExternalCourseRenderer renderer = new ExternalCourseRenderer(new StubLinkRenderer("standard", true),
+                                                                     new StubLinkRenderer("custom", true));
 
-        ModelAndView view = renderer.apply(course);
+        ModelAndView view = renderer.apply(course).get();
 
         assertEquals("custom", view.getViewName());
     }
 
     @Test
     public void willUseDefaultIfNoCustomFound() throws Exception {
-        ExternalCourseRenderer renderer = new ExternalCourseRenderer(newArrayList(new StubLinkRenderer("custom", false)), new StubLinkRenderer("standard", true));
+        ExternalCourseRenderer renderer = new ExternalCourseRenderer(new StubLinkRenderer("standard", true),
+                                                                     new StubLinkRenderer("custom", false));
 
-        ModelAndView view = renderer.apply(course);
+        ModelAndView view = renderer.apply(course).get();
 
         assertEquals("standard", view.getViewName());
     }

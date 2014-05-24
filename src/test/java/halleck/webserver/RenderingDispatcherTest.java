@@ -5,6 +5,9 @@ import halleck.webserver.renderers.RenderingDispatcher;
 import org.junit.Test;
 import spark.ModelAndView;
 
+import java.util.Optional;
+
+import static java.util.Optional.of;
 import static org.junit.Assert.assertEquals;
 
 public class RenderingDispatcherTest {
@@ -14,8 +17,8 @@ public class RenderingDispatcherTest {
     public void willUseFirstPositiveCustomRenderer() throws Exception {
         RenderingDispatcher renderer = new RenderingDispatcher(
                 new MockStacheRenderer("my result"),
-                c -> new ModelAndView(c.getId(), "a1"),
-                c -> new ModelAndView(c.getId(), "b2"));
+                c -> of(new ModelAndView(c.getId(), "a1")),
+                c -> of(new ModelAndView(c.getId(), "b2")));
 
         String result = renderer.render(new Course("SpiceHarvesterModel"));
 

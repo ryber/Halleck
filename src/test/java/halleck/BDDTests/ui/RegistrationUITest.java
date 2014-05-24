@@ -58,7 +58,6 @@ public class RegistrationUITest extends UITEstRunner {
         Result result = exec(get, regResult.getRedirect());
 
         assertThat(result.getContent(), containsString("Underwater Basketweaving"));
-        assertThat(result.getContent(), containsString("Launch Course"));
     }
 
     @Test
