@@ -15,9 +15,9 @@ public class StandardLinkRendererTest {
     }
 
     @Test
-    public void standardLinkRendererCanRenderAnything() throws Exception {
-        assertTrue(renderer.canRender(null));
-        assertTrue(renderer.canRender("foo"));
+    public void standardLinkWillOnlyRenderLinks() throws Exception {
+        assertFalse(renderer.canRender(null));
+        assertFalse(renderer.canRender("foo"));
         assertTrue(renderer.canRender("http://whatever.mp4"));
     }
 }

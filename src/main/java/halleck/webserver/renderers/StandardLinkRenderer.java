@@ -1,5 +1,12 @@
 package halleck.webserver.renderers;
 
+import halleck.lms.Utils;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import static halleck.lms.Utils.tryget;
+
 class StandardLinkRenderer implements LinkRenderer {
 
     @Override
@@ -9,6 +16,6 @@ class StandardLinkRenderer implements LinkRenderer {
 
     @Override
     public boolean canRender(String url) {
-        return true;
+        return tryget(() -> new URL(url)).isPresent();
     }
 }

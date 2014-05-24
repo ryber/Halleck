@@ -6,6 +6,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 import static com.google.common.base.Strings.nullToEmpty;
 
@@ -28,4 +31,18 @@ public class Utils {
     public static Integer toInteger(String value){
         return Ints.tryParse(nullToEmpty(value));
     }
+
+    public static <R> Optional<R> tryget(ExceptionalSupplier<R> func){
+        try{
+            return Optional.of(func.get());
+        }catch (Exception e){
+            return Optional.empty();
+        }
+    }
+
+    @FunctionalInterface
+    public static interface ExceptionalSupplier<T> {
+        T get() throws Exception;
+    }
+
 }

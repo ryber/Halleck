@@ -45,11 +45,11 @@ public class Course {
     }
 
     public void setUrl(String value){
-        url = nullToEmpty(value);
+        url = value;
     }
 
     public String getUrl() {
-        return url;
+        return nullToEmpty(url);
     }
 
     public Integer getMaxEnrollment() {
