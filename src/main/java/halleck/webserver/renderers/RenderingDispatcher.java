@@ -2,7 +2,10 @@ package halleck.webserver.renderers;
 
 import com.google.common.collect.Sets;
 import halleck.lms.Course;
+import halleck.lms.Registration;
+import halleck.lms.Utils;
 import halleck.webserver.CourseRenderer;
+import halleck.webserver.MapMaker;
 import halleck.webserver.MustacheRenderer;
 import spark.ModelAndView;
 
@@ -10,6 +13,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import static halleck.webserver.MapMaker.map;
 
 public class RenderingDispatcher implements CourseRenderer {
 
@@ -30,7 +35,19 @@ public class RenderingDispatcher implements CourseRenderer {
     }
 
     @Override
-    public String render(Course course) {
+    public String render(Registration reg) {
+        if(reg.isRegistered()) {
+            return renderCourseLaunchSection(reg.getCourse());
+        }
+        return renderNotRegisteredSection(reg);
+    }
+
+    private String renderNotRegisteredSection(Registration reg) {
+        return mustacheRenderer.render(new ModelAndView(map("registration", reg),
+                "courseRegistration.mustache"));
+    }
+
+    String renderCourseLaunchSection(Course course) {
         return linkRenderers.stream()
                      .map(f -> f.apply(course))
                      .filter(Optional::isPresent)

@@ -1,6 +1,7 @@
-package halleck.webserver;
+package halleck.webserver.renderers;
 
 import halleck.lms.Course;
+import halleck.webserver.MustacheRenderer;
 import halleck.webserver.renderers.RenderingDispatcher;
 import org.junit.Test;
 import spark.ModelAndView;
@@ -20,7 +21,7 @@ public class RenderingDispatcherTest {
                 c -> of(new ModelAndView(c.getId(), "a1")),
                 c -> of(new ModelAndView(c.getId(), "b2")));
 
-        String result = renderer.render(new Course("SpiceHarvesterModel"));
+        String result = renderer.renderCourseLaunchSection(new Course("SpiceHarvesterModel"));
 
         assertEquals("my result\n\nmy result", result);
     }

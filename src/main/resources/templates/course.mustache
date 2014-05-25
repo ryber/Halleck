@@ -4,29 +4,9 @@
 </div>
 
 
-{{#registration.isRegistered}}
-    <div class="content">
 
-        {{{courseCountent}}}
+<div class="content">
 
-    </div>
-{{/registration.isRegistered}}
+    {{{courseCountent}}}
 
-
-{{^registration.isRegistered}}
-    <div class="content">
-        {{#registration.canRegister}}
-        <div class="registration">
-            <form action="#" method="post">
-                <input type="submit" class="bigbutton" value="Register For this course now!">
-            </form>
-
-        {{/registration.canRegister}}
-        {{^registration.canRegister}}
-            <div class="error">The class is full. Please contact your team lead to have registrations added.</div>
-        {{/registration.canRegister}}
-    </div>
-
-        <p class="course-desc">{{registration.course.description}}</p>
-    </div>
-{{/registration.isRegistered}}
+</div>

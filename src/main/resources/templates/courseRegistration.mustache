@@ -1,0 +1,16 @@
+{{#registration.canRegister}}
+    <div class="registration">
+        <form action="#" method="post">
+            <input type="submit" class="bigbutton" value="Register For this course now!">
+        </form>
+    </div>
+{{/registration.canRegister}}
+
+{{^registration.canRegister}}
+    <div class="registration">
+        <div class="error">The class is full. Please contact your team lead to have registrations added.</div>
+    </div>
+{{/registration.canRegister}}
+
+
+<p class="course-desc">{{registration.course.description}}</p>
