@@ -3,15 +3,18 @@
     edit</a>{{/user.isAdmin}}
 </div>
 
-<div class="content">
-    {{#registration.isRegistered}}
 
+{{#registration.isRegistered}}
+    <div class="content">
 
         {{{courseCountent}}}
 
+    </div>
+{{/registration.isRegistered}}
 
-    {{/registration.isRegistered}}
-    {{^registration.isRegistered}}
+
+{{^registration.isRegistered}}
+    <div class="content">
         {{#registration.canRegister}}
         <div class="registration">
             <form action="#" method="post">
@@ -25,5 +28,5 @@
     </div>
 
         <p class="course-desc">{{registration.course.description}}</p>
-    {{/registration.isRegistered}}
-</div>
+    </div>
+{{/registration.isRegistered}}
