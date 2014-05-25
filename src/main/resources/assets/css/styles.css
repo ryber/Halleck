@@ -73,6 +73,14 @@ a:hover {
     margin-top: 30px;
 }
 
+.content {
+    margin-top: 30px;
+}
+
+.courseChunk {
+    margin-bottom: 20px;
+}
+
 .edit {
     font-size: 10px;
 }

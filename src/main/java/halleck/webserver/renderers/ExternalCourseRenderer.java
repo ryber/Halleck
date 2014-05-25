@@ -35,8 +35,9 @@ class ExternalCourseRenderer implements Function<Course, Optional<ModelAndView>>
 
         return linkRenderers.stream()
                 .filter(r -> r.canRender(standardLink))
-                .findFirst().map(l ->
-                                new ModelAndView(MapMaker.map(URL, l.formatLink(standardLink)), l.mustacheTemplate())
+                .findFirst()
+                .map(l ->
+                     new ModelAndView(l.formatLink(standardLink), l.mustacheTemplate())
                 );
     }
 

@@ -1,32 +1,29 @@
-
 <div class="course-title">
-    {{registration.course.name}} {{#user.isAdmin}} <a class="edit" href="/admin/course/{{registration.course.id}}" > :: edit</a>{{/user.isAdmin}}
+    {{registration.course.name}} {{#user.isAdmin}} <a class="edit" href="/admin/course/{{registration.course.id}}"> ::
+    edit</a>{{/user.isAdmin}}
 </div>
 
-<div>
-{{#registration.isRegistered}}
+<div class="content">
+    {{#registration.isRegistered}}
 
 
-    {{{courseCountent}}}
+        {{{courseCountent}}}
 
-</div>
 
-{{/registration.isRegistered}}
-{{^registration.isRegistered}}
-    {{#registration.canRegister}}
-    <div class="registration">
-        <form action="#" method="post">
-            <input type="submit" class="bigbutton" value="Register For this course now!">
-        </form>
+    {{/registration.isRegistered}}
+    {{^registration.isRegistered}}
+        {{#registration.canRegister}}
+        <div class="registration">
+            <form action="#" method="post">
+                <input type="submit" class="bigbutton" value="Register For this course now!">
+            </form>
 
         {{/registration.canRegister}}
         {{^registration.canRegister}}
-           <div class="error">The class is full. Please contact your team lead to have registrations added.</div>
+            <div class="error">The class is full. Please contact your team lead to have registrations added.</div>
         {{/registration.canRegister}}
     </div>
 
-    <p class="course-desc">{{registration.course.description}}</p>
-{{/registration.isRegistered}}
-
-
+        <p class="course-desc">{{registration.course.description}}</p>
+    {{/registration.isRegistered}}
 </div>
