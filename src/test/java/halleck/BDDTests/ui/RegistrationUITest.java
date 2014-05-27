@@ -143,18 +143,6 @@ public class RegistrationUITest extends UITEstRunner {
     }
 
 
-    @Test
-    public void templatesThatDoNotHaveJavascriptsWillNotRenderAnyJs(){
-        ApplicationFixture.givenAdminIsLoggedIn("Phil");
-        setContext("Phil");
-
-        givenCourse("1", "Underwater Basketweaving");
-
-        Result result = exec(get, "/admin/course/1");
-
-        assertThat(result.getContent(), not(containsString("<script")));
-    }
-
     private void assertHasFormInput(String content, String inputName, String inputValue) {
         try{
             assertThat(content, containsString(String.format("name=\"%s\"", inputName)));

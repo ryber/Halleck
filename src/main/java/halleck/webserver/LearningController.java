@@ -5,6 +5,7 @@ import halleck.lms.Course;
 import halleck.lms.Halleck;
 import halleck.lms.Registration;
 import halleck.lms.AppContext;
+import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
@@ -13,7 +14,8 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.stream.Stream;
 
-import static halleck.webserver.MapMaker.map;
+
+import static com.google.common.collect.ImmutableMap.of;
 import static java.util.stream.Collectors.toList;
 
 
@@ -31,17 +33,17 @@ public class LearningController {
         this.renderer = renderer;
     }
 
-    public ModelMapView getMyCourses() {
+    public ModelAndView getMyCourses() {
         return renderCourseList(halleck.getUsersCourses(getUser()));
     }
 
-    public ModelMapView getCourseCatalog() {
+    public ModelAndView getCourseCatalog() {
         return renderCourseList(halleck.getAllCourses());
     }
 
-    public ModelMapView getCourseDeets(Request request, Response response) {
+    public ModelAndView getCourseDeets(Request request, Response response) {
         try {
-            return new ModelMapView(getRegistrationMap(request), "course.mustache");
+            return new ModelAndView(getRegistrationMap(request), "course.mustache");
         } catch (NoSuchElementException e) {
             response.status(404);
             return null;
@@ -57,7 +59,7 @@ public class LearningController {
     }
 
 
-    public ModelMapView registerForCourse(Request request, Response response) {
+    public ModelAndView registerForCourse(Request request, Response response) {
         try {
             String courseID = request.params(":id");
             String user = getUser();
@@ -75,8 +77,8 @@ public class LearningController {
         return context.currentUser();
     }
 
-    private ModelMapView renderCourseList(Stream<Course> courses) {
-        return new ModelMapView(map("courses", courses.collect(toList())), "welcome.mustache");
+    private ModelAndView renderCourseList(Stream<Course> courses) {
+        return new ModelAndView(of("courses", courses.collect(toList())), "welcome.mustache");
     }
 
     private Registration getRegistrationId(Request request) {

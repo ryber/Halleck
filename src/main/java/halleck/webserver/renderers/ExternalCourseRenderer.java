@@ -2,7 +2,6 @@ package halleck.webserver.renderers;
 
 import com.google.common.collect.ImmutableList;
 import halleck.lms.Course;
-import halleck.webserver.MapMaker;
 import spark.ModelAndView;
 
 import java.util.Optional;

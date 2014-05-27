@@ -1,14 +1,16 @@
 package halleck.webserver;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import halleck.lms.Settings;
+import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
 import java.util.Map;
 import java.util.Objects;
 
-import static halleck.webserver.MapMaker.map;
+import static com.google.common.collect.ImmutableMap.of;
 
 public class AuthController {
 
@@ -25,28 +27,28 @@ public class AuthController {
     }
 
 
-    public ModelMapView getLoginForm() {
-        return new ModelMapView(getSettings(),"login.mustache");
+    public ModelAndView getLoginForm() {
+        return new ModelAndView(getSettings(),"login.mustache");
     }
 
-    public ModelMapView logoutAction(Response response) {
+    public ModelAndView logoutAction(Response response) {
         response.removeCookie(SecurityFilter.USERNAME_COOKIE);
         response.redirect("/login");
         return null;
     }
 
-    public ModelMapView loginAction(Request request, Response response) {
+    public ModelAndView loginAction(Request request, Response response) {
         String username = request.queryParams("username");
         String password = request.queryParams("password");
 
         if(auth.authenticate(username, password)){
             response.cookie(SecurityFilter.USERNAME_COOKIE, username);
-            return new ModelMapView(map("url", "/"), "redirect.mustache");
+            return new ModelAndView(of("url", "/"), "redirect.mustache");
         }
-        return new ModelMapView(map("wrong", true), "login.mustache");
+        return new ModelAndView(of("wrong", true), "login.mustache");
     }
 
     private Map getSettings() {
-        return map("showpass", !Objects.equals(settings.getAuthenticationType(), "fake"));
+        return of("showpass", !Objects.equals(settings.getAuthenticationType(), "fake"));
     }
 }

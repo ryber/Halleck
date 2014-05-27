@@ -3,9 +3,7 @@ package halleck.webserver.renderers;
 import com.google.common.collect.Sets;
 import halleck.lms.Course;
 import halleck.lms.Registration;
-import halleck.lms.Utils;
 import halleck.webserver.CourseRenderer;
-import halleck.webserver.MapMaker;
 import halleck.webserver.MustacheRenderer;
 import spark.ModelAndView;
 
@@ -14,7 +12,8 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static halleck.webserver.MapMaker.map;
+import static com.google.common.collect.ImmutableMap.of;
+
 
 public class RenderingDispatcher implements CourseRenderer {
 
@@ -43,7 +42,7 @@ public class RenderingDispatcher implements CourseRenderer {
     }
 
     private String renderNotRegisteredSection(Registration reg) {
-        return mustacheRenderer.render(new ModelAndView(map("registration", reg),
+        return mustacheRenderer.render(new ModelAndView(of("registration", reg),
                 "courseRegistration.mustache"));
     }
 
