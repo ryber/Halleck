@@ -3,7 +3,6 @@ package halleck.lms;
 import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
