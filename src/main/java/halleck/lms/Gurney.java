@@ -1,13 +1,12 @@
 package halleck.lms;
 
+import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static com.google.common.collect.FluentIterable.from;
 
 public class Gurney implements Halleck {
 
@@ -72,5 +71,18 @@ public class Gurney implements Halleck {
         courseArray.forEach(this::createCourse);
     }
 
+    @Override
+    public Stream<Course> getCourseDojo(String parentCourseId) {
+        return getCourse(parentCourseId).orElseThrow(() -> new CourseNotFoundException())
+                                        .getChildIds()
+                                        .stream()
+                                        .map(this::getCourse)
+                                        .filter(Optional::isPresent)
+                                        .map(Optional::get);
 
+    }
+
+
+    public static class CourseNotFoundException extends RuntimeException {
+    }
 }

@@ -1,5 +1,9 @@
 package halleck.lms;
 
+import halleck.BDDTests.mocks.MockContext;
+import halleck.BDDTests.mocks.MockCourseRepo;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -7,56 +11,58 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+
 public class GurneyTest {
 
-    @Mock
-    private InMemoryCourseRepository courseRepo;
+    private MockCourseRepo courseRepo;
 
-    @Mock
-    private AppContext context;
-
-    @InjectMocks
     private Gurney gurney;
+
+    @Before
+    public void setUp() throws Exception {
+        courseRepo = new MockCourseRepo();
+        gurney = new Gurney(courseRepo, new MockContext());
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        InMemoryCourseRepository.reset();
+    }
 
     @Test
     public void getAllReturnsAllFromRepo() throws Exception {
-        Course mock = mock(Course.class);
-        when(courseRepo.getAllCourses()).thenReturn(Stream.of(mock));
-
+        Course mock = new Course("f");
+        courseRepo.putCourse(mock);
 
         assertEquals(mock, gurney.getAllCourses().findFirst().get());
     }
 
     @Test
     public void willReturnDesiredCourse() throws Exception {
-        Course c1 = new Course("foo");
-        Course c2 = new Course("bar");
+        Course foo = new Course("foo");
+        Course bar = new Course("bar");
+        courseRepo.putCourse(foo);
+        courseRepo.putCourse(bar);
 
-        when(courseRepo.getAllCourses()).thenReturn(Stream.of(c1, c2));
-
-        assertEquals(c2, gurney.getCourse("bar").get());
+        assertEquals(bar, gurney.getCourse("bar").get());
     }
 
     @Test
     public void willSaveInputToCourseRepo() throws Exception {
 
-        ArgumentCaptor<Course> captor = ArgumentCaptor.forClass(Course.class);
-        doNothing().when(courseRepo).putCourse(captor.capture());
-
         gurney.createCourse(new Course("42"));
 
-        Course result = captor.getValue();
-
-        assertEquals("42", result.getId());
+        assertEquals("42", courseRepo.getAllCourses().findAny().get().getId());
     }
 
     @Test
@@ -65,9 +71,44 @@ public class GurneyTest {
         Course b = new Course("bar","B");
         Course c = new Course("bar","C");
 
-        when(courseRepo.getAllCourses()).thenReturn(Stream.of(c,b,a));
+        courseRepo.putAll(a, b, c);
 
         assertEquals(a, gurney.getAllCourses().collect(Collectors.toList()).get(0));
+    }
 
+    @Test
+    public void canGetChildCourseList() throws Exception {
+        Course a = new Course("A");
+        Course b = new Course("B");
+        Course c = new Course("C");
+        a.addChild("B");
+        a.addChild("C");
+
+        courseRepo.putAll(a, b, c);
+
+        List<Course> children = gurney.getCourseDojo("A").collect(Collectors.toList());
+
+        assertTrue(children.contains(b));
+        assertTrue(children.contains(c));
+    }
+
+    @Test(expected = Gurney.CourseNotFoundException.class)
+    public void willThrowExceptionIfParentDoesntExist() throws Exception {
+        gurney.getCourseDojo("foo");
+    }
+
+    @Test
+    public void ifChildrenDontExistJustKeepOnRolling() throws Exception {
+        Course a = new Course("A");
+        Course b = new Course("B");
+        a.addChild("B");
+        a.addChild("C");
+
+        courseRepo.putAll(a, b);
+
+        List<Course> children = gurney.getCourseDojo("A").collect(Collectors.toList());
+
+        assertTrue(children.contains(b));
+        assertEquals(1, children.size());
     }
 }

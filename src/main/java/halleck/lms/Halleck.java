@@ -14,4 +14,5 @@ public interface Halleck {
     Set<Registration> getRegistrations(String courseID);
     void createCourse(Course course);
     void createCourses(Iterable<Course> courseArray);
+    Stream<Course> getCourseDojo(String parentCourseId);
 }

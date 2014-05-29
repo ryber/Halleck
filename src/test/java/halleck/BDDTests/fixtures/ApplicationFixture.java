@@ -1,7 +1,5 @@
 package halleck.BDDTests.fixtures;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.FluentIterable;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import halleck.BDDTests.StaticContext;
@@ -11,8 +9,7 @@ import halleck.lms.Course;
 import halleck.lms.Halleck;
 import halleck.lms.InMemoryCourseRepository;
 
-import javax.annotation.Nullable;
-import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class ApplicationFixture {
     private static StaticContext context = new StaticContext();
@@ -75,12 +72,13 @@ public class ApplicationFixture {
     }
 
     public static boolean userIsRegisteredForCourse(final String userName, String... couseIds) {
-        return FluentIterable.from(Arrays.asList(couseIds))
-                .allMatch(new Predicate<String>() {
-                    @Override
-                    public boolean apply(@Nullable String input) {
-                        return system.getRegistration(input, userName).isRegistered();
-                    }
-                });
+        return Stream.of(couseIds)
+                     .allMatch(
+                             input -> system.getRegistration(input, userName).isRegistered()
+                     );
+    }
+
+    public static ChildFixture assertCourseChildListFor(String id){
+        return new ChildFixture(system.getCourseDojo(id));
     }
 }
