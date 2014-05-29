@@ -125,7 +125,7 @@ public class SecurityFilterTest {
 
     private class MockSparkRequest extends Request {
         private final String path;
-        private HashMap<String,String> cookies = Maps.newHashMap();;
+        private HashMap<String,String> cookies = Maps.newHashMap();
         private HashMap<String,Object> attributes = Maps.newHashMap();
 
         public MockSparkRequest(String path){
