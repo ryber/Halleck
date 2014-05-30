@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 import javax.annotation.Nullable;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -111,5 +112,9 @@ public class Course {
 
     public void removeChild(String id) {
         childCourses.remove(id);
+    }
+
+    public void addChildren(Collection<String> children) {
+        children.stream().forEach(this::addChild);
     }
 }

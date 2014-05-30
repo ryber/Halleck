@@ -1,14 +1,13 @@
 package halleck.lms;
 
-import com.mongodb.DBObject;
 import org.junit.Test;
 
 import java.util.List;
 import java.util.Set;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class MongoCourseRepositoryTest {
 
