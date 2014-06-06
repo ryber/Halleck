@@ -1,7 +1,7 @@
 package halleck.webserver;
 
-import halleck.BDDTests.mocks.MockSettings;
-import halleck.MockSparkRequest;
+import halleck.mocks.MockSettings;
+import halleck.mocks.MockSparkRequest;
 import halleck.lms.Settings;
 import halleck.lms.AppContext;
 import org.junit.After;

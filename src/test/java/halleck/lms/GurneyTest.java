@@ -1,25 +1,17 @@
 package halleck.lms;
 
-import halleck.BDDTests.mocks.MockContext;
-import halleck.BDDTests.mocks.MockCourseRepo;
+import halleck.mocks.MockContext;
+import halleck.mocks.MockCourseRepo;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 
 public class GurneyTest {

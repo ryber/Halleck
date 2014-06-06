@@ -4,7 +4,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import halleck.BDDTests.StaticContext;
 import halleck.BDDTests.TestBindings;
-import halleck.BDDTests.mocks.MockSettings;
+import halleck.mocks.MockSettings;
 import halleck.lms.Course;
 import halleck.lms.Halleck;
 import halleck.lms.InMemoryCourseRepository;

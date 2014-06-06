@@ -1,4 +1,4 @@
-package halleck.BDDTests.mocks;
+package halleck.mocks;
 
 import javax.servlet.ServletOutputStream;
 import java.io.IOException;

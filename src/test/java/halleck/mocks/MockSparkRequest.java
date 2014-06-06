@@ -1,4 +1,4 @@
-package halleck;
+package halleck.mocks;
 
 import com.google.common.collect.Maps;
 import spark.Request;

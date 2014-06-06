@@ -1,13 +1,13 @@
 package halleck.BDDTests.ui;
 
 import halleck.BDDTests.fixtures.ApplicationFixture;
-import halleck.BDDTests.mocks.Result;
+import halleck.mocks.Result;
 import halleck.webserver.mappers.FormVars;
 import org.junit.Test;
 
 import static halleck.BDDTests.fixtures.ApplicationFixture.givenCourse;
 import static halleck.BDDTests.fixtures.ApplicationFixture.setContext;
-import static halleck.BDDTests.mocks.FakeAppServer.exec;
+import static halleck.mocks.FakeAppServer.exec;
 import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertThat;

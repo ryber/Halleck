@@ -1,6 +1,4 @@
-package halleck.BDDTests.mocks;
-
-import halleck.BDDTests.mocks.FakeServletOutputStream;
+package halleck.mocks;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
