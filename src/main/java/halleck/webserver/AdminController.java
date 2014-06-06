@@ -2,6 +2,7 @@ package halleck.webserver;
 
 import com.google.inject.Inject;
 import halleck.lms.Course;
+import halleck.lms.Feature;
 import halleck.lms.Halleck;
 import halleck.webserver.mappers.CourseMapper;
 import halleck.webserver.mappers.FormVars;
@@ -45,10 +46,14 @@ public class AdminController {
     private ModelAndView renderCourseAdmin(Request request, String view) {
         Optional<Course> course = halleck.getCourse(request.params(":id"));
         if(course.isPresent()){
-            return new ModelAndView(of("course", course.get()), view);
+            return getModelAndView(view, course.get());
         }
 
         return new ModelAndView(of(), "unknowncourse.mustache");
     }
 
+    ModelAndView getModelAndView(String view, Course course) {
+        return new ModelAndView(of("course", course,
+                                   "FEATURES", new FeatureMap()), view);
+    }
 }

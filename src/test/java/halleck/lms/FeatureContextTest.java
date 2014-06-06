@@ -1,7 +1,6 @@
 package halleck.lms;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -15,13 +14,13 @@ public class FeatureContextTest {
     @Test
     public void byDefaultEverythingIsFalse() {
         FeatureContext.clear();
-        assertEquals(false, FeatureContext.check(Feature.DOJOS));
+        assertEquals(false, FeatureContext.check(Feature.LEARING_DOJOS));
     }
 
     @Test
     public void ifFeatureCheckerSaysItsOkThenItIs() {
         FeatureContext.setChecker((f) -> true);
 
-        assertTrue(FeatureContext.check(Feature.DOJOS));
+        assertTrue(FeatureContext.check(Feature.LEARING_DOJOS));
     }
 }

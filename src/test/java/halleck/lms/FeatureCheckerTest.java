@@ -13,11 +13,11 @@ public class FeatureCheckerTest {
     @Test
     public void willCheckAgainstSettingsIfFeatureIsOn() throws Exception {
         Settings settings = mock(Settings.class);
-        when(settings.getEnabledFeatures()).thenReturn(ImmutableList.of(Feature.DOJOS));
+        when(settings.getEnabledFeatures()).thenReturn(ImmutableList.of(Feature.LEARING_DOJOS));
 
         FeatureChecker check = new FeatureChecker(settings);
 
-        assertTrue(check.test(Feature.DOJOS));
+        assertTrue(check.test(Feature.LEARING_DOJOS));
     }
 
     @Test
@@ -27,6 +27,6 @@ public class FeatureCheckerTest {
 
         FeatureChecker check = new FeatureChecker(settings);
 
-        assertFalse(check.test(Feature.DOJOS));
+        assertFalse(check.test(Feature.LEARING_DOJOS));
     }
 }

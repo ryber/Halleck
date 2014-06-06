@@ -23,10 +23,12 @@ public class CourseLoaderTest {
         source.setUrl("http://www.google.com");
         source.setMaxCapacity(2);
         source.setContent("fishy content");
+        source.setOwner("Thufir");
 
 
         ArrayList<Course> sourceList = newArrayList(source);
-        Collection<Course> courses = l.createCourseArray(new Gson().toJson(sourceList));
+        String content = new Gson().toJson(sourceList);
+        Collection<Course> courses = l.createCourseArray(content);
         Course c = courses.stream().findAny().get();
 
         assertEquals(1, courses.size());
@@ -36,6 +38,6 @@ public class CourseLoaderTest {
         assertEquals("http://www.google.com", c.getUrl());
         assertEquals((Integer)2, c.getMaxEnrollment());
         assertEquals("fishy content", c.getContent());
-
+        assertEquals("Thufir", c.getOwner());
     }
 }

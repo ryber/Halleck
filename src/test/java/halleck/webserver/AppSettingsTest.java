@@ -80,12 +80,12 @@ public class AppSettingsTest {
 
     @Test
     public void getEnabledFeatures(){
-        props.setProperty(AppSettings.ENABLED_FEATURES, Feature.DOJOS.toString() + ",sandworm");
+        props.setProperty(AppSettings.ENABLED_FEATURES, Feature.LEARING_DOJOS.toString() + ",sandworm");
         settings = new AppSettings(props);
 
         List<Feature> enabledFeatures = settings.getEnabledFeatures();
 
-        Assert.assertEquals(Feature.DOJOS, enabledFeatures.get(0));
+        Assert.assertEquals(Feature.LEARING_DOJOS, enabledFeatures.get(0));
         Assert.assertEquals(1, enabledFeatures.size());
     }
 
