@@ -10,6 +10,7 @@ import static com.google.common.collect.Lists.newArrayList;
 public class MockSettings implements Settings {
 
     public static String admin;
+    private ImmutableList<Feature> features = ImmutableList.of();
 
     @Override
     public String getPersistenceType() {
@@ -77,8 +78,8 @@ public class MockSettings implements Settings {
     }
 
     @Override
-    public com.google.common.collect.ImmutableList<Feature> getEnabledFeatures() {
-        return null;
+    public ImmutableList<Feature> getEnabledFeatures() {
+        return features;
     }
 }
 
