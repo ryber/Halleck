@@ -2,6 +2,7 @@ package halleck.lms;
 
 import halleck.mocks.MockContext;
 import halleck.mocks.MockCourseRepo;
+import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,11 +20,13 @@ public class GurneyTest {
     private MockCourseRepo courseRepo;
 
     private Gurney gurney;
+    private MockContext context;
 
     @Before
     public void setUp() throws Exception {
         courseRepo = new MockCourseRepo();
-        gurney = new Gurney(courseRepo, new MockContext());
+        context = new MockContext();
+        gurney = new Gurney(courseRepo, context);
     }
 
     @After
@@ -102,5 +105,28 @@ public class GurneyTest {
 
         assertTrue(children.contains(b));
         assertEquals(1, children.size());
+    }
+
+    @Test
+    public void willNotSetOwnerIfAlreadyOnObject() throws Exception {
+        Course c = new Course("a");
+        c.setOwner("Duncan");
+
+        context.setCurrentUser("Jessica");
+
+        gurney.createCourse(c);
+
+        assertEquals("Duncan", c.getOwner());
+    }
+
+    @Test
+    public void willAddOwnerIfNotPresent() throws Exception {
+        Course c = new Course("a");
+
+        context.setCurrentUser("Jessica");
+
+        gurney.createCourse(c);
+
+        assertEquals("Jessica", c.getOwner());
     }
 }

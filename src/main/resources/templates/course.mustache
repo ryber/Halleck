@@ -1,8 +1,6 @@
 <div class="course-title">
-    {{registration.course.name}} {{#user.isAdmin}} <a class="edit" href="/admin/course/{{registration.course.id}}"> :: edit</a>{{/user.isAdmin}}
+    {{name}} {{#canedit}} <a class="edit" href="/admin/course/{{id}}"> :: edit</a>{{/canedit}}
 </div>
-
-
 
 <div class="content">
 

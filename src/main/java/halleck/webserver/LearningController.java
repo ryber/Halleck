@@ -1,5 +1,7 @@
 package halleck.webserver;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import halleck.lms.Course;
 import halleck.lms.Halleck;
@@ -12,6 +14,7 @@ import spark.Response;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
@@ -52,10 +55,11 @@ public class LearningController {
 
     private Map getRegistrationMap(Request request) {
         Registration reg = getRegistrationId(request);
-        return new HashMap() {{
-            put("registration", reg);
-            put("courseCountent", renderer.render(reg));
-        }};
+        return ImmutableMap.of("name", reg.getCourse().getName(),
+                               "id", reg.getCourse().getId(),
+                               "owner", reg.getCourse().getOwner(),
+                               "canedit", reg.getCourse().getOwner().equals(context.currentUser()),
+                               "courseCountent", renderer.render(reg));
     }
 
 
@@ -78,7 +82,13 @@ public class LearningController {
     }
 
     private ModelAndView renderCourseList(Stream<Course> courses) {
-        return new ModelAndView(of("courses", courses.collect(toList())), "welcome.mustache");
+        return new ModelAndView(of("courses", courses.map(this::mapToRow).collect(toList())), "welcome.mustache");
+    }
+
+    private Map mapToRow(Course c) {
+        return ImmutableMap.of("id", c.getId(),
+                               "name", c.getName(),
+                               "description", c.getDescription());
     }
 
     private Registration getRegistrationId(Request request) {

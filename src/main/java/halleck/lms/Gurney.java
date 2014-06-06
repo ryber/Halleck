@@ -1,5 +1,6 @@
 package halleck.lms;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 
@@ -60,9 +61,15 @@ public class Gurney implements Halleck {
 
     @Override
     public void createCourse(Course course) {
-        String owner = context.currentUser();
-        course.setOwner(owner);
+        setOwner(course);
         courseRepo.putCourse(course);
+    }
+
+    private void setOwner(Course course) {
+        String owner = context.currentUser();
+        if(Strings.isNullOrEmpty(course.getOwner())) {
+            course.setOwner(owner);
+        }
     }
 
 

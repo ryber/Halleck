@@ -85,7 +85,7 @@ public class Course {
     }
 
     public String getOwner() {
-        return owner;
+        return nullToEmpty(owner);
     }
 
     public void setOwner(String value) {
