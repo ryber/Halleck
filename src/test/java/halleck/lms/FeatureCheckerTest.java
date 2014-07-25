@@ -1,32 +1,33 @@
 package halleck.lms;
 
-import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class FeatureCheckerTest {
 
     @Test
-    public void willCheckAgainstSettingsIfFeatureIsOn() throws Exception {
-        Settings settings = mock(Settings.class);
-        when(settings.getEnabledFeatures()).thenReturn(ImmutableList.of(Feature.LEARING_DOJOS));
+    public void willReturnFalseByDefault() throws Exception {
+        FeatureChecker check = new FeatureChecker();
 
-        FeatureChecker check = new FeatureChecker(settings);
+        assertFalse(check.test(Feature.LEARING_DOJOS));
+    }
+
+    @Test
+    public void willReturnTrueIfMatchesAndTrue() {
+        FeatureChecker check = new FeatureChecker();
+        check.add(Feature.LEARING_DOJOS, (f) -> true);
 
         assertTrue(check.test(Feature.LEARING_DOJOS));
     }
 
     @Test
-    public void willNotReturnTrueIfFeatureIsNotInList() throws Exception {
-        Settings settings = mock(Settings.class);
-        when(settings.getEnabledFeatures()).thenReturn(ImmutableList.of());
+    public void willReturnTrueIfAnyMatchesAndTrue() {
+        FeatureChecker check = new FeatureChecker();
+        check.add(Feature.LEARING_DOJOS, (f) -> false);
+        check.add(Feature.LEARING_DOJOS, (f) -> true);
 
-        FeatureChecker check = new FeatureChecker(settings);
-
-        assertFalse(check.test(Feature.LEARING_DOJOS));
+        assertTrue(check.test(Feature.LEARING_DOJOS));
     }
 }

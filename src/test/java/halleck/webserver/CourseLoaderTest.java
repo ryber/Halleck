@@ -16,7 +16,7 @@ import static halleck.lms.Utils.toInteger;
 public class CourseLoaderTest {
     @Test
     public void testGSonStuff() throws Exception {
-        CourseLoader l = new CourseLoader(null, null);
+        CourseLoader l = new CourseLoader(null, null, null);
 
         Course source = new Course("42", "Underwater Basketweaving");
         source.setDecription("a long long description");
