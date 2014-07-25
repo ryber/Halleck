@@ -47,6 +47,7 @@ public class FeatureLoader implements Provider<FeatureChecker> {
         FeatureChecker checker = new FeatureChecker(context);
         load().forEach((p) -> {
             addUserChecks(checker, p);
+
         });
 
         return checker;

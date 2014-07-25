@@ -2,6 +2,7 @@ package halleck.webserver;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
+import halleck.lms.AppContext;
 import halleck.lms.Settings;
 import spark.ModelAndView;
 import spark.Request;
@@ -16,14 +17,17 @@ public class AuthController {
 
     private final Settings settings;
     private final Authenticator auth;
+    private AppContext context;
 
 
     @Inject
     public AuthController(Settings settings,
-                          Authenticator auth) {
+                          Authenticator auth,
+                          AppContext context) {
 
         this.settings = settings;
         this.auth = auth;
+        this.context = context;
     }
 
 
@@ -32,6 +36,7 @@ public class AuthController {
     }
 
     public ModelAndView logoutAction(Response response) {
+        context.clear();
         response.removeCookie(SecurityFilter.USERNAME_COOKIE);
         response.redirect("/login");
         return null;

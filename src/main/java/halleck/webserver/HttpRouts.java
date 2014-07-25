@@ -43,15 +43,13 @@ public class HttpRouts implements SparkApplication {
         configureRouts();
     }
 
-
-
     private void configureRouts() {
         setPort(settings.getAppPort());
         staticFileLocation("/assets");
         setExternalMedia();
         before(filter);
         setRouts();
-        //after((q,p) -> context.clear());
+        after((q,p) -> context.clear());
     }
 
     private void setRouts() {
@@ -69,7 +67,6 @@ public class HttpRouts implements SparkApplication {
         get("/admin/course/:id/registrations", (q,p) -> adminRouts.getRegistrationAdminView(q));
         post("/admin/course",    (q,p) -> adminRouts.createCourse(q, p));
     }
-
 
     private void setExternalMedia() {
         if(!isNullOrEmpty(settings.getExternalMediaLocation())) {
