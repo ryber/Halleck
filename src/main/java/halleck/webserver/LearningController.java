@@ -78,7 +78,7 @@ public class LearningController {
     }
 
     private String getUser() {
-        return context.currentUser();
+        return context.currentUser().getUserName();
     }
 
     private ModelAndView renderCourseList(Stream<Course> courses) {

@@ -1,22 +1,25 @@
 package halleck.mocks;
 
 import halleck.lms.AppContext;
+import halleck.lms.CurrentUser;
+
+import static halleck.lms.CurrentUser.tryGet;
 
 public class MockContext implements AppContext{
-    private String username;
+    private CurrentUser user;
 
     @Override
-    public String currentUser() {
-        return this.username ;
+    public CurrentUser currentUser() {
+        return tryGet(this.user);
     }
 
     @Override
-    public void setCurrentUser(String username) {
-        this.username = username;
+    public void setCurrentUser(CurrentUser username) {
+        this.user = username;
     }
 
     @Override
     public void clear() {
-        this.username = null;
+        this.user = null;
     }
 }

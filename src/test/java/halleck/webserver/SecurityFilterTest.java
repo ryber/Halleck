@@ -1,5 +1,8 @@
 package halleck.webserver;
 
+import com.google.common.collect.ImmutableMap;
+import halleck.lms.CurrentUser;
+import halleck.mocks.MockContext;
 import halleck.mocks.MockSettings;
 import halleck.mocks.MockSparkRequest;
 import halleck.lms.Settings;
@@ -14,6 +17,7 @@ import spark.HaltException;
 import spark.Request;
 import spark.Response;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 
@@ -26,13 +30,14 @@ public class SecurityFilterTest {
     @Mock
     private Response response;
 
-    @Mock
-    private AppContext appContext;
+
+    private MockContext appContext;
 
     private SecurityFilter filter;
 
     @Before
     public void setUp(){
+        appContext = new MockContext();
        settings = new MockSettings();
        filter = new SecurityFilter(settings, appContext);
     }
@@ -109,13 +114,16 @@ public class SecurityFilterTest {
 
     @Test
     public void willCreateUserOnContextFromCookie() throws Exception {
-        Request request = new MockSparkRequest("/courses");
+        MockSparkRequest request = new MockSparkRequest("/courses");
+        request.setHeaders(ImmutableMap.of("Accept-Language","de"));
+
         MockSettings.admin = "Fred";
         request.cookies().putIfAbsent(SecurityFilter.USERNAME_COOKIE, "Fred");
 
         filter.handle(request, response);
 
-        verify(appContext).setCurrentUser("Fred");
+        assertEquals("Fred", appContext.currentUser().getUserName());
+        assertEquals("de", appContext.currentUser().getLanaguage());
     }
 
 

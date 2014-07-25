@@ -112,7 +112,7 @@ public class GurneyTest {
         Course c = new Course("a");
         c.setOwner("Duncan");
 
-        context.setCurrentUser("Jessica");
+        context.setCurrentUser(new CurrentUser("Jessica"));
 
         gurney.createCourse(c);
 
@@ -123,7 +123,7 @@ public class GurneyTest {
     public void willAddOwnerIfNotPresent() throws Exception {
         Course c = new Course("a");
 
-        context.setCurrentUser("Jessica");
+        context.setCurrentUser(new CurrentUser("Jessica"));
 
         gurney.createCourse(c);
 

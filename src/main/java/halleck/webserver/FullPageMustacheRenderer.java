@@ -27,7 +27,7 @@ public class FullPageMustacheRenderer extends MustacheTemplateEngine {
 
         String innercontent = super.render(modelAndView);
 
-        String user = context.currentUser();
+        String user = context.currentUser().getUserName();
 
         Body body = new Body(innercontent, new User(user, isAdmin(user)), settings.getSiteName());
         return super.render(new ModelAndView(body, "shell.mustache"));

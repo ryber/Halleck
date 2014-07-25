@@ -4,6 +4,8 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import halleck.BDDTests.StaticContext;
 import halleck.BDDTests.TestBindings;
+import halleck.lms.CurrentUser;
+import halleck.mocks.MockContext;
 import halleck.mocks.MockSettings;
 import halleck.lms.Course;
 import halleck.lms.Halleck;
@@ -47,11 +49,11 @@ public class ApplicationFixture {
     }
 
     public static void setContext(String name) {
-        context.setCurrentUser(name);
+        context.setCurrentUser(new CurrentUser(name));
     }
 
     public static String getContext() {
-        return context.currentUser();
+        return context.currentUser().getUserName();
     }
 
     public static void givenAdminIsLoggedIn(String name) {

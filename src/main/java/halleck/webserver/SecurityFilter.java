@@ -1,11 +1,15 @@
 package halleck.webserver;
 
+import com.google.common.base.Strings;
 import com.google.inject.Inject;
+import halleck.lms.CurrentUser;
 import halleck.lms.Settings;
 import halleck.lms.AppContext;
 import spark.Filter;
 import spark.Request;
 import spark.Response;
+
+import java.util.Optional;
 
 import static spark.Spark.halt;
 
@@ -15,6 +19,13 @@ public class SecurityFilter implements Filter {
     public static final String USERNAME_COOKIE = "halleckName";
     public static final String USER_KEY = "USER";
     public static final String SITE_NAME = "SITE_NAME";
+    private static final CurrentUser NOT_LOGGED_IN_USER = new CurrentUser("") {
+        @Override
+        public boolean isAuthenticated() {
+            return false;
+        }
+    };
+
     private final Settings settings;
     private final AppContext context;
 
@@ -32,8 +43,9 @@ public class SecurityFilter implements Filter {
     }
 
     private void handleNonExemptPages(Request request, Response response) {
-        String user = getUserFromCookies(request);
-        if(user == null){
+        CurrentUser user = getUser(request);
+
+        if(!user.isAuthenticated()){
             response.redirect("/login");
         }
 
@@ -45,16 +57,20 @@ public class SecurityFilter implements Filter {
     }
 
 
-    private void setUserOnContext(String user) {
+    private void setUserOnContext(CurrentUser user) {
         context.setCurrentUser(user);
     }
 
-    private String getUserFromCookies(Request request) {
-        return request.cookie(USERNAME_COOKIE);
+    private CurrentUser getUser(Request request) {
+        String username = request.cookie(USERNAME_COOKIE);
+        if(!Strings.isNullOrEmpty(username)){
+            return new CurrentUser(username, request.headers("Accept-Language"));
+        }
+        return NOT_LOGGED_IN_USER;
     }
 
-    private boolean userIsAdmin(String user) {
-        return settings.getAdmins().contains(user);
+    private boolean userIsAdmin(CurrentUser user) {
+        return settings.getAdmins().contains(user.getUserName());
     }
 
     private boolean isAdminPage(Request request) {

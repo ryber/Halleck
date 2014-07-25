@@ -1,18 +1,19 @@
 package halleck.lms.contexts;
 
 import halleck.lms.AppContext;
+import halleck.lms.CurrentUser;
 
 public class PerThreadContext implements AppContext {
 
-    private static final ThreadLocal<String> user = new ThreadLocal<>();
+    private static final ThreadLocal<CurrentUser> user = new ThreadLocal<>();
 
     @Override
-    public String currentUser() {
-        return user.get();
+    public CurrentUser currentUser() {
+        return CurrentUser.tryGet(user.get());
     }
 
     @Override
-    public void setCurrentUser(String username) {
+    public void setCurrentUser(CurrentUser username) {
         user.set(username);
     }
 

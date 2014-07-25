@@ -66,7 +66,7 @@ public class Gurney implements Halleck {
     }
 
     private void setOwner(Course course) {
-        String owner = context.currentUser();
+        String owner = context.currentUser().getUserName();
         if(Strings.isNullOrEmpty(course.getOwner())) {
             course.setOwner(owner);
         }

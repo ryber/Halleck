@@ -1,23 +1,24 @@
 package halleck.BDDTests;
 
 import halleck.lms.AppContext;
+import halleck.lms.CurrentUser;
 
 public class StaticContext implements AppContext {
-    private static String user;
+    private static CurrentUser user;
 
     @Override
-    public String currentUser() {
-        return user;
+    public CurrentUser currentUser() {
+        return CurrentUser.tryGet(user);
     }
 
     @Override
-    public void setCurrentUser(String username) {
+    public void setCurrentUser(CurrentUser username) {
         user = username;
     }
 
     @Override
     public void clear() {
-        user = null;
+
     }
 
     public static void reset() {
