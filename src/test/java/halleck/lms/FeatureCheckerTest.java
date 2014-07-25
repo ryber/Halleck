@@ -9,14 +9,14 @@ public class FeatureCheckerTest {
 
     @Test
     public void willReturnFalseByDefault() throws Exception {
-        FeatureChecker check = new FeatureChecker();
+        FeatureChecker check = new FeatureChecker(null);
 
         assertFalse(check.test(Feature.LEARING_DOJOS));
     }
 
     @Test
     public void willReturnTrueIfMatchesAndTrue() {
-        FeatureChecker check = new FeatureChecker();
+        FeatureChecker check = new FeatureChecker(null);
         check.add(Feature.LEARING_DOJOS, (f) -> true);
 
         assertTrue(check.test(Feature.LEARING_DOJOS));
@@ -24,7 +24,7 @@ public class FeatureCheckerTest {
 
     @Test
     public void willReturnTrueIfAnyMatchesAndTrue() {
-        FeatureChecker check = new FeatureChecker();
+        FeatureChecker check = new FeatureChecker(null);
         check.add(Feature.LEARING_DOJOS, (f) -> false);
         check.add(Feature.LEARING_DOJOS, (f) -> true);
 

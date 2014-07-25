@@ -46,7 +46,7 @@ public class AppSettings implements Settings {
     private final String authType;
     private final String externalMedia;
     private final String courseLoadLocation;
-    private final ImmutableList<Feature> enabledFeatures;
+    private final String enabledFeatures;
 
 
     public AppSettings(Properties properties) {
@@ -63,16 +63,10 @@ public class AppSettings implements Settings {
         this.authType = properties.getProperty(AUTHENTICATION_TYPE);
         this.externalMedia = properties.getProperty(SITE_EXTERNALMEDIA);
         this.courseLoadLocation = properties.getProperty(COURSE_LOAD);
-        this.enabledFeatures = copyOf(parseFeatures(properties.getProperty(ENABLED_FEATURES)));
+        this.enabledFeatures = properties.getProperty(ENABLED_FEATURES);
     }
 
-    private List<Feature> parseFeatures(String property) {
-        return splitString(property).stream()
-                                    .map(f -> Enums.getIfPresent(Feature.class, f))
-                                    .filter(Optional::isPresent)
-                                    .map(Optional::get)
-                                    .collect(Collectors.toList());
-    }
+
 
 
     @Override
@@ -141,7 +135,7 @@ public class AppSettings implements Settings {
     }
 
     @Override
-    public ImmutableList<Feature> getEnabledFeatures() {
+    public String getFeatureLoadLocation() {
         return enabledFeatures;
     }
 

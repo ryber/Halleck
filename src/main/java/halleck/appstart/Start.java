@@ -5,6 +5,7 @@ import com.google.inject.Injector;
 import halleck.lms.FeatureChecker;
 import halleck.lms.FeatureContext;
 import halleck.webserver.CourseLoader;
+import halleck.webserver.featurechecks.FeatureLoader;
 import halleck.webserver.HttpRouts;
 
 public class Start {
@@ -16,12 +17,12 @@ public class Start {
 
     public static void startServer(BindingModule bindingModule) {
         Injector injector = Guice.createInjector(bindingModule);
-        loadFetures(injector);
+        loadFeatures(injector);
         loadCourses(injector);
         initRouts(injector);
     }
 
-    private static void loadFetures(Injector injector) {
+    private static void loadFeatures(Injector injector) {
         FeatureContext.setChecker(injector.getInstance(FeatureChecker.class));
     }
 

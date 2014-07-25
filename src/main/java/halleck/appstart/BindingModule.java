@@ -2,14 +2,11 @@ package halleck.appstart;
 
 import com.google.inject.AbstractModule;
 import com.mongodb.Mongo;
-import halleck.lms.Halleck;
-import halleck.lms.Settings;
-import halleck.lms.AppContext;
-import halleck.lms.CourseRepository;
-import halleck.lms.Gurney;
+import halleck.lms.*;
 import halleck.lms.contexts.PerThreadContext;
 import halleck.webserver.Authenticator;
 import halleck.webserver.CourseRenderer;
+import halleck.webserver.featurechecks.FeatureLoader;
 import halleck.webserver.renderers.RenderingDispatcher;
 
 public class BindingModule extends AbstractModule {
@@ -22,6 +19,7 @@ public class BindingModule extends AbstractModule {
         bind(Mongo.class).toProvider(MongoClientProvider.class);
         bind(Authenticator.class).toProvider(AuthenticatorProvider.class);
         bind(CourseRenderer.class).to(RenderingDispatcher.class);
+        bind(FeatureChecker.class).toProvider(FeatureLoader.class);
 
         bindRepo();
     }

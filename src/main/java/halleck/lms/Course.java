@@ -5,13 +5,14 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 import javax.annotation.Nullable;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
 import static com.google.common.base.Strings.nullToEmpty;
 
-public class Course {
+public class Course implements Serializable {
     public static final String EMPTY = "";
     private final String id;
     private String name = EMPTY;

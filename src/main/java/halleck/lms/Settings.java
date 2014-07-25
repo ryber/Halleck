@@ -20,5 +20,5 @@ public interface Settings {
     String getAuthenticationType();
     String getExternalMediaLocation();
     String getCourseLoadLocation();
-    ImmutableList<Feature> getEnabledFeatures();
+    String getFeatureLoadLocation();
 }

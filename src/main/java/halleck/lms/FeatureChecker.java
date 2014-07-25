@@ -5,20 +5,31 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
+import java.util.Collection;
 import java.util.function.Predicate;
 
 public class FeatureChecker implements Predicate<Feature> {
 
-    private Multimap<Feature, Predicate<Feature>> featureChecks = HashMultimap.create();
+    private Multimap<Feature, Predicate<AppContext>> featureChecks = HashMultimap.create();
+    private AppContext context;
+
+    public FeatureChecker(AppContext context){
+
+        this.context = context;
+    }
 
     @Override
     public boolean test(Feature feature) {
         return featureChecks.get(feature)
                             .stream()
-                            .anyMatch(c -> c.test(feature));
+                            .anyMatch(c -> c.test(context));
     }
 
-    public void add(Feature feature, Predicate<Feature> predicate) {
+    public void add(Feature feature, Predicate<AppContext> predicate) {
         featureChecks.put(feature, predicate);
+    }
+
+    public void addAll(Feature feature, Collection<Predicate<AppContext>> userChecks) {
+        featureChecks.putAll(feature, userChecks);
     }
 }
