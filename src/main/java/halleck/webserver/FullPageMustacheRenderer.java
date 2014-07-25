@@ -6,6 +6,8 @@ import halleck.lms.AppContext;
 import spark.ModelAndView;
 import spark.template.mustache.MustacheTemplateEngine;
 
+import java.util.Map;
+
 public class FullPageMustacheRenderer extends MustacheTemplateEngine {
 
     private Settings settings;
@@ -42,12 +44,14 @@ public class FullPageMustacheRenderer extends MustacheTemplateEngine {
         public String body;
         public String title;
         public User user;
+        public Map FEATURES;
 
 
         public Body(String body, User request, String title) {
             this.body = body;
             this.title = title;
             this.user = request;
+            this.FEATURES = new FeatureMap();
         }
     }
 }

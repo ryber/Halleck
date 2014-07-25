@@ -6,12 +6,16 @@
     <title>{{title}}</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
     <link rel="stylesheet" href="/css/1140.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="/css/styles.css" type="text/css" media="screen"/>
-    {{#javascript}}
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css" media="screen"/>
-    {{/javascript}}
+
+    {{#FEATURES.GEO_CITIES}}
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css" media="screen"/>
+    {{/FEATURES.GEO_CITIES}}
+
+    {{^FEATURES.GEO_CITIES}}
+        <link rel="stylesheet" href="/css/1140.css" type="text/css" media="screen"/>
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" media="screen"/>
+    {{/FEATURES.GEO_CITIES}}
 
     <link rel="apple-touch-icon-precomposed" href="img/appletouchicon.png"/>
 </head>

@@ -10,7 +10,8 @@ public enum Feature {
 
     VIDEOS,
     EMBEDDED_CONTENT,
-    LEARING_DOJOS;
+    LEARING_DOJOS,
+    GEO_CITIES;
 
     public boolean isActive() {
         return FeatureContext.check(this);
