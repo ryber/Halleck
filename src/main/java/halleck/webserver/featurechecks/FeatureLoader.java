@@ -28,9 +28,11 @@ public class FeatureLoader implements Provider<FeatureChecker> {
     }
 
     public Collection<FeaturePreference> load() {
-        String content = loader.getContent(settings.getFeatureLoadLocation());
+        String featureLoadLocation = settings.getFeatureLoadLocation();
+        String content = loader.getContent(featureLoadLocation);
 
         if(!Strings.isNullOrEmpty(content)){
+            System.out.println("Loading feature preferences from " + featureLoadLocation);
             return createPreferences(content);
         }
         return Lists.newArrayList();
@@ -46,7 +48,6 @@ public class FeatureLoader implements Provider<FeatureChecker> {
         FeatureChecker checker = new FeatureChecker(context);
         load().forEach((p) -> {
             addUserChecks(checker, p);
-
         });
 
         return checker;
