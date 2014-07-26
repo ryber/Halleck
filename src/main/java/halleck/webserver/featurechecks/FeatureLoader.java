@@ -54,9 +54,12 @@ public class FeatureLoader implements Provider<FeatureChecker> {
     }
 
     private void addUserChecks(FeatureChecker checker, FeaturePreference p) {
-        Set<String> userNames = p.getUserNames();
-        if(!userNames.isEmpty()){
-            checker.add(p.getFeature(), new UserChecker(userNames));
+        if(!p.getUserNames().isEmpty()){
+            checker.add(p.getFeature(), new UserChecker(p.getUserNames()));
+        }
+
+        if(!p.getLocales().isEmpty()){
+            checker.add(p.getFeature(), new LocaleChecker(p.getLocales()));
         }
     }
 

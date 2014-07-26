@@ -1,6 +1,7 @@
 [
     {
         "feature": "GEO_CITIES",
-        "userNames": ["ryber", "fred"]
+        "userNames": [],
+        "locales": ["fr"]
     }
 ]
