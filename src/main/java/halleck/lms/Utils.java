@@ -13,9 +13,6 @@ import java.util.function.Supplier;
 import static com.google.common.base.Strings.nullToEmpty;
 
 public class Utils {
-    public static String toSafeString(String url) {
-        return url == null ? "" : url;
-    }
 
     public static Map<String, String> splitQuery(String url) throws UnsupportedEncodingException {
         String query = url.substring(url.indexOf('?') + 1);

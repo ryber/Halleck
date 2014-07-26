@@ -21,18 +21,4 @@ public enum Feature {
     public boolean isActive() {
         return FeatureContext.check(this);
     }
-
-    public static Set<Feature> getAllEnabled() {
-        return Arrays.stream(Feature.values())
-                     .filter(Feature::isActive)
-                     .collect(toSet());
-    }
-
-//    private List<Feature> parseFeatures(String property) {
-//        return splitString(property).stream()
-//                .map(f -> Enums.getIfPresent(Feature.class, f))
-//                .filter(Optional::isPresent)
-//                .map(Optional::get)
-//                .collect(Collectors.toList());
-//    }
 }

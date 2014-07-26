@@ -28,8 +28,4 @@ public class FeatureChecker implements Predicate<Feature> {
     public void add(Feature feature, Predicate<AppContext> predicate) {
         featureChecks.put(feature, predicate);
     }
-
-    public void addAll(Feature feature, Collection<Predicate<AppContext>> userChecks) {
-        featureChecks.putAll(feature, userChecks);
-    }
 }
