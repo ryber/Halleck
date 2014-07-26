@@ -1,5 +1,6 @@
 package halleck.webserver.featurechecks;
 
+import com.google.common.collect.ImmutableSet;
 import halleck.lms.AppContext;
 
 import java.util.Locale;
@@ -8,10 +9,10 @@ import java.util.function.Predicate;
 
 public class LocaleChecker implements Predicate<AppContext> {
 
-    private Set<Locale> locales;
+    private ImmutableSet<Locale> locales;
 
     public LocaleChecker(Set<Locale> locales){
-        this.locales = locales;
+        this.locales = ImmutableSet.copyOf(locales);
     }
 
     @Override
