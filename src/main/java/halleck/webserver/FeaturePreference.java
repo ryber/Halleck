@@ -10,7 +10,7 @@ public class FeaturePreference implements Serializable {
     private Feature feature;
     private Set<String> userNames;
     private Set<Locale> locales;
-    
+    private Integer percent;
 
     public Set<String> getUserNames() {
         return userNames;
@@ -22,5 +22,9 @@ public class FeaturePreference implements Serializable {
 
     public Set<Locale> getLocales() {
         return locales;
+    }
+
+    public Integer getPercent() {
+        return percent;
     }
 }

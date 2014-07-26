@@ -14,7 +14,6 @@ import halleck.webserver.ResourceLoader;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 public class FeatureLoader implements Provider<FeatureChecker> {
     private Settings settings;
@@ -60,6 +59,10 @@ public class FeatureLoader implements Provider<FeatureChecker> {
 
         if(!p.getLocales().isEmpty()){
             checker.add(p.getFeature(), new LocaleChecker(p.getLocales()));
+        }
+
+        if(!(p.getPercent() == null)){
+            checker.add(p.getFeature(), new PercentPassChecker(p.getPercent()));
         }
     }
 
