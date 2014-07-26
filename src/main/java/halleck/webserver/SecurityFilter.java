@@ -18,8 +18,7 @@ import static spark.Spark.halt;
 public class SecurityFilter implements Filter {
 
     public static final String USERNAME_COOKIE = "halleckName";
-    public static final String USER_KEY = "USER";
-    public static final String SITE_NAME = "SITE_NAME";
+    public static final String SESSION_ID = "SESSIONID";
     private static final CurrentUser NOT_LOGGED_IN_USER = new CurrentUser("") {
         @Override
         public boolean isAuthenticated() {
@@ -64,8 +63,10 @@ public class SecurityFilter implements Filter {
 
     private CurrentUser getUser(Request request) {
         String username = request.cookie(USERNAME_COOKIE);
+        String sessionId = request.cookie(SESSION_ID);
+
         if(!Strings.isNullOrEmpty(username)){
-            return new CurrentUser(username, getLocale(request));
+            return new CurrentUser(username, getLocale(request), sessionId);
         }
         return NOT_LOGGED_IN_USER;
     }

@@ -10,6 +10,7 @@ import spark.Response;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 
 import static com.google.common.collect.ImmutableMap.of;
 
@@ -37,6 +38,7 @@ public class AuthController {
 
     public ModelAndView logoutAction(Response response) {
         context.clear();
+        response.removeCookie(SecurityFilter.SESSION_ID);
         response.removeCookie(SecurityFilter.USERNAME_COOKIE);
         response.redirect("/login");
         return null;
@@ -48,6 +50,7 @@ public class AuthController {
 
         if(auth.authenticate(username, password)){
             response.cookie(SecurityFilter.USERNAME_COOKIE, username);
+            response.cookie(SecurityFilter.SESSION_ID, UUID.randomUUID().toString());
             return new ModelAndView(of("url", "/"), "redirect.mustache");
         }
         return new ModelAndView(of("wrong", true), "login.mustache");

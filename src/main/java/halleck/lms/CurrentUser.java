@@ -9,16 +9,18 @@ import java.util.Optional;
 public class CurrentUser implements Serializable {
     private final String userName;
     private final Locale lanaguage;
+    private final Optional<String> sessionId;
 
     public static final CurrentUser LOGGED_OUT_USER = new CurrentUser("");
 
-    public CurrentUser(String userName, Locale lanaguage){
+    public CurrentUser(String userName, Locale lanaguage, String sessionId){
         this.userName = userName;
         this.lanaguage = lanaguage;
+        this.sessionId = Optional.ofNullable(sessionId);
     }
 
     public CurrentUser(String userName) {
-        this(userName, Locale.ENGLISH);
+        this(userName, Locale.ENGLISH, null);
     }
 
     public String getUserName() {
@@ -30,7 +32,7 @@ public class CurrentUser implements Serializable {
     }
 
     public boolean isAuthenticated(){
-        return !Strings.isNullOrEmpty(userName);
+        return sessionId.isPresent();
     }
 
     public static CurrentUser tryGet(CurrentUser user){

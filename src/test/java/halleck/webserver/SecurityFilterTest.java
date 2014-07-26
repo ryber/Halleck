@@ -88,6 +88,7 @@ public class SecurityFilterTest {
     public void ifLoggedInThenDontRedirect() throws Exception {
         Request request = new MockSparkRequest("/courses");
         request.cookies().putIfAbsent(SecurityFilter.USERNAME_COOKIE, "Fred");
+        request.cookies().putIfAbsent(SecurityFilter.SESSION_ID, "FID");
 
         filter.handle(request, response);
 
@@ -107,6 +108,7 @@ public class SecurityFilterTest {
         Request request = new MockSparkRequest("/admin/foo");
         MockSettings.admin = "Fred";
         request.cookies().putIfAbsent(SecurityFilter.USERNAME_COOKIE, "Fred");
+        request.cookies().putIfAbsent(SecurityFilter.SESSION_ID, "fid");
 
         filter.handle(request, response);
 
