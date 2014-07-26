@@ -39,4 +39,8 @@ public class CurrentUser implements Serializable {
         return Optional.ofNullable(user)
                        .orElseGet(() -> CurrentUser.LOGGED_OUT_USER);
     }
+
+    public String getSessionId() {
+        return sessionId.get();
+    }
 }
