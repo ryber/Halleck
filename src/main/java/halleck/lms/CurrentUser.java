@@ -3,29 +3,30 @@ package halleck.lms;
 import com.google.common.base.Strings;
 
 import java.io.Serializable;
+import java.util.Locale;
 import java.util.Optional;
 
 public class CurrentUser implements Serializable {
     private final String userName;
-    private final String lanaguage;
+    private final Locale lanaguage;
 
-    public static final CurrentUser LOGGED_OUT_USER = new CurrentUser("","en");
+    public static final CurrentUser LOGGED_OUT_USER = new CurrentUser("");
 
-    public CurrentUser(String userName, String lanaguage){
+    public CurrentUser(String userName, Locale lanaguage){
         this.userName = userName;
         this.lanaguage = lanaguage;
     }
 
     public CurrentUser(String userName) {
-        this(userName, "en");
-    }
-
-    public String getLanaguage() {
-        return lanaguage;
+        this(userName, Locale.ENGLISH);
     }
 
     public String getUserName() {
         return userName;
+    }
+
+    public Locale getLocale() {
+        return lanaguage;
     }
 
     public boolean isAuthenticated(){
@@ -33,6 +34,7 @@ public class CurrentUser implements Serializable {
     }
 
     public static CurrentUser tryGet(CurrentUser user){
-        return Optional.ofNullable(user).orElseGet(() -> CurrentUser.LOGGED_OUT_USER);
+        return Optional.ofNullable(user)
+                       .orElseGet(() -> CurrentUser.LOGGED_OUT_USER);
     }
 }

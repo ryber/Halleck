@@ -33,10 +33,9 @@ import static com.google.common.collect.Lists.newArrayList;
 public class MockRequest implements HttpServletRequest {
     private final HttpMethod method;
     private final String path;
+    private Locale locale = Locale.ENGLISH;
     private FormVars form = new FormVars();
     private List<Cookie> cookies = newArrayList();
-
-
 
     public MockRequest(HttpMethod method, String path, String currentUser, FormVars form) {
         this.method = method;
@@ -50,6 +49,11 @@ public class MockRequest implements HttpServletRequest {
 
     }
 
+    public MockRequest(String path, Locale locale) {
+        this(path);
+        this.locale = locale;
+    }
+
     private void setForm(FormVars input) {
         if(input != null){
             this.form = input;
@@ -61,8 +65,6 @@ public class MockRequest implements HttpServletRequest {
             cookies.add(new Cookie(SecurityFilter.USERNAME_COOKIE, currentUser));
         }
     }
-
-
 
     @Override
     public Object getAttribute(String name) {
@@ -166,7 +168,7 @@ public class MockRequest implements HttpServletRequest {
 
     @Override
     public Locale getLocale() {
-        return null;
+        return locale;
     }
 
     @Override

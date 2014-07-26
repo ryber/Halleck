@@ -9,7 +9,8 @@ import spark.Filter;
 import spark.Request;
 import spark.Response;
 
-import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Locale;
 
 import static spark.Spark.halt;
 
@@ -64,9 +65,17 @@ public class SecurityFilter implements Filter {
     private CurrentUser getUser(Request request) {
         String username = request.cookie(USERNAME_COOKIE);
         if(!Strings.isNullOrEmpty(username)){
-            return new CurrentUser(username, request.headers("Accept-Language"));
+            return new CurrentUser(username, getLocale(request));
         }
         return NOT_LOGGED_IN_USER;
+    }
+
+    private Locale getLocale(Request request) {
+        HttpServletRequest raw = request.raw();
+        if(raw != null){
+            return raw.getLocale();
+        }
+        return Locale.ENGLISH;
     }
 
     private boolean userIsAdmin(CurrentUser user) {
