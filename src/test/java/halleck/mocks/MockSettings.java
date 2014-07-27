@@ -12,6 +12,8 @@ public class MockSettings implements Settings {
 
     public static String admin;
     public AuthenticationType authType = AuthenticationType.FAKE;
+    public String username;
+    public String password;
 
     @Override
     public String getPersistenceType() {
@@ -45,12 +47,12 @@ public class MockSettings implements Settings {
 
     @Override
     public String getUsername() {
-        return null;
+        return username;
     }
 
     @Override
     public char[] getPassword() {
-        return new char[0];
+        return password.toCharArray();
     }
 
     @Override

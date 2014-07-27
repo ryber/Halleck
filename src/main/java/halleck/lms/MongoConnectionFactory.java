@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 
 class MongoConnectionFactory {
 
-    private static final String DBNAME = "halleck";
+    public static final String DBNAME = "halleck";
     private Mongo mongoClient;
     private final Settings settings;
 
@@ -29,7 +29,7 @@ class MongoConnectionFactory {
         return database;
     }
 
-    private static class CantAuthenticateToMongo extends RuntimeException {
+    public static class CantAuthenticateToMongo extends RuntimeException {
         private String username;
 
         public CantAuthenticateToMongo(String username) {
