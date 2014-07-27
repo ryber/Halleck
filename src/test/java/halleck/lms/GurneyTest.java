@@ -8,8 +8,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
@@ -128,5 +131,17 @@ public class GurneyTest {
         gurney.createCourse(c);
 
         assertEquals("Jessica", c.getOwner());
+    }
+
+    @Test
+    public void canCreateMultipleCourses() {
+        Course a = new Course("a");
+        Course b = new Course("b");
+
+        gurney.createCourses(newArrayList(a,b));
+
+        Set allCourses = courseRepo.getAllCourses().collect(Collectors.<Course>toSet());
+        assertEquals(true, allCourses.contains(a));
+        assertEquals(true, allCourses.contains(b));
     }
 }
