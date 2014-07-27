@@ -14,6 +14,7 @@ import halleck.webserver.ResourceLoader;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 public class FeatureLoader implements Provider<FeatureChecker> {
     private Settings settings;
@@ -29,11 +30,11 @@ public class FeatureLoader implements Provider<FeatureChecker> {
 
     public Collection<FeaturePreference> load() {
         String featureLoadLocation = settings.getFeatureLoadLocation();
-        String content = loader.getContent(featureLoadLocation);
+        Optional<String> content = loader.getContent(featureLoadLocation);
 
-        if(!Strings.isNullOrEmpty(content)){
+        if(content.isPresent()){
             System.out.println("Loading feature preferences from " + featureLoadLocation);
-            return createPreferences(content);
+            return createPreferences(content.get());
         }
         return Lists.newArrayList();
     }

@@ -10,6 +10,7 @@ import halleck.lms.Settings;
 import javax.inject.Inject;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 public class CourseLoader {
 
@@ -27,13 +28,11 @@ public class CourseLoader {
     public void load() {
         String courseLoadLocation = settings.getCourseLoadLocation();
 
-        String content = loader.getContent(courseLoadLocation);
-        if(!Strings.isNullOrEmpty(content)){
-
-            hal.createCourses(createCourseArray(content));
-
+        Optional<String> content = loader.getContent(courseLoadLocation);
+        content.ifPresent((s) -> {
+            hal.createCourses(createCourseArray(s));
             System.out.println("Loaded Course Content from " + courseLoadLocation);
-        }
+        });
     }
 
     Collection<Course> createCourseArray(String content) {
