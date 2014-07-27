@@ -1,6 +1,5 @@
 package halleck.webserver;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import halleck.lms.AppContext;
 import halleck.lms.Settings;
@@ -21,7 +20,6 @@ public class AuthController {
     private final Settings settings;
     private final Authenticator auth;
     private AppContext context;
-
 
     @Inject
     public AuthController(Settings settings,
