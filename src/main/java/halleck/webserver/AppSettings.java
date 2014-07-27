@@ -43,7 +43,7 @@ public class AppSettings implements Settings {
     private final String persistenceType;
     private final String username;
     private final char[] password;
-    private final String authType;
+    private final AuthenticationType authType;
     private final String externalMedia;
     private final String courseLoadLocation;
     private final String enabledFeatures;
@@ -60,7 +60,7 @@ public class AppSettings implements Settings {
         this.password = nullToEmpty(properties.getProperty(MONGO_PASSWORD)).toCharArray();
         this.ldapURL = properties.getProperty(LDAP_URL);
         this.ldapDomain = properties.getProperty(LDAP_DOMAIN);
-        this.authType = properties.getProperty(AUTHENTICATION_TYPE);
+        this.authType = AuthenticationType.tryGet(properties.getProperty(AUTHENTICATION_TYPE));
         this.externalMedia = properties.getProperty(SITE_EXTERNALMEDIA);
         this.courseLoadLocation = properties.getProperty(COURSE_LOAD);
         this.enabledFeatures = properties.getProperty(ENABLED_FEATURES);
@@ -120,7 +120,7 @@ public class AppSettings implements Settings {
     }
 
     @Override
-    public String getAuthenticationType() {
+    public AuthenticationType getAuthenticationType() {
         return authType;
     }
 

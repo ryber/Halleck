@@ -11,6 +11,7 @@ import java.util.UUID;
 import java.util.function.Supplier;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static org.junit.Assert.assertEquals;
 
 public class AppSettingsTest {
 
@@ -47,7 +48,9 @@ public class AppSettingsTest {
 
     @Test
     public void authenticationType(){
-        assertProp(AppSettings.AUTHENTICATION_TYPE, rand(), ()-> settings.getAuthenticationType());
+        props.setProperty(AppSettings.AUTHENTICATION_TYPE, AuthenticationType.LDAP.name());
+        settings = new AppSettings(props);
+        assertEquals(AuthenticationType.LDAP, settings.getAuthenticationType());
     }
 
     @Test
@@ -75,7 +78,7 @@ public class AppSettingsTest {
         props.setProperty(AppSettings.SITE_ADMINS, "Leto,Paul");
         settings = new AppSettings(props);
 
-        Assert.assertEquals(newArrayList("Leto", "Paul"), settings.getAdmins());
+        assertEquals(newArrayList("Leto", "Paul"), settings.getAdmins());
     }
 
     @Test
@@ -106,6 +109,6 @@ public class AppSettingsTest {
         props.setProperty(propEntry, expectedValue.toString());
         settings = new AppSettings(props);
 
-        Assert.assertEquals(expectedValue, method.get());
+        assertEquals(expectedValue, method.get());
     }
 }

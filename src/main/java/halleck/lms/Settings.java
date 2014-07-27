@@ -3,6 +3,7 @@ package halleck.lms;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import halleck.lms.Feature;
+import halleck.webserver.AuthenticationType;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public interface Settings {
     char[] getPassword();
     String getLdapUrl();
     String getLdapDomain();
-    String getAuthenticationType();
+    AuthenticationType getAuthenticationType();
     String getExternalMediaLocation();
     String getCourseLoadLocation();
     String getFeatureLoadLocation();

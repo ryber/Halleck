@@ -3,6 +3,7 @@ package halleck.mocks;
 import com.google.common.collect.ImmutableList;
 import halleck.lms.Settings;
 import halleck.lms.Feature;
+import halleck.webserver.AuthenticationType;
 
 import static com.google.common.collect.ImmutableList.of;
 import static com.google.common.collect.Lists.newArrayList;
@@ -10,7 +11,7 @@ import static com.google.common.collect.Lists.newArrayList;
 public class MockSettings implements Settings {
 
     public static String admin;
-
+    public AuthenticationType authType = AuthenticationType.FAKE;
 
     @Override
     public String getPersistenceType() {
@@ -63,8 +64,8 @@ public class MockSettings implements Settings {
     }
 
     @Override
-    public String getAuthenticationType() {
-        return "";
+    public AuthenticationType getAuthenticationType() {
+        return authType;
     }
 
     @Override

@@ -16,6 +16,8 @@ import static com.google.common.collect.ImmutableMap.of;
 
 public class AuthController {
 
+    public static final String LOGIN_TEMPLATE = "login.mustache";
+    public static final String SHOWPASSWORD_VAR = "showpass";
     private final Settings settings;
     private final Authenticator auth;
     private AppContext context;
@@ -31,10 +33,6 @@ public class AuthController {
         this.context = context;
     }
 
-
-    public ModelAndView getLoginForm() {
-        return new ModelAndView(getSettings(),"login.mustache");
-    }
 
     public ModelAndView logoutAction(Response response) {
         context.clear();
@@ -56,7 +54,13 @@ public class AuthController {
         return new ModelAndView(of("wrong", true), "login.mustache");
     }
 
+    public ModelAndView getLoginForm() {
+        return new ModelAndView(getSettings(), LOGIN_TEMPLATE);
+    }
+
     private Map getSettings() {
-        return of("showpass", !Objects.equals(settings.getAuthenticationType(), "fake"));
+        return of(SHOWPASSWORD_VAR, !Objects.equals(settings.getAuthenticationType(),
+                                                    AuthenticationType.FAKE)
+        );
     }
 }
