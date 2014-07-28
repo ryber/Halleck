@@ -1,6 +1,5 @@
 package halleck.webserver.featurechecks;
 
-import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -30,10 +29,14 @@ public class FeatureLoader implements Provider<FeatureChecker> {
 
     public Collection<FeaturePreference> load() {
         String featureLoadLocation = settings.getFeatureLoadLocation();
+        System.out.println("Loading feature preferences from " + featureLoadLocation);
         Optional<String> content = loader.getContent(featureLoadLocation);
 
+        return getFeaturePreferences(content);
+    }
+
+    private Collection<FeaturePreference> getFeaturePreferences(Optional<String> content) {
         if(content.isPresent()){
-            System.out.println("Loading feature preferences from " + featureLoadLocation);
             return createPreferences(content.get());
         }
         return Lists.newArrayList();
@@ -48,23 +51,40 @@ public class FeatureLoader implements Provider<FeatureChecker> {
     public FeatureChecker get() {
         FeatureChecker checker = new FeatureChecker(context);
         load().forEach((p) -> {
-            addUserChecks(checker, p);
+            addChecks(checker, p);
         });
 
         return checker;
+    }
+
+    private void addChecks(FeatureChecker checker, FeaturePreference p) {
+        addUserChecks(checker, p);
+        addLocaleChecks(checker, p);
+        addPercentChecks(checker, p);
+        addReleasedChecks(checker, p);
     }
 
     private void addUserChecks(FeatureChecker checker, FeaturePreference p) {
         if(!p.getUserNames().isEmpty()){
             checker.add(p.getFeature(), new UserChecker(p.getUserNames()));
         }
+    }
 
+    private void addLocaleChecks(FeatureChecker checker, FeaturePreference p) {
         if(!p.getLocales().isEmpty()){
             checker.add(p.getFeature(), new LocaleChecker(p.getLocales()));
         }
+    }
 
+    private void addPercentChecks(FeatureChecker checker, FeaturePreference p) {
         if(!(p.getPercent() == null)){
             checker.add(p.getFeature(), new PercentPassChecker(p.getPercent()));
+        }
+    }
+
+    private void addReleasedChecks(FeatureChecker checker, FeaturePreference p) {
+        if(p.isReleased()){
+            checker.add(p.getFeature(), (a) -> true);
         }
     }
 

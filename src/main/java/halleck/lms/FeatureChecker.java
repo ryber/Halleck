@@ -1,11 +1,13 @@
 package halleck.lms;
 
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.function.Predicate;
 
 public class FeatureChecker implements Predicate<Feature> {
@@ -14,7 +16,6 @@ public class FeatureChecker implements Predicate<Feature> {
     private AppContext context;
 
     public FeatureChecker(AppContext context){
-
         this.context = context;
     }
 
@@ -27,5 +28,9 @@ public class FeatureChecker implements Predicate<Feature> {
 
     public void add(Feature feature, Predicate<AppContext> predicate) {
         featureChecks.put(feature, predicate);
+    }
+
+    public Multimap<Feature, Predicate<AppContext>> getMap() {
+        return ImmutableMultimap.copyOf(featureChecks);
     }
 }

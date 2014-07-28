@@ -1,0 +1,20 @@
+[
+    {
+        "feature": "GEO_CITIES",
+        "userNames": ["Jessica", "Leto"],
+        "locales": ["grc"],
+        "percent": 42
+    },
+
+    {
+        "feature": "VIDEOS",
+        "userNames": ["Vlad", "Feyd"],
+        "locales": ["roh"],
+        "percent": 78
+    },
+
+    {
+        "feature": "LEARING_DOJOS",
+        "released": true
+    }
+]

@@ -14,6 +14,7 @@ public class MockSettings implements Settings {
     public AuthenticationType authType = AuthenticationType.FAKE;
     public String username;
     public String password;
+    public String featureLocation;
 
     @Override
     public String getPersistenceType() {
@@ -82,7 +83,7 @@ public class MockSettings implements Settings {
 
     @Override
     public String getFeatureLoadLocation() {
-        return null;
+        return featureLocation;
     }
 }
 
