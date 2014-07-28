@@ -14,6 +14,8 @@ public class SettingsProviderTest {
 
     @Test
     public void willGetDefaultSettingsByDefault() {
+        SettingsProvider.setCustomConfigFile(null);
+        SettingsProvider.setCustomConfigFile(new String[]{});
         SettingsProvider provider = new SettingsProvider();
         Settings settings = provider.get();
         assertEquals("Halleck LMS", settings.getSiteName());

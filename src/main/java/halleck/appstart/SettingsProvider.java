@@ -16,6 +16,7 @@ import java.util.function.Supplier;
 
 import static com.google.common.io.Files.newReaderSupplier;
 import static com.google.common.io.Resources.getResource;
+import static halleck.lms.Utils.propogate;
 
 public class SettingsProvider implements Provider<Settings> {
 
@@ -48,12 +49,8 @@ public class SettingsProvider implements Provider<Settings> {
 
     private static void setCustomProperties(String arg) {
         File prop = new File(arg);
-        if (prop.exists()) {
-            System.out.println("Loading with properties: " + prop.getPath());
-            SettingsProvider.customConfigFile = () -> getOverridePropertyFile(prop);
-        }else {
-            System.out.println("Supplied property file not found! " + prop.getAbsolutePath());
-        }
+        System.out.println("Loading with properties: " + prop.getPath());
+        SettingsProvider.customConfigFile = () -> getOverridePropertyFile(prop);
     }
 
 
@@ -64,11 +61,7 @@ public class SettingsProvider implements Provider<Settings> {
 
     private Properties getBaseFile() {
         Properties baseFile = new Properties();
-        try {
-            baseFile.load(getResourceInputStream(DEFAULT_PROPERTIES));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        propogate(() -> baseFile.load(getResourceInputStream(DEFAULT_PROPERTIES)));
         return baseFile;
     }
 
@@ -79,26 +72,22 @@ public class SettingsProvider implements Provider<Settings> {
         }
 
         Properties props = new Properties(baseFile);
-        try {
-            props.load(customConfigFile.get());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        propogate(
+                () -> props.load(customConfigFile.get())
+        );
         return props;
     }
 
     private static Reader getOverridePropertyFile(File customProp) {
-        try {
-            return newReaderSupplier(customProp, Charsets.UTF_8).getInput();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        return propogate(
+                () -> newReaderSupplier(customProp, Charsets.UTF_8).getInput()
+        );
     }
 
 
     private static Reader getResourceInputStream(String rezLocation) {
 
-        return Utils.propogate(
+        return propogate(
                 () -> getOverridePropertyFile(new File(getResource(rezLocation).toURI()))
         );
     }

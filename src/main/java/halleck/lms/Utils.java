@@ -7,6 +7,7 @@ import java.net.URLDecoder;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -45,9 +46,20 @@ public class Utils {
         }
     }
 
+    public static void propogate(ExceptionaRunnable func){
+        try{
+             func.run();
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+    }
+
     @FunctionalInterface
     public static interface ExceptionalSupplier<T> {
         T get() throws Exception;
     }
 
+    public static interface ExceptionaRunnable<R> {
+        void run() throws Exception;
+    }
 }
