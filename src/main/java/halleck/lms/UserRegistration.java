@@ -11,11 +11,6 @@ public class UserRegistration implements Registration {
     }
 
     @Override
-    public String getUserID() {
-        return userID;
-    }
-
-    @Override
     public Course getCourse() {
         return course;
     }

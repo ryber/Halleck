@@ -2,7 +2,7 @@
     {
         "feature": "GEO_CITIES",
         "userNames": [],
-        "locales": [],
-        "percent": 42
+        "locales": ["fr"],
+        "percent": 0
     }
 ]
