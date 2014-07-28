@@ -1,8 +1,10 @@
 package halleck.appstart;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Throwables;
 import com.google.inject.Provider;
 import halleck.lms.Settings;
+import halleck.lms.Utils;
 import halleck.webserver.AppSettings;
 
 import java.io.File;
@@ -95,10 +97,13 @@ public class SettingsProvider implements Provider<Settings> {
 
 
     private static Reader getResourceInputStream(String rezLocation) {
-        try {
-            return getOverridePropertyFile(new File(getResource(rezLocation).toURI()));
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
+
+        return Utils.propogate(
+                () -> getOverridePropertyFile(new File(getResource(rezLocation).toURI()))
+        );
+    }
+
+    public static void clear() {
+        customConfigFile = null;
     }
 }

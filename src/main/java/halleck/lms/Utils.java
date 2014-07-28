@@ -37,6 +37,14 @@ public class Utils {
         }
     }
 
+    public static <R> R propogate(ExceptionalSupplier<R> func){
+        try{
+            return func.get();
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+    }
+
     @FunctionalInterface
     public static interface ExceptionalSupplier<T> {
         T get() throws Exception;
