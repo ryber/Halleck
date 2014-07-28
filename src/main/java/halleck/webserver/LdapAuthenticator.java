@@ -41,16 +41,9 @@ public class LdapAuthenticator implements Authenticator {
         env.put(Context.SECURITY_PRINCIPAL, formatUserName(username));
         env.put(Context.SECURITY_CREDENTIALS, password);
 
-        //log(env);
-
         return env;
     }
 
-    private void log(Hashtable<String, String> env) {
-        for(Map.Entry<String, String> c : env.entrySet()){
-            System.out.println(c.getKey() + " :: " + c.getValue());
-        }
-    }
 
     private String formatUserName(String username) {
         return String.format("%s\\%s", settings.getLdapDomain(), username);
