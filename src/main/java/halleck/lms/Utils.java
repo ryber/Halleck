@@ -59,6 +59,7 @@ public class Utils {
         T get() throws Exception;
     }
 
+    @FunctionalInterface
     public static interface ExceptionaRunnable<R> {
         void run() throws Exception;
     }
